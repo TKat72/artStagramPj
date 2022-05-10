@@ -3,6 +3,9 @@ from app.models import db, User, Photo, Post , Comment
 from flask_login import current_user
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.forms.create_post_form import PostForm
+from app.forms.update_post_form import UpdatePostForm
+from app.forms.remove_pt_form import RemovePhotoForm
+from app.forms.add_photo_form import AddPhotoForm
 
 posts_router = Blueprint("posts", __name__)
 
@@ -62,3 +65,46 @@ def create_post():
 def single_post(id):
     post = Post.query.get(id)
     return post.to_dict()
+
+@posts_router.route("/<int:id>/edit",methods=["GET","POST"])
+def update_post(id):
+    print("im here -------------------------")
+    post = Post.query.get(id)
+    form = UpdatePostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        post.description = form.data['description']
+        post.updated_at = form.data['updated_at']
+        db.session.commit()
+    return render_template("update_post_form.html", form= form)
+
+@posts_router.route("/<int:id>/remove-photo", methods=["DELETE"])
+def remove_photo(id):
+    post = Post.query.get(id)
+    form = RemovePhotoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        photo = Photo.query.get(form.data['photo_id'])
+        post.updated_at = form.data['updated_at']
+        db.session.delete(photo)
+        db.session.commit()
+        return post.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)},401
+
+@posts_router.route("/<int:id>/add-photo", methods=["POST"])
+def remove_photo(id):
+    post = Post.query.get(id)
+    user_id = current_user.id
+    form = AddPhotoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_photo= Photo(
+            user_id= user_id,
+            post_id = post.id,
+            photo_url = form.data['photo_url']
+        )
+        db.session.add(new_photo)
+        db.session.commit()
+        post.updated_at = form.data['updated_at']
+        return post.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)},401
