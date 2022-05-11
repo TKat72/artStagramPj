@@ -1,6 +1,6 @@
 const GET_ALL_POSTS = "posts/GET_ALL_POSTS"
 const GET_ONE_POST = "posts/GET_ONE_POST"
-
+const POST_POST = "posts/POST_POST"
 
 const getAll = posts => ({
     type: GET_ALL_POSTS,
@@ -10,6 +10,12 @@ const getOne = (post) => ({
     type: GET_ONE_POST,
     payload: post
 })
+
+const createPost = (post) => ({
+    type: POST_POST,
+    payload: post
+})
+
 
 export const getAllPosts = () => async (dispatch) => {
     const res = await fetch("/api/posts/all")
@@ -29,6 +35,20 @@ export const getOnePost = (id) => async (dispatch) => {
     }
 }
 
+export const addPost = (post) => async (dispatch) => {
+    console.log("...........", post)
+    const res = await fetch(`/api/posts/create-post`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(post)
+    })
+    if (res.ok) {
+        const data = await res.json()
+        console.log("data======>", data)
+        dispatch(createPost(data))
+    }
+}
+
 
 export default function postReducer(state = {}, action) {
     let newState
@@ -39,6 +59,10 @@ export default function postReducer(state = {}, action) {
             action.payload.map(post => newState[post.id] = post)
             return newState
         case GET_ONE_POST:
+            newState = { ...state }
+            newState[action.payload.id] = action.payload
+            return newState
+        case POST_POST:
             newState = { ...state }
             newState[action.payload.id] = action.payload
             return newState
