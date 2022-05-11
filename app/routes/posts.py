@@ -3,6 +3,9 @@ from app.models import db, User, Photo, Post , Comment
 from flask_login import current_user
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.forms.create_post_form import PostForm
+from app.forms.update_post_form import UpdatePostForm
+from app.forms.remove_pt_form import RemovePhotoForm
+from app.forms.add_photo_form import AddPhotoForm
 
 posts_router = Blueprint("posts", __name__)
 
@@ -16,24 +19,28 @@ def post_all():
 
 @posts_router.route("/create-post", methods=["GET","POST"])
 def create_post():
-    print("...............-----------",)
+
     user_id = current_user.id
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_post = Post(
-            user_id= user_id,
-            description = form.data['description'],
-            created_at = form.data['created_at'],
-            updated_at = form.data['updated_at']
-        )
-        db.session.add(new_post)
-        db.session.commit()
-        new_photo= Photo(
-            user_id= user_id,
-            post_id = new_post.id,
-            photo_url = form.data['photo_url']
-        )
+        if form.data['photo_url']:
+            new_post = Post(
+                user_id= user_id,
+                description = form.data['description'],
+                created_at = form.data['created_at'],
+                updated_at = form.data['updated_at']
+            )
+            db.session.add(new_post)
+            db.session.commit()
+            new_photo= Photo(
+                user_id= user_id,
+                post_id = new_post.id,
+                photo_url = form.data['photo_url']
+            )
+        else:
+            return {"errors": " need photo url"}
+
         if form.data['photo_url2']:
             new_photo2= Photo(
             user_id= user_id,
@@ -62,3 +69,57 @@ def create_post():
 def single_post(id):
     post = Post.query.get(id)
     return post.to_dict()
+
+@posts_router.route("/<int:id>/edit",methods=["GET","POST"])
+def update_post(id):
+    print("im here -------------------------")
+    post = Post.query.get(id)
+    form = UpdatePostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        post.description = form.data['description']
+        post.updated_at = form.data['updated_at']
+        db.session.commit()
+        return post.to_dict()
+
+    return render_template("update_post_form.html", form= form)
+
+@posts_router.route("/<int:id>/remove-photo", methods=["DELETE"])
+def remove_photo(id):
+    post = Post.query.get(id)
+    form = RemovePhotoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        photo = Photo.query.get(form.data['photo_id'])
+        post.updated_at = form.data['updated_at']
+        db.session.delete(photo)
+        db.session.commit()
+        return post.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)},401
+
+@posts_router.route("/<int:id>/add-photo", methods=["POST"])
+def add_photo(id):
+    post = Post.query.get(id)
+    user_id = current_user.id
+    form = AddPhotoForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        new_photo= Photo(
+            user_id= user_id,
+            post_id = post.id,
+            photo_url = form.data['photo_url']
+        )
+        db.session.add(new_photo)
+
+        post.updated_at = form.data['updated_at']
+        db.session.commit()
+        return post.to_dict()
+    return {"errors": validation_errors_to_error_messages(form.errors)},401
+
+
+@posts_router.route("/<int:id>/delete", methods=["DELETE"])
+def delete_post(id):
+    post = Post.query.get(id)
+    db.session.delete(post)
+    db.session.commit()
+    return {"massage":"Secsees"}
