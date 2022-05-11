@@ -50,7 +50,7 @@ export default function DisplayPosts() {
                     <h2 key={`${post.id}2`}>{post.description}</h2>
                     {post?.photos.map(photo => (
                         <>
-                            <img key={photo.id} src={photo?.photo_url} />
+                            <img style={{ width: '200px', height: "200px" }} key={photo.id} src={photo?.photo_url} />
                         </>
                     ))}
 
