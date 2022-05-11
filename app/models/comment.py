@@ -20,6 +20,6 @@ class Comment(db.Model):
             'user_id': self.user_id,
             'post_id': self.post_id,
             'comment': self.comment,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'created_at': str(self.created_at),
+            'updated_at': str(self.updated_at)
         }

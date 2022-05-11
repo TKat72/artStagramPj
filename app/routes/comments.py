@@ -49,3 +49,6 @@ def delete_comment(id):
         db.session.commit()
         return {"massage": "deleted"}
     return {"errors": validation_errors_to_error_messages(form.errors)}
+
+
+

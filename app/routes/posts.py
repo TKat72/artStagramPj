@@ -19,7 +19,7 @@ def post_all():
 
 @posts_router.route("/create-post", methods=["GET","POST"])
 def create_post():
-  
+
     user_id = current_user.id
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -80,6 +80,8 @@ def update_post(id):
         post.description = form.data['description']
         post.updated_at = form.data['updated_at']
         db.session.commit()
+        return post.to_dict()
+
     return render_template("update_post_form.html", form= form)
 
 @posts_router.route("/<int:id>/remove-photo", methods=["DELETE"])
