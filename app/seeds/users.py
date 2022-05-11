@@ -1,6 +1,6 @@
 from app.models import db, User
 from datetime import datetime
-
+import pytz
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():

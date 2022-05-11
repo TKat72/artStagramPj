@@ -1,6 +1,6 @@
 from app.models import db, Post
 from datetime import datetime
-
+import pytz
 
 def seed_posts():
     p1 = Post(

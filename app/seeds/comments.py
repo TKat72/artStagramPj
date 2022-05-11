@@ -1,5 +1,7 @@
 from app.models import db,Comment
 from datetime import datetime
+import pytz
+
 
 def seed_comments():
     c1= Comment(post_id=1,user_id=3, comment=" Very pritty",created_at=datetime.now(), updated_at=datetime.now())

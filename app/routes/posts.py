@@ -19,24 +19,28 @@ def post_all():
 
 @posts_router.route("/create-post", methods=["GET","POST"])
 def create_post():
-    print("...............-----------",)
+  
     user_id = current_user.id
     form = PostForm()
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
-        new_post = Post(
-            user_id= user_id,
-            description = form.data['description'],
-            created_at = form.data['created_at'],
-            updated_at = form.data['updated_at']
-        )
-        db.session.add(new_post)
-        db.session.commit()
-        new_photo= Photo(
-            user_id= user_id,
-            post_id = new_post.id,
-            photo_url = form.data['photo_url']
-        )
+        if form.data['photo_url']:
+            new_post = Post(
+                user_id= user_id,
+                description = form.data['description'],
+                created_at = form.data['created_at'],
+                updated_at = form.data['updated_at']
+            )
+            db.session.add(new_post)
+            db.session.commit()
+            new_photo= Photo(
+                user_id= user_id,
+                post_id = new_post.id,
+                photo_url = form.data['photo_url']
+            )
+        else:
+            return {"errors": " need photo url"}
+
         if form.data['photo_url2']:
             new_photo2= Photo(
             user_id= user_id,
@@ -92,7 +96,7 @@ def remove_photo(id):
     return {"errors": validation_errors_to_error_messages(form.errors)},401
 
 @posts_router.route("/<int:id>/add-photo", methods=["POST"])
-def remove_photo(id):
+def add_photo(id):
     post = Post.query.get(id)
     user_id = current_user.id
     form = AddPhotoForm()
@@ -104,7 +108,16 @@ def remove_photo(id):
             photo_url = form.data['photo_url']
         )
         db.session.add(new_photo)
-        db.session.commit()
+
         post.updated_at = form.data['updated_at']
+        db.session.commit()
         return post.to_dict()
     return {"errors": validation_errors_to_error_messages(form.errors)},401
+
+
+@posts_router.route("/<int:id>/delete", methods=["DELETE"])
+def delete_post(id):
+    post = Post.query.get(id)
+    db.session.delete(post)
+    db.session.commit()
+    return {"massage":"Secsees"}
