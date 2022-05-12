@@ -2,7 +2,7 @@ const GET_ALL_POSTS = "posts/GET_ALL_POSTS"
 const GET_ONE_POST = "posts/GET_ONE_POST"
 const POST_POST = "posts/POST_POST"
 const UPDATE_POST = "posts/UPDATE_POST"
-
+const DELETE_POST = "posts/DELE"
 
 const getAll = posts => ({
     type: GET_ALL_POSTS,
@@ -20,6 +20,10 @@ const createPost = (post) => ({
 const editPost = (post) => ({
     type: UPDATE_POST,
     payload: post
+})
+const removePost = (id) => ({
+    type: DELETE_POST,
+    payload: id
 })
 
 export const getAllPosts = () => async (dispatch) => {
@@ -41,7 +45,7 @@ export const getOnePost = (id) => async (dispatch) => {
 }
 
 export const addPost = (post) => async (dispatch) => {
-    console.log("...........", post)
+
     const res = await fetch(`/api/posts/create-post`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -55,7 +59,7 @@ export const addPost = (post) => async (dispatch) => {
 }
 export const updatePost = (description, id) => async (dispatch) => {
 
-    const res = await fetch(`/api/posts/create-post`, {
+    const res = await fetch(`/api/posts/${id}/edit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ description })
@@ -66,7 +70,17 @@ export const updatePost = (description, id) => async (dispatch) => {
         dispatch(editPost(data))
     }
 }
+export const deletePost = (id) => async (dispatch) => {
 
+    const res = await fetch(`/api/posts/${id}/delete`, {
+        method: 'DELETE',
+    })
+    if (res.ok) {
+        const data = await res.json()
+
+        dispatch(removePost(id))
+    }
+}
 
 export default function postReducer(state = {}, action) {
     let newState
@@ -87,6 +101,10 @@ export default function postReducer(state = {}, action) {
         case UPDATE_POST:
             newState = { ...state }
             newState = { [action.payload.id]: action.payload }
+            return newState
+        case DELETE_POST:
+            newState = { ...state }
+            delete newState[action.payload]
             return newState
 
         default:

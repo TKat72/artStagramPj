@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { getAllPosts, addPost } from "../../store/posts"
 import { useDispatch, useSelector } from 'react-redux'
+import { Fade } from 'react-slideshow-image'
 
+import 'react-slideshow-image/dist/styles.css'
+import "./DisplayAllPosts.css"
 
 export default function DisplayPosts() {
     const dispatch = useDispatch()
@@ -46,13 +49,39 @@ export default function DisplayPosts() {
                 <button onClick={onClick}>Submit</button>
             </form>
             {posts?.map(post => (
-                <div key={post.id}>
+                <div className="post-div" key={post.id}>
                     <h2 key={`${post.id}2`}>{post.description}</h2>
-                    {post?.photos.map(photo => (
-                        <>
-                            <img style={{ width: '200px', height: "200px" }} key={photo.id} src={photo?.photo_url} />
-                        </>
-                    ))}
+                    {post.photos.length > 1 ? (
+                        <div className="slide-container">
+
+                            <Fade>
+
+                                {post?.photos.map(photo => (
+                                    <>
+                                        <div key={photo.id} className="each-fade" >
+                                            <div className="image-container">
+                                                <img style={{ height: "300px", width: "auto" }} src={photo?.photo_url} />
+                                            </div>
+                                        </div>
+                                    </>
+                                ))}
+                            </Fade>
+                        </div>
+                    ) : <div >
+
+
+
+                        {post?.photos.map(photo => (
+                            <>
+                                <div key={photo.id}  >
+                                    <div >
+                                        <img style={{ height: "300px", width: "300px" }} src={photo?.photo_url} />
+                                    </div>
+                                </div>
+                            </>
+                        ))}
+
+                </div>}
 
                 </div>
             ))
