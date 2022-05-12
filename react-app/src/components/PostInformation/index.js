@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getOnePost, updatePost, deletePost } from "../../store/posts"
+import 'react-slideshow-image/dist/styles.css'
 
 
 export default function PostInformation() {
@@ -31,11 +32,15 @@ export default function PostInformation() {
             ) : null}
             <button onClick={() => { dispatch(deletePost(post_id)); history.push('/posts') }} >Delete</button>
             <div>
-                {post?.photos.map(photo => (
-                    <>
-                        <img key={photo.id} src={photo.photo_url} />
-                    </>
-                ))}
+                <div className="slide-container">
+
+                    {post?.photos.map(photo => (
+                        <div className="each-fade">
+                            <img key={photo.id} src={photo.photo_url} />
+                        </div>
+                    ))}
+
+                </div>
                 <h4>{post?.description} </h4 >
                 <h3>Comments </h3>
                 {post?.comments.map(comment => (
@@ -43,6 +48,7 @@ export default function PostInformation() {
                         <p>{comment.comment}</p>
                     </>
                 ))}
+
             </div>
 
         </>

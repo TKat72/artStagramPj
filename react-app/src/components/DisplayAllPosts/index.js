@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getAllPosts, addPost } from "../../store/posts"
 import { useDispatch, useSelector } from 'react-redux'
+import { NavLink } from "react-router-dom"
 import { Fade } from 'react-slideshow-image'
 
 import 'react-slideshow-image/dist/styles.css'
@@ -49,8 +50,11 @@ export default function DisplayPosts() {
                 <button onClick={onClick}>Submit</button>
             </form>
             {posts?.map(post => (
+
                 <div className="post-div" key={post.id}>
-                    <h2 key={`${post.id}2`}>{post.description}</h2>
+                    <NavLink to={`/posts/${post.id}`}>
+                        <h2 key={`${post.id}2`}>{post.description}</h2>
+                    </NavLink>
                     {post.photos.length > 1 ? (
                         <div className="slide-container">
 
@@ -81,11 +85,14 @@ export default function DisplayPosts() {
                             </>
                         ))}
 
-                </div>}
+                    </div>}
 
                 </div>
             ))
+
+
             }
+
         </>
     )
 
