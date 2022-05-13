@@ -3,8 +3,8 @@ const DELETE_COMMENT = 'comment/DELETE';
 const UPDATE_COMMENT = 'comment/UPDATE';
 const GET_ONE_COMMENT = 'comment/GET_ONE_COMMENT'
 
-const createCommwnt = (comment) = ({
-    type: CREATE_COMMENT,
+const createComment = (comment) => ({
+    type: GET_ONE_COMMENT,
     payload: comment
 })
 
@@ -22,7 +22,7 @@ const removeComment = (id) => ({
 })
 
 export const createNewComment = (comment) => async (dispatch) => {
-    const res = await fetch(`/api/posts/create-post`, {
+    const res = await fetch(`/api/comments/create-comment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(comment)
@@ -30,7 +30,7 @@ export const createNewComment = (comment) => async (dispatch) => {
     if (res.ok) {
         const data = await res.json()
 
-        dispatch(createCommwnt(data))
+        dispatch(createComment(data))
     }
 }
 export const updatePost = (comment, id) => async (dispatch) => {

@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getOnePost, updatePost, deletePost } from "../../store/posts"
+import AddCommentModal from "../AddNewComment"
+import AddNewComment from "../AddNewComment/AddNewComment"
 import 'react-slideshow-image/dist/styles.css'
 
 
@@ -36,12 +38,14 @@ export default function PostInformation() {
 
                     {post?.photos.map(photo => (
                         <div className="each-fade">
-                            <img key={photo.id} src={photo.photo_url} />
+                            <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} />
                         </div>
                     ))}
 
                 </div>
                 <h4>{post?.description} </h4 >
+                <AddCommentModal post_id={post?.id}></AddCommentModal>
+                <AddNewComment post_id={post?.id}></AddNewComment>
                 <h3>Comments </h3>
                 {post?.comments.map(comment => (
                     <>

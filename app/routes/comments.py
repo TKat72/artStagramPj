@@ -13,6 +13,7 @@ comments_routes = Blueprint('comments', __name__)
 def create_comment():
     user_id= current_user.id
     form = AddCommentForm()
+    print("<<<<<<<<>>>>>>>>>",form.data)
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_comment = Comment(
@@ -49,6 +50,3 @@ def delete_comment(id):
         db.session.commit()
         return {"massage": "deleted"}
     return {"errors": validation_errors_to_error_messages(form.errors)}
-
-
-

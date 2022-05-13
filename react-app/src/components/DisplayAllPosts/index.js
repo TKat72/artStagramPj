@@ -65,6 +65,7 @@ export default function DisplayPosts() {
                 <div className="post-div" key={post.id}>
                     <NavLink to={`/posts/${post.id}`}>
                         <h2 key={`${post.id}2`}>
+                            {post.description}
                         </h2>
                     </NavLink>
                     {post.photos.length > 1 ? (
