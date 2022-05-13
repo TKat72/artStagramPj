@@ -13,15 +13,25 @@ export default function DisplayPosts() {
     const [photo_url, setPhotoUrl] = useState("")
     const [photo_url2, setPhotoUrl2] = useState("")
     const [photo_url3, setPhotoUrl3] = useState("")
-
+    const [users, setUsers] = useState([]);
     const user_id = useSelector(state => state.session?.user?.id)
     const posts = useSelector(state => Object.values(state?.posts))
+
 
     useEffect(() => {
         dispatch(getAllPosts())
 
+        async function fetchData() {
+            const response = await fetch('/api/users/');
+            const responseData = await response.json();
+            setUsers(responseData);
+        }
+        fetchData();
 
     }, [dispatch])
+
+
+
 
     const onClick = (e) => {
         e.preventDefault()
@@ -32,6 +42,7 @@ export default function DisplayPosts() {
             description,
             user_id
         }
+
         dispatch(addPost(post))
 
     }
@@ -53,7 +64,8 @@ export default function DisplayPosts() {
 
                 <div className="post-div" key={post.id}>
                     <NavLink to={`/posts/${post.id}`}>
-                        <h2 key={`${post.id}2`}>{post.description}</h2>
+                        <h2 key={`${post.id}2`}>
+                        </h2>
                     </NavLink>
                     {post.photos.length > 1 ? (
                         <div className="slide-container">
@@ -63,8 +75,8 @@ export default function DisplayPosts() {
                                 {post?.photos.map(photo => (
                                     <>
                                         <div key={photo.id} className="each-fade" >
-                                            <div className="image-container">
-                                                <img style={{ height: "300px", width: "auto" }} src={photo?.photo_url} />
+                                            <div className="image-container img-podt-dspl">
+                                                <img style={{ height: "400px", width: "auto" }} src={photo?.photo_url} />
                                             </div>
                                         </div>
                                     </>
@@ -78,14 +90,21 @@ export default function DisplayPosts() {
                         {post?.photos.map(photo => (
                             <>
                                 <div key={photo.id}  >
-                                    <div >
-                                        <img style={{ height: "300px", width: "300px" }} src={photo?.photo_url} />
+                                    <div className="img-podt-dspl">
+                                        <img style={{ height: "300px", width: "fit-content" }} src={photo?.photo_url} />
                                     </div>
                                 </div>
                             </>
                         ))}
 
                     </div>}
+                    <div>
+                        {post.comments.map(comment => (
+                            <div>
+                                <h4>{comment.comment}</h4>
+                            </div>
+                        ))}
+                    </div>
 
                 </div>
             ))
