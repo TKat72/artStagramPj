@@ -16,7 +16,7 @@ def post_all():
     posts = Post.query.all()
     # print({"posts": [ podt.to_dict() for podt in posts]})
 
-    return {"posts": [ podt.to_dict() for podt in posts]}
+    return {"posts": [ post.to_dict() for post in posts]}
 
 @posts_router.route("/create-post", methods=["GET","POST"])
 def create_post():
@@ -28,6 +28,7 @@ def create_post():
     print("..............", form.data)
     if form.validate_on_submit():
         print("im here 444444444444")
+
         new_post = Post(
             user_id= user_id,
             description = form.data["description"],
@@ -54,7 +55,7 @@ def create_post():
             new_photo3= Photo(
             user_id= user_id,
             post_id = new_post.id,
-            photo_url = form.data['photo_url2']
+            photo_url = form.data['photo_url3']
             )
             db.session.add(new_photo3)
 

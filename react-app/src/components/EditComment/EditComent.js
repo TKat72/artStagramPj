@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { createNewComment } from "../../store/comments"
+import { updateComment } from "../../store/comments"
 
 
-export default function AddNewComment({ post_id, }) {
+export default function EditComment({ id, comentVal }) {
     const dispatch = useDispatch()
 
-    const [comment, setComment] = useState("")
+    const [comment, setComment] = useState(comentVal)
 
 
     const user_id = useSelector(state => state.session?.user?.id)
@@ -14,14 +15,13 @@ export default function AddNewComment({ post_id, }) {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(createNewComment(comment, post_id))
+        dispatch(updateComment(comment, id))
 
     }
 
     return (
         <>
             <form onSubmit={onSubmit}>
-                <label>Your comment </label>
                 <input onChange={(e) => setComment(e.target.value)} value={comment}></input>
                 <button>Submit</button>
             </form>

@@ -1,16 +1,16 @@
 const CREATE_COMMENT = 'comment/CREATE_POST';
 const DELETE_COMMENT = 'comment/DELETE';
 const UPDATE_COMMENT = 'comment/UPDATE';
-const GET_ONE_COMMENT = 'comment/GET_ONE_COMMENT'
+const GET_ALL_COMMENT = 'comment/GET_All_COMMENT'
 
 const createComment = (comment) => ({
-    type: GET_ONE_COMMENT,
+    type: CREATE_COMMENT,
     payload: comment
 })
 
-const getOne = (comment) => ({
-    type: GET_ONE_COMMENT,
-    payload: comment
+const getAll = (comments) => ({
+    type: GET_ALL_COMMENT,
+    payload: comments
 })
 const editComment = (comment) => ({
     type: UPDATE_COMMENT,
@@ -21,11 +21,11 @@ const removeComment = (id) => ({
     payload: id
 })
 
-export const createNewComment = (comment) => async (dispatch) => {
+export const createNewComment = (comment, post_id) => async (dispatch) => {
     const res = await fetch(`/api/comments/create-comment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(comment)
+        body: JSON.stringify({ comment, post_id })
     })
     if (res.ok) {
         const data = await res.json()
@@ -33,10 +33,10 @@ export const createNewComment = (comment) => async (dispatch) => {
         dispatch(createComment(data))
     }
 }
-export const updatePost = (comment, id) => async (dispatch) => {
+export const updateComment = (comment, id) => async (dispatch) => {
 
-    const res = await fetch(`/api/posts/${id}/edit`, {
-        method: 'POST',
+    const res = await fetch(`/api/comments/${id}`, {
+        method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ comment })
     })
@@ -46,9 +46,9 @@ export const updatePost = (comment, id) => async (dispatch) => {
         dispatch(editComment(data))
     }
 }
-export const deletePost = (id) => async (dispatch) => {
+export const deleteComment = (id) => async (dispatch) => {
 
-    const res = await fetch(`/api/posts/${id}/delete`, {
+    const res = await fetch(`/api/comments/${id}`, {
         method: 'DELETE',
     })
     if (res.ok) {
@@ -57,11 +57,24 @@ export const deletePost = (id) => async (dispatch) => {
         dispatch(removeComment(id))
     }
 }
+export const getAllComment = (id) => async (dispatch) => {
+
+    const res = await fetch(`/api/comments/${id}/all`)
+    if (res.ok) {
+        const data = await res.json()
+
+        dispatch(getAll(data))
+    }
+}
 
 export default function commentReducer(state = {}, action) {
     let newState
 
     switch (action.type) {
+        case GET_ALL_COMMENT:
+            newState = { ...state }
+            action.payload.map(comment => newState[comment.id] = comment)
+            return newState
         case CREATE_COMMENT:
             newState = { ...state }
             newState[action.payload.id] = action.payload

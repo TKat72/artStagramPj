@@ -8,6 +8,11 @@ from app.forms.update_comment_form import UpdateCommentForm
 
 comments_routes = Blueprint('comments', __name__)
 
+@comments_routes.route("/<int:id>/all")
+def getAllcoments(id):
+    comments = Comment.query.filter(Comment.post_id == id).all()
+    return comments.to_dict()
+
 
 @comments_routes.route("/create-comment", methods=['POST'])
 def create_comment():
@@ -24,8 +29,8 @@ def create_comment():
             updated_at = form.data['updated_at']
         )
         db.session.add(new_comment)
-        db.session.commit()
-        return new_comment.to_dict()
+        post = Post.query.get(form.data['post_id'])
+        return post.to_dict()
 
     return {"errors": validation_errors_to_error_messages(form.errors)},401
 
@@ -35,6 +40,7 @@ def update_comment(id):
     comment = Comment.query.get(id)
     form = UpdateCommentForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("in edit =>>>>>", form.data)
     if form.validate_on_submit():
         comment.comment = form.data['comment']
         comment.updated_at = form.data['updated_at']
