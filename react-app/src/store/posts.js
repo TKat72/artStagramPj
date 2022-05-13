@@ -45,7 +45,7 @@ export const getOnePost = (id) => async (dispatch) => {
 }
 
 export const addPost = (post) => async (dispatch) => {
-
+    console.log("...........", post)
     const res = await fetch(`/api/posts/create-post`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

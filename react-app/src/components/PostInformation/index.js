@@ -3,19 +3,26 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getOnePost, updatePost, deletePost } from "../../store/posts"
+import AddCommentModal from "../AddNewComment"
+import AddNewComment from "../AddNewComment/AddNewComment"
+import EditComment from '../EditComment/EditComent'
+import DeleteComment from "../DeleteComment/DeleteComment"
+import 'react-slideshow-image/dist/styles.css'
 
 
 export default function PostInformation() {
     const { post_id } = useParams()
     const dispatch = useDispatch()
     const [showForm, setShowForm] = useState(false)
+    const [showForm2, setShowForm2] = useState(false)
     const post = useSelector(state => state?.posts[post_id])
     const test = post?.description
     const [description, setDescription] = useState(test)
     const history = useHistory()
+
     useEffect(() => {
         dispatch(getOnePost(post_id))
-    }, [dispatch])
+    }, [dispatch, description])
 
 
     return (
@@ -31,18 +38,28 @@ export default function PostInformation() {
             ) : null}
             <button onClick={() => { dispatch(deletePost(post_id)); history.push('/posts') }} >Delete</button>
             <div>
-                {post?.photos.map(photo => (
-                    <>
-                        <img key={photo.id} src={photo.photo_url} />
-                    </>
-                ))}
+                <div className="slide-container">
+
+                    {post?.photos.map(photo => (
+                        <div className="each-fade">
+                            <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} />
+                        </div>
+                    ))}
+
+                </div>
                 <h4>{post?.description} </h4 >
+                <AddCommentModal post_id={post?.id}></AddCommentModal>
+                <AddNewComment post_id={post?.id}></AddNewComment>
                 <h3>Comments </h3>
                 {post?.comments.map(comment => (
                     <>
-                        <p>{comment.comment}</p>
+                        <p>{comment.comment} </p><button onClick={() => setShowForm(true)} >Edit</button>
+                        {showForm && (<EditComment id={comment.id} comentVal={comment?.comment}></EditComment>)}
+                        <button onClick={() => setShowForm2(true)} >Delete</button>
+                        {showForm2 && (<DeleteComment id={comment.id} setShowForm={setShowForm2}></DeleteComment>)}
                     </>
                 ))}
+
             </div>
 
         </>

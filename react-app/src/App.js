@@ -10,7 +10,7 @@ import User from './components/User';
 import { authenticate } from './store/session';
 import DisplayPosts from './components/DisplayAllPosts'
 import PostInformation from './components/PostInformation'
-
+import AddNewComment from './components/AddNewComment/AddNewComment';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -42,10 +42,10 @@ function App() {
         <ProtectedRoute path='/users/:userId' exact={true} >
           <User />
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <h1>My Home Page</h1>
+        <ProtectedRoute path='/comment' exact={true} >
+          <AddNewComment></AddNewComment>
         </ProtectedRoute>
-        <ProtectedRoute path='/posts' exact={true} >
+        <ProtectedRoute path='/' exact={true} >
           <DisplayPosts />
         </ProtectedRoute>
         <ProtectedRoute path='/posts/:post_id' exact={true} >

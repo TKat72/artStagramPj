@@ -10,7 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .routes.posts import posts_router
 from .routes.comments import comments_routes
-
+from .awsfunc import (upload_file_to_s3, allowed_file, get_unique_filename)
 from .seeds import seed_commands
 
 from .config import Config
