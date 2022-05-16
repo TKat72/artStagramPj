@@ -17,6 +17,7 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
+        console.log(data)
         setErrors(data)
       }
     }
@@ -43,50 +44,54 @@ const SignUpForm = () => {
   }
 
   return (
-    <form onSubmit={onSignUp}>
+    <form className='formLogin formSignUp' onSubmit={onSignUp}>
       <div>
-        {errors.map((error, ind) => (
+        {errors?.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
       <div>
-        <label>User Name</label>
-        <input
+
+        <input className="form-control-impt-lg sign-up"
           type='text'
           name='username'
+          placeholder="Username"
           onChange={updateUsername}
           value={username}
         ></input>
       </div>
       <div>
-        <label>Email</label>
-        <input
+
+        <input className="form-control-impt-lg sign-up"
           type='text'
           name='email'
+          placeholder="Email"
           onChange={updateEmail}
           value={email}
         ></input>
       </div>
       <div>
-        <label>Password</label>
-        <input
+
+        <input className="form-control-impt-lg sign-up"
           type='password'
           name='password'
+          placeholder="Password"
           onChange={updatePassword}
           value={password}
         ></input>
       </div>
       <div>
-        <label>Repeat Password</label>
-        <input
+
+        <input className="form-control-impt-lg sign-up"
           type='password'
           name='repeat_password'
+          placeholder="Repeat Password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
           required={true}
         ></input>
       </div>
-      <button type='submit'>Sign Up</button>
+      <button className="btn-login" type='submit'>Sign Up</button>
     </form>
   );
 };

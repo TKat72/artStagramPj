@@ -11,3 +11,26 @@ body {
     justify-content: space-between;
     list-style-type: none;
 }
+
+#navForHome {
+    text-decoration: none;
+    color: black;
+    font-family: cursive;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.rightNav {
+    display: flex;
+
+    justify-content: space-between;
+    align-self: flex-start;
+
+}
+
+.loginUserNav {
+    display: flex;
+    width: 100px;
+    justify-content: space-between;
+
+}

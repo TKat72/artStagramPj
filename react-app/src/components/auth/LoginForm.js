@@ -31,15 +31,15 @@ const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={onLogin}>
+    <form className='formLogin' onSubmit={onLogin}>
       <div>
         {errors.map((error, ind) => (
           <div key={ind}>{error}</div>
         ))}
       </div>
+
       <div>
-        <label htmlFor='email'>Email</label>
-        <input
+        <input className="form-control-impt-lg"
           name='email'
           type='text'
           placeholder='Email'
@@ -48,16 +48,16 @@ const LoginForm = () => {
         />
       </div>
       <div>
-        <label htmlFor='password'>Password</label>
-        <input
+        <input className="form-control-impt-lg"
           name='password'
           type='password'
           placeholder='Password'
           value={password}
           onChange={updatePassword}
         />
-        <button type='submit'>Login</button>
+
       </div>
+      <button className="btn-login"type='submit'>Login</button>
     </form>
   );
 };

@@ -1,0 +1,58 @@
+.splashPage {
+    display: flex;
+    margin-top: 100px;
+}
+
+.rightSide {}
+
+.loginForm {
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    height: 300px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formLogin {
+    display: flex;
+    margin: 35px;
+    height: 115px;
+    width: 200px;
+
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.form-control-impt-lg {
+    width: 194px;
+    height: 25px;
+
+}
+
+.btn-login {
+    margin-top: 10px;
+    height: 25px;
+    background-color: lightblue;
+    border-radius: 5px;
+}
+
+#sign-up-click {
+    color: rgb(114, 148, 234);
+}
+
+.SignUpLink {
+    margin-top: 10px;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.formSignUp {
+    margin-top: -5px;
+}
+
+.sign-up {
+    margin-bottom: 5px;
+}
