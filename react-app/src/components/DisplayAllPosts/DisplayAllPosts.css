@@ -113,7 +113,7 @@ img {
     width: 750px;
     height: 900px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    margin: 0px 500px 0px 600px;
+    /* margin: 0px 500px 0px 600px; */
 
 }
 
@@ -123,4 +123,16 @@ img {
     justify-content: center;
     margin: 15px;
 
+}
+
+#imgCont {
+    position: relative;
+}
+
+.imgFade {
+    position: relative;
+}
+
+.imgContainer {
+    position: relative;
 }

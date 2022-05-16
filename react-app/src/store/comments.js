@@ -57,13 +57,13 @@ export const deleteComment = (id) => async (dispatch) => {
         dispatch(removeComment(id))
     }
 }
-export const getAllComment = (id) => async (dispatch) => {
+export const getAllComments = (id) => async (dispatch) => {
 
     const res = await fetch(`/api/comments/${id}/all`)
     if (res.ok) {
         const data = await res.json()
 
-        dispatch(getAll(data))
+        dispatch(getAll(data.comments))
     }
 }
 
@@ -81,7 +81,7 @@ export default function commentReducer(state = {}, action) {
             return newState
         case UPDATE_COMMENT:
             newState = { ...state }
-            newState = { [action.payload.id]: action.payload }
+            newState[action.payload.id]= action.payload
             return newState
         case DELETE_COMMENT:
             newState = { ...state }

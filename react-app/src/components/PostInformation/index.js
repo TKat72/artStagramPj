@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { getOnePost, updatePost, deletePost } from "../../store/posts"
+import { getAllComments } from "../../store/comments"
 import AddCommentModal from "../AddNewComment"
 import AddNewComment from "../AddNewComment/AddNewComment"
-import EditComment from '../EditComment/EditComent'
-import DeleteComment from "../DeleteComment/DeleteComment"
+import EditMyCommentModal from "../EditMyComment"
+import DeleteCommentModal from "../DeleteComment"
 import 'react-slideshow-image/dist/styles.css'
 
 
@@ -16,13 +17,19 @@ export default function PostInformation() {
     const [showForm, setShowForm] = useState(false)
     const [showForm2, setShowForm2] = useState(false)
     const post = useSelector(state => state?.posts[post_id])
+    const user_id = useSelector(state => state?.session?.user?.id)
+    const comments = useSelector(state => Object.values(state?.comment))
+    const postComments = comments.filter(comment => comment.post_id === parseInt(post_id))
     const test = post?.description
     const [description, setDescription] = useState(test)
     const history = useHistory()
+    console.log("im here %%%%%%", comments)
+
 
     useEffect(() => {
         dispatch(getOnePost(post_id))
-    }, [dispatch, description])
+        dispatch(getAllComments(post_id))
+    }, [dispatch])
 
 
     return (
@@ -48,16 +55,19 @@ export default function PostInformation() {
 
                 </div>
                 <h4>{post?.description} </h4 >
-                <AddCommentModal post_id={post?.id}></AddCommentModal>
-                <AddNewComment post_id={post?.id}></AddNewComment>
-                <h3>Comments </h3>
-                {post?.comments.map(comment => (
-                    <>
-                        <p>{comment.comment} </p><button onClick={() => setShowForm(true)} >Edit</button>
-                        {showForm && (<EditComment id={comment.id} comentVal={comment?.comment}></EditComment>)}
-                        <button onClick={() => setShowForm2(true)} >Delete</button>
-                        {showForm2 && (<DeleteComment id={comment.id} setShowForm={setShowForm2}></DeleteComment>)}
-                    </>
+                <div>
+                    <AddCommentModal post_id={post?.id}></AddCommentModal>
+                </div>
+                {postComments.map(comment => (
+                    <div>
+                        <p>{comment.comment} </p>
+                        {comment.user_id === user_id && (
+                            <>
+                                <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal>
+                                <DeleteCommentModal id={comment.id}></DeleteCommentModal>
+                            </>
+                        )}
+                    </div>
                 ))}
 
             </div>

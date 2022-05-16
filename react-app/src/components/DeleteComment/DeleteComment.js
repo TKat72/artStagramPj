@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from "../../store/comments"
 
 
-export default function DeleteComment({ id, setShowForm }) {
+export default function DeleteComment({ id, setShowModal }) {
     const dispatch = useDispatch()
 
 
@@ -16,6 +16,7 @@ export default function DeleteComment({ id, setShowForm }) {
         e.preventDefault()
 
         dispatch(deleteComment(id))
+        setShowModal(false)
 
     }
 
@@ -23,7 +24,7 @@ export default function DeleteComment({ id, setShowForm }) {
         <>
             <h2>Are you sure you want to Delete this comment </h2>
             <button onClick={onSubmit}>Yes</button>
-            <button onClick={() => setShowForm(false)}>No</button>
+            <button onClick={() => setShowModal(false)}>No</button>
         </>
     )
 
