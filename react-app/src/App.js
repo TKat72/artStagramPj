@@ -31,9 +31,6 @@ function App() {
     <BrowserRouter>
       <NavBar />
       <Switch>
-        <Route path='/login' exact={true}>
-          <LoginForm />
-        </Route>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />
         </Route>
@@ -52,7 +49,7 @@ function App() {
         <ProtectedRoute path='/posts/:post_id' exact={true} >
           <PostInformation></PostInformation>
         </ProtectedRoute>
-        <Route path='/test'>
+        <Route path='/login'>
           <SplashPage></SplashPage>
         </Route>
       </Switch>
