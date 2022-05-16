@@ -1,0 +1,30 @@
+.postInfo {
+
+
+    display: flex;
+   
+
+
+
+}
+
+.topPostBar {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.div-for-desscription {
+    border: 1px solid #efefef;
+    min-height: 50px;
+    padding: 10px;
+}
+
+.topPostBar {
+
+    width: max-content
+}
+
+.username {
+    font-weight: bold;
+}

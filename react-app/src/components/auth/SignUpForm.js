@@ -47,7 +47,7 @@ const SignUpForm = () => {
     <form className='formLogin formSignUp' onSubmit={onSignUp}>
       <div>
         {errors?.map((error, ind) => (
-          <div key={ind}>{error}</div>
+          <div className="errors" key={ind}>{error}</div>
         ))}
       </div>
       <div>
@@ -88,7 +88,7 @@ const SignUpForm = () => {
           placeholder="Repeat Password"
           onChange={updateRepeatPassword}
           value={repeatPassword}
-          required={true}
+
         ></input>
       </div>
       <button className="btn-login" type='submit'>Sign Up</button>

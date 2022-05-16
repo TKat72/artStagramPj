@@ -2,3 +2,17 @@
     position:absolute;
 
 } */
+.form-add-post {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+}
+
+.inputForAddPost {
+    padding: 10px;
+}
+
+#add-post-btn {
+    border-radius: 5px;
+    background-color: rgba(126, 172, 227, 0.607);
+}

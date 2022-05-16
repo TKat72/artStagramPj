@@ -5,7 +5,7 @@ import { createNewComment } from "../../store/comments"
 
 export default function AddNewComment({ post_id, setShowModal }) {
     const dispatch = useDispatch()
-
+    const [errors, setErrors] = useState([])
     const [comment, setComment] = useState("")
 
 
@@ -14,13 +14,24 @@ export default function AddNewComment({ post_id, setShowModal }) {
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(createNewComment(comment, post_id))
-        setShowModal(false)
+            .then((res) => {
+                if (!res?.ok) {
+                    setErrors(res?.errors)
+
+                } else {
+                    setErrors([])
+                    setShowModal(false)
+                }
+            })
 
     }
 
     return (
         <>
             <form onSubmit={onSubmit}>
+                {errors?.length > 0 && errors?.map((error, ind) => (
+                    <div className="errors" key={ind}>{error}</div>
+                ))}
                 <label>Your comment </label>
                 <input onChange={(e) => setComment(e.target.value)} value={comment}></input>
                 <button>Submit</button>

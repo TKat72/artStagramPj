@@ -28,7 +28,7 @@ def create_comment():
         print(" in create comment route ********************************** if sts")
         new_comment = Comment(
             user_id = user_id,
-            post_id = form.data['post_id'],
+            post_id = int(form.data['post_id']),
             comment = form.data['comment'],
             created_at = form.data['created_at'],
             updated_at = form.data['updated_at']
@@ -48,11 +48,13 @@ def update_comment(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     print("in edit =>>>>>", form.data)
     if form.validate_on_submit():
+
         comment.comment = form.data['comment']
         comment.updated_at = form.data['updated_at']
         db.session.commit()
         return comment.to_dict()
-    return {"errors": validation_errors_to_error_messages(form.errors)}
+    print("in edit =>>>>>", form.errors)
+    return {"errors": validation_errors_to_error_messages(form.errors)}, 401
 
 @comments_routes.route("/<int:id>", methods=["DELETE"])
 def delete_comment(id):

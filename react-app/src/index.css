@@ -3,6 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .navbar {
@@ -33,4 +34,19 @@ body {
     width: 100px;
     justify-content: space-between;
 
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#navBar {
+    width: 900px;
+    border: 1px solid #efefef;
+}
+
+.errors {
+    margin: 10px;
+    color: red;
 }

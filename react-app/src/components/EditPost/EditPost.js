@@ -12,7 +12,8 @@ export default function EditPost({ id, descriptionVal, setShowModal }) {
         dispatch(updatePost(description, id))
             .then((res) => {
                 if (!res?.ok) {
-                    setErrors(res?.errors)
+                    setErrors(res.errors)
+                    console.log(res.errors)
                 } else {
                     setErrors([])
                     setShowModal(false)
@@ -24,7 +25,7 @@ export default function EditPost({ id, descriptionVal, setShowModal }) {
     return (
         <form onSubmit={onSubmit}>
             {errors?.length > 0 && errors?.map((error, ind) => (
-                <div key={ind}>{error}</div>
+                <div className="errors" key={ind}>{error}</div>
             ))}
             <label>Your Description </label>
             <input type="text" onChange={(e) => setDescription(e.target.value)} value={description} ></input>

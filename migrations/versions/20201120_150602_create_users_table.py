@@ -56,7 +56,7 @@ def upgrade():
     sa.Column('updated_at', sa.DateTime(timezone=True), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], onupdate="CASCADE", ondelete="SET NULL"),
-    sa.ForeignKeyConstraint(['post_id'], ['users.id'], onupdate="CASCADE", ondelete="SET NULL"),
+    sa.ForeignKeyConstraint(['post_id'], ['posts.id'], onupdate="CASCADE", ondelete="SET NULL"),
 
     )
 

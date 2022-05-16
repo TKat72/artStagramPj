@@ -37,6 +37,7 @@ def create_post():
         )
         db.session.add(new_post)
         db.session.commit()
+        print("post id back end =========>", new_post.id)
         new_photo= Photo(
             user_id= user_id,
             post_id = new_post.id,

@@ -9,7 +9,7 @@ import UsersList from './components/UsersList';
 import User from './components/User';
 import { authenticate } from './store/session';
 import DisplayPosts from './components/DisplayAllPosts'
-import PostInformation from './components/PostInformation'
+import PostInformation from './components/PostInformation/PostInformatiom'
 import AddNewComment from './components/AddNewComment/AddNewComment';
 import SplashPage from './components/auth/SplashPageModel/LoginSplash'
 function App() {

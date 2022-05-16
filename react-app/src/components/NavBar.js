@@ -9,7 +9,7 @@ const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
   return (
     <nav >
-      <div className="navbar">
+      <div className="navbar" id="navBar">
         <div>
           <NavLink id="navForHome" to='/' exact={true} activeClassName='active'>
             ArtStagram

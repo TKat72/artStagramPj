@@ -31,6 +31,7 @@ export const createNewComment = (comment, post_id) => async (dispatch) => {
         const data = await res.json()
 
         dispatch(createComment(data))
+
     } else if (res.status < 500) {
         const data = await res.json();
 
@@ -47,7 +48,7 @@ export const updateComment = (comment, id) => async (dispatch) => {
     })
     if (res.ok) {
         const data = await res.json()
-        console.log("data======>", data)
+    
         dispatch(editComment(data))
     } else if (res.status < 500) {
         const data = await res.json();
