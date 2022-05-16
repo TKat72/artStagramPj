@@ -31,7 +31,12 @@ export const createNewComment = (comment, post_id) => async (dispatch) => {
         const data = await res.json()
 
         dispatch(createComment(data))
+    } else if (res.status < 500) {
+        const data = await res.json();
+
+        return data
     }
+    return res;
 }
 export const updateComment = (comment, id) => async (dispatch) => {
 
@@ -44,7 +49,12 @@ export const updateComment = (comment, id) => async (dispatch) => {
         const data = await res.json()
         console.log("data======>", data)
         dispatch(editComment(data))
+    } else if (res.status < 500) {
+        const data = await res.json();
+
+        return data
     }
+    return res;
 }
 export const deleteComment = (id) => async (dispatch) => {
 
@@ -55,15 +65,16 @@ export const deleteComment = (id) => async (dispatch) => {
         const data = await res.json()
 
         dispatch(removeComment(id))
+        return data
     }
 }
-export const getAllComment = (id) => async (dispatch) => {
+export const getAllComments = (id) => async (dispatch) => {
 
     const res = await fetch(`/api/comments/${id}/all`)
     if (res.ok) {
         const data = await res.json()
 
-        dispatch(getAll(data))
+        dispatch(getAll(data.comments))
     }
 }
 
@@ -81,7 +92,7 @@ export default function commentReducer(state = {}, action) {
             return newState
         case UPDATE_COMMENT:
             newState = { ...state }
-            newState = { [action.payload.id]: action.payload }
+            newState[action.payload.id] = action.payload
             return newState
         case DELETE_COMMENT:
             newState = { ...state }

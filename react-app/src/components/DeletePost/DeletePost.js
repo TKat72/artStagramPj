@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteComment } from "../../store/comments"
+import { useHistory } from 'react-router-dom';
+import { deletePost } from "../../store/posts"
 
 
-export default function DeleteComment({ id, setShowModal }) {
+export default function DeletePost({ id, setShowModal }) {
     const dispatch = useDispatch()
-
+    const history = useHistory()
 
 
 
@@ -15,14 +15,15 @@ export default function DeleteComment({ id, setShowModal }) {
     const onSubmit = (e) => {
         e.preventDefault()
 
-        dispatch(deleteComment(id))
+        dispatch(deletePost(id))
+        history.push("/")
         setShowModal(false)
 
     }
 
     return (
         <>
-            <h2>Are you sure you want to Delete this comment </h2>
+            <h2>Are you sure you want to Delete this Post </h2>
             <button onClick={onSubmit}>Yes</button>
             <button onClick={() => setShowModal(false)}>No</button>
         </>

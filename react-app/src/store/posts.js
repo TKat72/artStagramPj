@@ -39,13 +39,13 @@ export const getOnePost = (id) => async (dispatch) => {
     const res = await fetch(`/api/posts/${id}`)
     if (res.ok) {
         const data = await res.json()
-        console.log(" im in fetch for get One=======>>>", data)
+
         dispatch(getOne(data))
     }
 }
 
 export const addPost = (post) => async (dispatch) => {
-    console.log("...........", post)
+
     const res = await fetch(`/api/posts/create-post`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -55,7 +55,13 @@ export const addPost = (post) => async (dispatch) => {
         const data = await res.json()
 
         dispatch(createPost(data))
+        
+    } else if (res.status < 500) {
+        const data = await res.json();
+
+        return data
     }
+    return res;
 }
 export const updatePost = (description, id) => async (dispatch) => {
 
@@ -66,9 +72,14 @@ export const updatePost = (description, id) => async (dispatch) => {
     })
     if (res.ok) {
         const data = await res.json()
-        console.log("data======>", data)
+
         dispatch(editPost(data))
+    } else if (res.status < 500) {
+        const data = await res.json();
+
+        return data
     }
+    return res
 }
 export const deletePost = (id) => async (dispatch) => {
 

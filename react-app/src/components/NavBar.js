@@ -2,11 +2,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import LogoutButton from './auth/LogoutButton';
+import AddNewPostModel from "./addNewPost"
 
 const NavBar = () => {
   return (
-    <nav>
-      <ul>
+    <nav >
+      <ul className="navbar">
         <li>
           <NavLink to='/' exact={true} activeClassName='active'>
             Home
@@ -26,6 +27,9 @@ const NavBar = () => {
           <NavLink to='/users' exact={true} activeClassName='active'>
             Users
           </NavLink>
+        </li>
+        <li>
+          <AddNewPostModel></AddNewPostModel>
         </li>
         <li>
           <LogoutButton />

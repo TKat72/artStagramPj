@@ -84,7 +84,7 @@ def update_post(id):
         db.session.commit()
         return post.to_dict()
 
-    return render_template("update_post_form.html", form= form)
+    return {"errors": validation_errors_to_error_messages(form.errors)},401
 
 @posts_router.route("/<int:id>/remove-photo", methods=["DELETE"])
 def remove_photo(id):

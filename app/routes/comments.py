@@ -11,16 +11,21 @@ comments_routes = Blueprint('comments', __name__)
 @comments_routes.route("/<int:id>/all")
 def getAllcoments(id):
     comments = Comment.query.filter(Comment.post_id == id).all()
-    return comments.to_dict()
+    test = [comment.to_dict() for comment in comments]
+    print(test)
+    return {"comments": [ comment.to_dict() for comment in comments]}
+
 
 
 @comments_routes.route("/create-comment", methods=['POST'])
 def create_comment():
     user_id= current_user.id
     form = AddCommentForm()
-    print("<<<<<<<<>>>>>>>>>",form.data)
+
     form['csrf_token'].data = request.cookies['csrf_token']
+    print("<<<<<<<<>>>>>>>>>",form.data)
     if form.validate_on_submit():
+        print(" in create comment route ********************************** if sts")
         new_comment = Comment(
             user_id = user_id,
             post_id = form.data['post_id'],
@@ -29,9 +34,10 @@ def create_comment():
             updated_at = form.data['updated_at']
         )
         db.session.add(new_comment)
-        post = Post.query.get(form.data['post_id'])
-        return post.to_dict()
+        db.session.commit()
 
+        return new_comment.to_dict()
+    print(form.errors)
     return {"errors": validation_errors_to_error_messages(form.errors)},401
 
 

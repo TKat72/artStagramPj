@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Modal } from "../../context/Modal"
-import AddNewComment from "./AddNewComment"
+import EditPost from "./EditPost"
 
-export default function AddPhotoToAlbumModal({ post_id }) {
+export default function EditPostModal({ id, descriptionVal }) {
     const [showModal, setShowModal] = useState(false)
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Add comment </button>
+            <button onClick={() => setShowModal(true)}>Edit </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
-                    <AddNewComment post_id={post_id} setShowModal={setShowModal} ></AddNewComment>
+                    <EditPost descriptionVal={descriptionVal} id={id} setShowModal={setShowModal} ></EditPost>
                 </Modal>
             )}
 
