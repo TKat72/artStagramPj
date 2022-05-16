@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
 import { addPost } from "../../store/posts"
-import "./addNewPost.css" 
+import "./addNewPost.css"
 
 
 export default function AddNewPost({ setShowModal }) {
@@ -10,6 +10,7 @@ export default function AddNewPost({ setShowModal }) {
     const [photo_url, setPhotoUrl] = useState("")
     const [photo_url2, setPhotoUrl2] = useState("")
     const [photo_url3, setPhotoUrl3] = useState("")
+    const [errors, setErrors] = useState([])
     const user_id = useSelector(state => state.session?.user?.id)
 
     const onSubmit = (e) => {
@@ -22,7 +23,15 @@ export default function AddNewPost({ setShowModal }) {
             photo_url3
         }
         dispatch(addPost(post))
-        setShowModal(false)
+            .then((res) => {
+                if (!res?.ok) {
+                    setErrors(res?.errors)
+                } else {
+                    setErrors([])
+                    setShowModal(false)
+                }
+            })
+
     }
 
 
@@ -30,6 +39,9 @@ export default function AddNewPost({ setShowModal }) {
         <div>
             <h1>Hello</h1>
             <form onSubmit={onSubmit} className="form-add-post">
+                {errors?.length > 0 && errors?.map((error, ind) => (
+                    <div key={ind}>{error}</div>
+                ))}
                 <label>Photo url </label>
                 <input onChange={(e) => setPhotoUrl(e.target.value)} value={photo_url} required></input>
                 <label>Photo url </label>

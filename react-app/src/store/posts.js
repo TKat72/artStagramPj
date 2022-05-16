@@ -39,7 +39,7 @@ export const getOnePost = (id) => async (dispatch) => {
     const res = await fetch(`/api/posts/${id}`)
     if (res.ok) {
         const data = await res.json()
-      
+
         dispatch(getOne(data))
     }
 }
@@ -55,7 +55,13 @@ export const addPost = (post) => async (dispatch) => {
         const data = await res.json()
 
         dispatch(createPost(data))
+        
+    } else if (res.status < 500) {
+        const data = await res.json();
+
+        return data
     }
+    return res;
 }
 export const updatePost = (description, id) => async (dispatch) => {
 
@@ -68,7 +74,12 @@ export const updatePost = (description, id) => async (dispatch) => {
         const data = await res.json()
 
         dispatch(editPost(data))
+    } else if (res.status < 500) {
+        const data = await res.json();
+
+        return data
     }
+    return res
 }
 export const deletePost = (id) => async (dispatch) => {
 

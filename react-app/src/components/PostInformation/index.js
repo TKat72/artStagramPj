@@ -5,9 +5,10 @@ import { useHistory } from 'react-router-dom';
 import { getOnePost, updatePost, deletePost } from "../../store/posts"
 import { getAllComments } from "../../store/comments"
 import AddCommentModal from "../AddNewComment"
-import AddNewComment from "../AddNewComment/AddNewComment"
+import EditPostModal from "../EditPost"
 import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
+import DeletePostModal from "../DeletePost"
 import 'react-slideshow-image/dist/styles.css'
 
 
@@ -23,7 +24,7 @@ export default function PostInformation() {
     const test = post?.description
     const [description, setDescription] = useState(test)
     const history = useHistory()
-    console.log("im here %%%%%%", comments)
+    console.log("im here %%%%%%", post?.id)
 
 
     useEffect(() => {
@@ -34,17 +35,13 @@ export default function PostInformation() {
 
     return (
         <>
-            <button onClick={() => setShowForm(true)} >Edit</button>
-            {showForm ? (
-                <>
-                    <label>Description</label>
-                    <input onChange={(e) => setDescription(e.target.value)} value={description}></input>
-                    <button onClick={(e) => { dispatch(updatePost(description, post_id)); setShowForm(false) }}> submit</button>
-                    <button onClick={() => setShowForm(false)}>Cencel</button>
-                </>
-            ) : null}
-            <button onClick={() => { dispatch(deletePost(post_id)); history.push('/posts') }} >Delete</button>
             <div>
+                {post?.user_id === user_id && (
+                    <>
+                        <EditPostModal id={post?.id} descriptionVal={post.description} />
+                        <DeletePostModal id={post?.id}></DeletePostModal>
+                    </>
+                )}
                 <div className="slide-container">
 
                     {post?.photos.map(photo => (
@@ -61,7 +58,7 @@ export default function PostInformation() {
                 {postComments.map(comment => (
                     <div>
                         <p>{comment.comment} </p>
-                        {comment.user_id === user_id && (
+                        {comment?.user_id === user_id && (
                             <>
                                 <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal>
                                 <DeleteCommentModal id={comment.id}></DeleteCommentModal>
