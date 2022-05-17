@@ -7,7 +7,7 @@ export default function DeletePostModal({ id, descriptionVal }) {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Delete</button>
+            <i className="fa-solid fa-trash-can-arrow-up" onClick={() => setShowModal(true)}></i>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <DeletePost id={id} setShowModal={setShowModal} ></DeletePost>

@@ -8,7 +8,7 @@ const LogoutButton = () => {
     await dispatch(logout());
   };
 
-  return <i style={{ fontSize: "25px" }} className="fa-solid fa-arrow-right-from-bracket" onClick={onLogout}></i>;
+  return <i style={{ fontSize: "25px" }} className="fa-solid fa-arrow-right-from-bracket haverOver" onClick={onLogout}></i>;
 };
 
 export default LogoutButton;

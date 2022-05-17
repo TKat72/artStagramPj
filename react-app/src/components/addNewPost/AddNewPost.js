@@ -37,20 +37,19 @@ export default function AddNewPost({ setShowModal }) {
 
     return (
         <div>
-            <h1>Hello</h1>
             <form onSubmit={onSubmit} className="form-add-post">
                 {errors?.length > 0 && errors?.map((error, ind) => (
-                    <div key={ind}>{error}</div>
+                    <div  className="errors" key={ind}>{error}</div>
                 ))}
-                <label>Photo url </label>
-                <input onChange={(e) => setPhotoUrl(e.target.value)} value={photo_url} required></input>
-                <label>Photo url </label>
-                <input onChange={(e) => setPhotoUrl2(e.target.value)} value={photo_url2} ></input>
-                <label>Photo url </label>
-                <input onChange={(e) => setPhotoUrl3(e.target.value)} value={photo_url3} ></input>
-                <label>Description </label>
-                <input onChange={(e) => setDescription(e.target.value)} value={description} ></input>
-                <button >Submit</button>
+
+                <input className="inputForAddPost" placeholder="Photo" onChange={(e) => setPhotoUrl(e.target.value)} value={photo_url}></input>
+
+                <input className="inputForAddPost" placeholder="Photo 2" onChange={(e) => setPhotoUrl2(e.target.value)} value={photo_url2} ></input>
+
+                <input className="inputForAddPost" placeholder="Photo 3" onChange={(e) => setPhotoUrl3(e.target.value)} value={photo_url3} ></input>
+
+                <input className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
+                <button id='add-post-btn' >Submit</button>
             </form>
         </div>
     )

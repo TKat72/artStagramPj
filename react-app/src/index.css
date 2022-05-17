@@ -3,6 +3,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .navbar {
@@ -31,6 +32,39 @@ body {
 .loginUserNav {
     display: flex;
     width: 100px;
-    justify-content: space-between;
+    justify-content: space-around;
 
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#navBar {
+    width: 900px;
+    border: 1px solid #efefef;
+}
+
+.errors {
+    margin: 10px;
+    color: red;
+}
+
+.hiden {
+    display: none;
+    margin-left: -10px;
+    font-size: 1em;
+}
+
+.haverOver:hover+.hiden {
+    display: block;
+    text-align: right;
+
+}
+
+
+
+.haverOver {
+    width: 50px;
 }

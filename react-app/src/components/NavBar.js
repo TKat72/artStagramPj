@@ -9,7 +9,7 @@ const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
   return (
     <nav >
-      <div className="navbar">
+      <div className="navbar" id="navBar">
         <div>
           <NavLink id="navForHome" to='/' exact={true} activeClassName='active'>
             ArtStagram
@@ -30,14 +30,15 @@ const NavBar = () => {
           {sessionUser &&
             <>
               <div className='loginUserNav' >
-                <NavLink to='/users' exact={true} activeClassName='active'>
-                  Users
 
-                </NavLink>
-
-                <AddNewPostModel></AddNewPostModel>
-
-                <LogoutButton />
+                <div className='haverOver'>
+                  <AddNewPostModel></AddNewPostModel>
+                  <p className='hiden' style={{ width: '70px', marginTop: "-5px" }}>new post</p>
+                </div>
+                <div  className='haverOver'>
+                  <LogoutButton />
+                <p className='hiden' style={{ width: '50px', marginTop: "-5px" }}>log out</p>
+                </div>
               </div>
             </>
           }

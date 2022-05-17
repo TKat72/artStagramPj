@@ -3,7 +3,7 @@ const GET_ONE_POST = "posts/GET_ONE_POST"
 const POST_POST = "posts/POST_POST"
 const UPDATE_POST = "posts/UPDATE_POST"
 const DELETE_POST = "posts/DELE"
-
+const ADD_PHOTO_TO_POST = "posts/ADD_PHOTO_TO_POST"
 const getAll = posts => ({
     type: GET_ALL_POSTS,
     payload: posts
@@ -24,6 +24,10 @@ const editPost = (post) => ({
 const removePost = (id) => ({
     type: DELETE_POST,
     payload: id
+})
+const addPhoto = (post) => ({
+    type: ADD_PHOTO_TO_POST,
+    payload: post
 })
 
 export const getAllPosts = () => async (dispatch) => {
@@ -55,7 +59,7 @@ export const addPost = (post) => async (dispatch) => {
         const data = await res.json()
 
         dispatch(createPost(data))
-        
+
     } else if (res.status < 500) {
         const data = await res.json();
 
@@ -92,6 +96,12 @@ export const deletePost = (id) => async (dispatch) => {
         dispatch(removePost(id))
     }
 }
+// export const addOnePhotoToPost = (id, form) => async (dispatch) => {
+//     const res = await fetch(`/posts/${id}/add-photo`, {
+//         method: 'POST',
+//     bady
+//     })
+// }
 
 export default function postReducer(state = {}, action) {
     let newState
