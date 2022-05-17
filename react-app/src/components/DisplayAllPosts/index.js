@@ -6,6 +6,11 @@ import { Fade } from 'react-slideshow-image'
 import { Slide } from 'react-slideshow-image';
 import PostInformationModal from "../PostInformation"
 import 'react-slideshow-image/dist/styles.css'
+import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+import 'swiper/swiper.min.css'
+import 'swiper/modules/pagination/pagination.min.css'
+import 'swiper/modules/navigation/navigation.min.css'
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 import "./DisplayAllPosts.css"
 
 export default function DisplayPosts() {
@@ -14,7 +19,7 @@ export default function DisplayPosts() {
     const [users, setUsers] = useState([]);
     const user_id = useSelector(state => state.session?.user?.id)
     const posts = useSelector(state => Object.values(state?.posts))
- 
+
 
     useEffect(() => {
         dispatch(getAllPosts())
@@ -59,20 +64,31 @@ export default function DisplayPosts() {
                     </NavLink>
                     <PostInformationModal username={post.username} description={post.description} id={post.id}></PostInformationModal>
                     {post.photos.length > 1 ? (
-                        <div className="slide-container" >
-                            <Slide>
-
+                        <div className="slide" >
+                            <Swiper cssMode={true}
+                                navigation={true}
+                                pagination={true}
+                                mousewheel={true}
+                                keyboard={true}
+                                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+                                className="mySwiper">
 
                                 {post?.photos.map(photo => (
                                     <>
                                         <div key={photo.id} className="each-slide" >
-                                            <div id="imgCont" className="image-container img-podt-dspl">
-                                                <img style={{ height: "400px", maxWidth: "540px" }} src={photo?.photo_url} />
-                                            </div>
+                                            {post?.photo?.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
+                                                <div className="img-podt-dspl">
+                                                    <SwiperSlide> <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800"></embed></SwiperSlide>
+                                                </div >
+                                            ) :
+                                                <div id="imgCont" className="image-container img-podt-dspl">
+                                                    <SwiperSlide> <img style={{ height: "600px", maxWidth: "540px" }} src={photo?.photo_url} /></SwiperSlide>
+                                                </div>
+                                            }
                                         </div>
                                     </>
                                 ))}
-                            </Slide>
+                            </Swiper>
                         </div>
                     ) : <div >
 
@@ -81,9 +97,15 @@ export default function DisplayPosts() {
                         {post?.photos.map(photo => (
                             <>
                                 <div key={photo.id}  >
-                                    <div className="img-podt-dspl">
-                                        <img style={{ height: "400px", maxWidth: "540px" }} src={photo?.photo_url} />
-                                    </div>
+                                    {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
+                                        <div className="img-podt-dspl">
+                                            <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800" style={{ marginTop: "10px" }} ></embed>
+                                        </div >
+                                    ) :
+                                        <div className="img-podt-dspl">
+                                            <img style={{ height: "600px", maxWidth: "540px" }} src={photo?.photo_url} />
+                                        </div>
+                                    }
                                 </div>
                             </>
                         ))}

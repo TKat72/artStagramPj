@@ -6,25 +6,28 @@ import "./addNewPost.css"
 
 export default function AddNewPost({ setShowModal }) {
     const dispatch = useDispatch()
+    const [image, setImage] = useState(null)
     const [description, setDescription] = useState("")
-    const [photo_url, setPhotoUrl] = useState("")
-    const [photo_url2, setPhotoUrl2] = useState("")
-    const [photo_url3, setPhotoUrl3] = useState("")
+    const [photo_url2, setPhotoUrl2] = useState(null)
+    const [photo_url3, setPhotoUrl3] = useState(null)
     const [errors, setErrors] = useState([])
     const user_id = useSelector(state => state.session?.user?.id)
+
 
     const onSubmit = (e) => {
         e.preventDefault()
         const post = {
             user_id,
-            photo_url,
+            image,
             description,
             photo_url2,
             photo_url3
         }
+
         dispatch(addPost(post))
             .then((res) => {
                 if (!res?.ok) {
+                    console.log(res?.errors)
                     setErrors(res?.errors)
                 } else {
                     setErrors([])
@@ -33,20 +36,32 @@ export default function AddNewPost({ setShowModal }) {
             })
 
     }
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    }
+    const updateImage2 = (e) => {
+        const file = e.target.files[0];
+        setPhotoUrl2(file);
+    }
+    const updateImage3 = (e) => {
+        const file = e.target.files[0];
+        setPhotoUrl3(file);
+    }
 
 
     return (
         <div>
             <form onSubmit={onSubmit} className="form-add-post">
                 {errors?.length > 0 && errors?.map((error, ind) => (
-                    <div  className="errors" key={ind}>{error}</div>
+                    <div className="errors" key={ind}>{error}</div>
                 ))}
+                <input type="file" onChange={updateImage} ></input>
 
-                <input className="inputForAddPost" placeholder="Photo" onChange={(e) => setPhotoUrl(e.target.value)} value={photo_url}></input>
 
-                <input className="inputForAddPost" placeholder="Photo 2" onChange={(e) => setPhotoUrl2(e.target.value)} value={photo_url2} ></input>
+                <input className="inputForAddPost" type="file" onChange={updateImage2} ></input>
 
-                <input className="inputForAddPost" placeholder="Photo 3" onChange={(e) => setPhotoUrl3(e.target.value)} value={photo_url3} ></input>
+                <input className="inputForAddPost" type="file" placeholder="Photo 3" onChange={updateImage3}  ></input>
 
                 <input className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
                 <button id='add-post-btn' >Submit</button>

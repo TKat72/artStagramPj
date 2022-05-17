@@ -68,8 +68,8 @@ export default function Profile() {
             <p> Join on {month}/{day}/{year} </p>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label={`${user.posts.length} posts`} {...a11yProps(0)} />
-                    <Tab label={`${user.comments.length} comments`} {...a11yProps(1)} />
+                    <Tab label={`${user.comments.length} comments`} {...a11yProps(0)} />
+                    <Tab label={`${user.posts.length} posts`} {...a11yProps(1)} />
                     <Tab label="Item Three" {...a11yProps(2)} />
                 </Tabs>
             </Box>
@@ -91,13 +91,19 @@ export default function Profile() {
                             {post?.photos.map(photo => (
                                 <>
                                     <div key={photo.id}  >
-                                        <div className="img-podt-dspl">
-                                            <img style={{ height: "60px", maxWidth: "90px" }} src={photo?.photo_url} />
-                                        </div>
+                                        {post?.photo?.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
+                                            <div className="img-podt-dspl">
+                                                <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800"></embed>
+                                            </div >
+                                        ) :
+                                            <div className="img-podt-dspl">
+                                                <img style={{ height: "60px", maxWidth: "90px" }} src={photo?.photo_url} />
+                                            </div>
+                                        }
                                     </div>
                                 </>
                             ))}
-                           
+
 
                         </div>
                     </>

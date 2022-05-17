@@ -49,11 +49,16 @@ export const getOnePost = (id) => async (dispatch) => {
 }
 
 export const addPost = (post) => async (dispatch) => {
-
+    const { user_id, image, description, photo_url2, photo_url3 } = post
+    const formData = new FormData()
+    formData.append('user_id', user_id)
+    formData.append('description', description)
+    formData.append('photo_url2', photo_url2)
+    formData.append('photo_url3', photo_url3)
+    if (image) formData.append('image', image)
     const res = await fetch(`/api/posts/create-post`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(post)
+        body: formData
     })
     if (res.ok) {
         const data = await res.json()
@@ -96,12 +101,23 @@ export const deletePost = (id) => async (dispatch) => {
         dispatch(removePost(id))
     }
 }
-// export const addOnePhotoToPost = (id, form) => async (dispatch) => {
-//     const res = await fetch(`/posts/${id}/add-photo`, {
-//         method: 'POST',
-//     bady
-//     })
-// }
+export const addOnePhotoToPost = (id, formData) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${id}/add-photo`, {
+        method: 'POST',
+        body: formData
+    })
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(addPhoto(data))
+
+    } else if (res.status < 500) {
+        const data = await res.json();
+
+        return data
+    }
+    return res
+
+}
 
 export default function postReducer(state = {}, action) {
     let newState
@@ -123,6 +139,11 @@ export default function postReducer(state = {}, action) {
             newState = { ...state }
             newState = { [action.payload.id]: action.payload }
             return newState
+        case ADD_PHOTO_TO_POST:
+            newState = { ...state }
+            newState = { [action.payload.id]: action.payload }
+            return newState
+
         case DELETE_POST:
             newState = { ...state }
             delete newState[action.payload]

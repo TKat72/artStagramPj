@@ -1,6 +1,7 @@
 .post-div {
-    width: 550px;
-    height: 600px;
+    width: 670px;
+    height: 980px;
+    margin: 10px;
     position: relative;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     /* margin: 0px 500px 0px 600px; */
