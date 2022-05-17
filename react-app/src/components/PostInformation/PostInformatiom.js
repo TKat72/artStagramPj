@@ -71,6 +71,11 @@ export default function PostInformation({ id }) {
                         </div >
                     )}
                     <div className="slide-container" >
+                        <form onSubmit={onSubmit}>
+                            <input type="file" accept="image/*" onChange={updateImage} ></input>
+                            <button type="submit">Add</button>
+                            {imageLoading && (<p>Loading... please wait...</p>)}
+                        </form>
 
 
                         {post?.photos.map(photo => (
@@ -82,11 +87,7 @@ export default function PostInformation({ id }) {
                                 </div>
                             </>
                         ))}
-                        <form onSubmit={onSubmit}>
-                            <input type="file" accept="image/*" onChange={updateImage} ></input>
-                            <button type="submit">Add</button>
-                            {imageLoading&&(<p>Loading... please wait...</p>)}
-                        </form>
+
                     </div>
 
 
