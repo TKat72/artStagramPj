@@ -27,14 +27,37 @@ export default function PostInformation({ id }) {
     const test = post?.description
     const [description, setDescription] = useState(test)
     const history = useHistory()
-    console.log("im here %%%%%%", post?.id)
+    const [image, setImage] = useState(null)
+    const [imageLoading, setImageLoading] = useState(false);
+
 
 
     useEffect(() => {
         dispatch(getOnePost(post_id))
         dispatch(getAllComments(post_id))
     }, [dispatch])
+    const onSubmit = async (e) => {
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append('image', image)
+        setImageLoading(true)
+        const res = await fetch(`/api/posts/${post_id}/add-photo`, {
+            method: 'POST',
+            body: formData
+        })
+        if (res.ok) {
+            await res.json()
+            setImageLoading(false)
+        } else {
+            setImageLoading(false)
+            console.log("somthing went wron ")
+        }
 
+    }
+    const updateImage = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    }
 
     return (
         <>
@@ -48,18 +71,22 @@ export default function PostInformation({ id }) {
                         </div >
                     )}
                     <div className="slide-container" >
-                       
 
-                            {post?.photos.map(photo => (
-                                <>
-                                    <div className="each-slide">
-                                        <div className="image-container">
-                                            <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} />
-                                        </div>
+
+                        {post?.photos.map(photo => (
+                            <>
+                                <div className="each-slide">
+                                    <div className="image-container">
+                                        <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} />
                                     </div>
-                                </>
-                            ))}
-
+                                </div>
+                            </>
+                        ))}
+                        <form onSubmit={onSubmit}>
+                            <input type="file" accept="image/*" onChange={updateImage} ></input>
+                            <button type="submit">Add</button>
+                            {imageLoading&&(<p>Loading... please wait...</p>)}
+                        </form>
                     </div>
 
 

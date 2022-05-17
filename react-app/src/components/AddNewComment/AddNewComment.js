@@ -10,7 +10,7 @@ export default function AddNewComment({ post_id, setShowModal }) {
 
 
     const user_id = useSelector(state => state.session?.user?.id)
-    console.log(post_id)
+   
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(createNewComment(comment, post_id))

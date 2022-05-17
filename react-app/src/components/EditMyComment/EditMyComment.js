@@ -8,7 +8,7 @@ export default function EditComment({ id, commentVal, setShowModal }) {
     const [errors, setErrors] = useState([])
     const [comment, setComment] = useState(commentVal)
     const history = useHistory()
-    console.log(" im in edit for comment ")
+
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(updateComment(comment, id))
@@ -16,7 +16,7 @@ export default function EditComment({ id, commentVal, setShowModal }) {
 
                 if (!res?.ok) {
                     setErrors(res.errors)
-                    console.log("hello", res.errors)
+                    
                 } else {
                     setErrors([])
                     setShowModal(false)

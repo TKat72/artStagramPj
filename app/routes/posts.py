@@ -102,21 +102,55 @@ def remove_photo(id):
 
 @posts_router.route("/<int:id>/add-photo", methods=["POST"])
 def add_photo(id):
+    print("ID ---------------", id )
     post = Post.query.get(id)
     user_id = current_user.id
-    form = AddPhotoForm()
-    form['csrf_token'].data = request.cookies['csrf_token']
-    if form.validate_on_submit():
+    # form = AddPhotoForm()
+    # form['csrf_token'].data = request.cookies['csrf_token']
+    # if form.validate_on_submit():
+    #     new_photo= Photo(
+    #         user_id= user_id,
+    #         post_id = post.id,
+    #         photo_url = form.data['photo_url']
+    #     )
+    #     db.session.add(new_photo)
+
+    #     post.updated_at = form.data['updated_at']
+    #     db.session.commit()
+    #     return post.to_dict()
+    print("F-----------", request.files['image'])
+    if not  request.files['image']:
+        print("in firts if ")
+        return {"errors": "image required"},400
+    image = request.files["image"]
+
+    if not allowed_file(image.filename):
+        print("in second  if ")
+        return {"errors": "file type not permitted"}, 400
+
+    image.filename = get_unique_filename(image.filename)
+
+    upload = upload_file_to_s3(image)
+    print("---------", upload)
+    if "url" not in upload:
+        print("in therd  if ")
+        # if the dictionary doesn't have a url key
+        # it means that there was an error when we tried to upload
+        # so we send back that error message
+        return upload, 400
+
+    url = upload["url"]
+    if url:
         new_photo= Photo(
             user_id= user_id,
             post_id = post.id,
-            photo_url = form.data['photo_url']
+            photo_url = url
         )
         db.session.add(new_photo)
-
-        post.updated_at = form.data['updated_at']
         db.session.commit()
         return post.to_dict()
+    print('did not hit last ')
+
     return {"errors": validation_errors_to_error_messages(form.errors)},401
 
 

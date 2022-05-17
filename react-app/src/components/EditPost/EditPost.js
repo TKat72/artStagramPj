@@ -6,14 +6,14 @@ export default function EditPost({ id, descriptionVal, setShowModal }) {
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
     const [description, setDescription] = useState(descriptionVal)
-    console.log("id ------------", id)
+
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(updatePost(description, id))
             .then((res) => {
                 if (!res?.ok) {
                     setErrors(res.errors)
-                    console.log(res.errors)
+                    
                 } else {
                     setErrors([])
                     setShowModal(false)

@@ -27,10 +27,20 @@ class User(db.Model, UserMixin):
 
     def check_password(self, password):
         return check_password_hash(self.password, password)
-
+    def comments_to_dict(self):
+        return [comment.to_dict() for comment in self.comments]
+    def post_to_dict(self):
+        return [post.to_dict() for post in self.posts]
     def to_dict(self):
         return {
             'id': self.id,
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'created_at': str(self.created_at),
+            'updated_at': str(self.updated_at),
+            'comments': self.comments_to_dict(),
+            'posts': self.post_to_dict(),
+
+
+
         }

@@ -14,7 +14,7 @@ export default function DisplayPosts() {
     const [users, setUsers] = useState([]);
     const user_id = useSelector(state => state.session?.user?.id)
     const posts = useSelector(state => Object.values(state?.posts))
-    console.log("users", users)
+ 
 
     useEffect(() => {
         dispatch(getAllPosts())

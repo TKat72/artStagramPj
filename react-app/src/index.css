@@ -32,7 +32,7 @@ body {
 .loginUserNav {
     display: flex;
     width: 100px;
-    justify-content: space-between;
+    justify-content: space-around;
 
 }
 
@@ -49,4 +49,22 @@ a {
 .errors {
     margin: 10px;
     color: red;
+}
+
+.hiden {
+    display: none;
+    margin-left: -10px;
+    font-size: 1em;
+}
+
+.haverOver:hover+.hiden {
+    display: block;
+    text-align: right;
+
+}
+
+
+
+.haverOver {
+    width: 50px;
 }

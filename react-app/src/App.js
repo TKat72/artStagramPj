@@ -11,7 +11,8 @@ import { authenticate } from './store/session';
 import DisplayPosts from './components/DisplayAllPosts'
 import PostInformation from './components/PostInformation/PostInformatiom'
 import AddNewComment from './components/AddNewComment/AddNewComment';
-import SplashPage from './components/auth/SplashPageModel/LoginSplash'
+import SplashPage from './components/auth/SplashPageModel/LoginSplash';
+import Profile from './components/Profile/Profile'
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -48,6 +49,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/posts/:post_id' exact={true} >
           <PostInformation></PostInformation>
+        </ProtectedRoute>
+        <ProtectedRoute path='/profile' exact={true} >
+          <Profile></Profile>
         </ProtectedRoute>
         <Route path='/login'>
           <SplashPage></SplashPage>
