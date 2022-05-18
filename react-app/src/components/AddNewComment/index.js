@@ -7,7 +7,7 @@ export default function AddPhotoToAlbumModal({ post_id }) {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Add comment </button>
+            <button className="rnb" onClick={() => setShowModal(true)}>Add comment </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <AddNewComment post_id={post_id} setShowModal={setShowModal} ></AddNewComment>

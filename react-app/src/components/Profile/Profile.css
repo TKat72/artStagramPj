@@ -2,3 +2,14 @@
     border: 1px solid #efefef;
     padding: 10px;
 }
+
+.profile-photo-div {
+    display: flex;
+    width: 80vw;
+    overflow-x: scroll;
+}
+
+.post-box {
+
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}

@@ -1,0 +1,7 @@
+.edit-form {
+    height: 15vw;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+
+}

@@ -10,7 +10,7 @@ export default function AddNewComment({ post_id, setShowModal }) {
 
 
     const user_id = useSelector(state => state.session?.user?.id)
-   
+
     const onSubmit = (e) => {
         e.preventDefault()
         dispatch(createNewComment(comment, post_id))
@@ -34,7 +34,7 @@ export default function AddNewComment({ post_id, setShowModal }) {
                 ))}
                 <label>Your comment </label>
                 <input onChange={(e) => setComment(e.target.value)} value={comment}></input>
-                <button>Submit</button>
+                <button className="rnb">Submit</button>
             </form>
         </>
     )

@@ -17,7 +17,7 @@ const SignUpForm = () => {
     if (password === repeatPassword) {
       const data = await dispatch(signUp(username, email, password));
       if (data) {
-       
+
         setErrors(data)
       }
     }
@@ -91,7 +91,7 @@ const SignUpForm = () => {
 
         ></input>
       </div>
-      <button className="btn-login" type='submit'>Sign Up</button>
+      <button className="btn-login rnb" type='submit'>Sign Up</button>
     </form>
   );
 };

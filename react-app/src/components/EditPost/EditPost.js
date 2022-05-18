@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updatePost } from "../../store/posts"
-
+import "./EditForm.css"
 export default function EditPost({ id, descriptionVal, setShowModal }) {
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
@@ -13,7 +13,7 @@ export default function EditPost({ id, descriptionVal, setShowModal }) {
             .then((res) => {
                 if (!res?.ok) {
                     setErrors(res.errors)
-                    
+
                 } else {
                     setErrors([])
                     setShowModal(false)
@@ -23,14 +23,14 @@ export default function EditPost({ id, descriptionVal, setShowModal }) {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form className="edit-form" onSubmit={onSubmit}>
             {errors?.length > 0 && errors?.map((error, ind) => (
                 <div className="errors" key={ind}>{error}</div>
             ))}
             <label>Your Description </label>
-            <input type="text" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
-            <button>Submit</button>
-            <button onClick={() => setShowModal(false)}>Cencel</button>
+            <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} type="text" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
+            <button className="rnb">Submit</button>
+            <button className="rnb" onClick={() => setShowModal(false)}>Cencel</button>
         </form>
     )
 }

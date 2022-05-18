@@ -3,15 +3,18 @@ import LoginForm from "../LoginForm"
 import SignUpForm from "../SignUpForm"
 import "./SplashPage.css"
 
+
 export default function SplashPage() {
     const [showModal, setShowModal] = useState(true)
 
     return (
         <div className="splashPage">
+            
+            <div className="img">
 
-            <div>
                 <img src="mobile-app.png"></img>
             </div>
+
             <div className="rightSide">
                 {showModal ? (
                     <>

@@ -16,7 +16,7 @@ export default function EditComment({ id, commentVal, setShowModal }) {
 
                 if (!res?.ok) {
                     setErrors(res.errors)
-                    
+
                 } else {
                     setErrors([])
                     setShowModal(false)
@@ -26,14 +26,14 @@ export default function EditComment({ id, commentVal, setShowModal }) {
     }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form className="edit-form" onSubmit={onSubmit}>
             {errors?.length > 0 && errors?.map((error, indx) => (
-                <div  className="errors"key={indx}>{error}</div>
+                <div className="errors" key={indx}>{error}</div>
             ))}
             <label>Your comment </label>
-            <input type="text" onChange={(e) => setComment(e.target.value)} value={comment} ></input>
-            <button>Submit</button>
-            <button onClick={() => setShowModal(false)}>Cencel</button>
+            <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} type="text" onChange={(e) => setComment(e.target.value)} value={comment} ></input>
+            <button className="rnb">Submit</button>
+            <button className="rnb" onClick={() => setShowModal(false)}>Cencel</button>
         </form>
     )
 }
