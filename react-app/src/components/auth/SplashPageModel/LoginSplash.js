@@ -9,11 +9,8 @@ export default function SplashPage() {
 
     return (
         <div className="splashPage">
-            
-            <div className="img">
 
-                <img src="mobile-app.png"></img>
-            </div>
+
 
             <div className="rightSide">
                 {showModal ? (
