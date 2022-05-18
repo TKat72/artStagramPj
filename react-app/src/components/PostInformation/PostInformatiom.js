@@ -10,7 +10,7 @@ import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
 import DeletePostModal from "../DeletePost"
 import { Pagination, Navigation } from 'swiper'
-import { Swiper, SwiperSlide } from 'swiper/react/swiper-react'
+
 import 'swiper/swiper.min.css'
 import 'swiper/modules/pagination/pagination.min.css'
 import 'swiper/modules/navigation/navigation.min.css'
@@ -95,13 +95,7 @@ export default function PostInformation({ id }) {
 
 
                     <div>
-
-                        <><Swiper
-                           spaceBetween={50}
-      slidesPerView={3}
-      centeredSlides
-      onSlideChange={() => console.log("slide change")}
-      onSwiper={swiper => console.log(swiper)}>
+                        <>
                             {post?.photos?.map(photo => (
                                 <>
 
@@ -109,12 +103,12 @@ export default function PostInformation({ id }) {
                                         <div className="image-container">
                                             {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
                                                 <>
-                                                    <SwiperSlide>  <embed src={photo.photo_url} allowfullscreen="true" width="400" height="700"></embed></SwiperSlide>
+                                                    <embed src={photo.photo_url} allowfullscreen="true" width="400" height="700"></embed>
                                                 </>
                                             )
                                                 :
                                                 <>
-                                                    <SwiperSlide> <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} /> </SwiperSlide>
+                                                    <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} />
                                                 </>
                                             }
 
@@ -122,7 +116,7 @@ export default function PostInformation({ id }) {
                                     </div>
                                 </>
                             ))}
-                        </Swiper> </>
+                        </>
                     </div>
                 </div>
 
