@@ -6,10 +6,7 @@ import { Fade } from 'react-slideshow-image'
 import { Slide } from 'react-slideshow-image';
 import PostInformationModal from "../PostInformation"
 import 'react-slideshow-image/dist/styles.css'
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/swiper.min.css'
-import 'swiper/modules/pagination/pagination.min.css'
-import 'swiper/modules/navigation/navigation.min.css'
+
 import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper";
 import "./DisplayAllPosts.css"
 
@@ -65,30 +62,23 @@ export default function DisplayPosts() {
                     <PostInformationModal username={post.username} description={post.description} id={post.id}></PostInformationModal>
                     {post.photos.length > 1 ? (
                         <div className="slide" >
-                            <Swiper cssMode={true}
-                                navigation={true}
-                                pagination={true}
-                                mousewheel={true}
-                                keyboard={true}
-                                modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-                                className="mySwiper">
 
                                 {post?.photos.map(photo => (
                                     <>
 
                                         {post?.photo?.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
 
-                                            <SwiperSlide> <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800"></embed></SwiperSlide>
+                                             <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800"></embed>
 
                                         ) :
 
-                                            <SwiperSlide> <img style={{ height: "600px", maxWidth: "540px" }} src={photo?.photo_url} /></SwiperSlide>
+                                             <img style={{ height: "600px", maxWidth: "540px" }} src={photo?.photo_url} />
 
                                         }
 
                                     </>
                                 ))}
-                            </Swiper>
+                           
                         </div>
                     ) : <div >
 
