@@ -87,7 +87,7 @@ export default function DisplayPosts() {
             {posts?.map(post => (
 
                 <div className="post-div" key={post.id} >
-                    <PostInformationModal username={post.username} description={post.description} id={post.id}></PostInformationModal>
+                    <PostInformationModal username={post.username} description={post.description} id={post.id}> </PostInformationModal>
                     {post.photos.length > 1 ? (
                         <div className="slide" >
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
