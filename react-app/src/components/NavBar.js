@@ -30,14 +30,17 @@ const NavBar = () => {
           {sessionUser &&
             <>
               <div className='loginUserNav' >
+                <div className='haverOver'>
+                  <NavLink to='/profile' >Profile</NavLink>
 
+                </div>
                 <div className='haverOver'>
                   <AddNewPostModel></AddNewPostModel>
                   <p className='hiden' style={{ width: '70px', marginTop: "-5px" }}>new post</p>
                 </div>
-                <div  className='haverOver'>
+                <div className='haverOver'>
                   <LogoutButton />
-                <p className='hiden' style={{ width: '50px', marginTop: "-5px" }}>log out</p>
+                  <p className='hiden' style={{ width: '50px', marginTop: "-5px" }}>log out</p>
                 </div>
               </div>
             </>
