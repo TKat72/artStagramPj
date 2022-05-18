@@ -7,7 +7,7 @@ export default function DeleteCommentModal({ id }) {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Delete</button>
+            <button className="rnb" onClick={() => setShowModal(true)}>Delete</button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <DeleteComment id={id} setShowModal={setShowModal} ></DeleteComment>

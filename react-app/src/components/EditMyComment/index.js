@@ -7,7 +7,7 @@ export default function EditMyCommentModal({ comment_id, commentVal }) {
 
     return (
         <>
-            <button onClick={() => setShowModal(true)}>Edit </button>
+            <button className="rnb" onClick={() => setShowModal(true)}>Edit </button>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <EditComment commentVal={commentVal} id={comment_id} setShowModal={setShowModal} ></EditComment>

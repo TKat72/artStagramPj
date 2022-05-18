@@ -5,7 +5,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Slide } from 'react-slideshow-image';
+
 import 'react-slideshow-image/dist/styles.css'
 import './Profile.css';
 
@@ -70,7 +70,7 @@ export default function Profile() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label={`${user.comments.length} comments`} {...a11yProps(0)} />
                     <Tab label={`${user.posts.length} posts`} {...a11yProps(1)} />
-                    <Tab label="Item Three" {...a11yProps(2)} />
+                    
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
@@ -84,20 +84,21 @@ export default function Profile() {
             </TabPanel>
             <TabPanel value={value} index={1}>
                 {user?.posts?.map(post => (
-                    <>
-                        <div>
-                            <p>{post.description}</p>
+                    <div className="post-box">
+                        <p>{post.description}</p>
+                        <div className="profile-photo-div">
+
 
                             {post?.photos.map(photo => (
                                 <>
                                     <div key={photo.id}  >
-                                        {post?.photo?.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
-                                            <div className="img-podt-dspl">
-                                                <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800"></embed>
-                                            </div >
+                                        {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
+                                            <>
+                                                <embed src={photo.photo_url} allowfullscreen="true" width="400" height="700"></embed>
+                                            </>
                                         ) :
                                             <div className="img-podt-dspl">
-                                                <img style={{ height: "60px", maxWidth: "90px" }} src={photo?.photo_url} />
+                                                <img style={{ height: "600px", maxWidth: "auto" }} src={photo?.photo_url} />
                                             </div>
                                         }
                                     </div>
@@ -106,12 +107,10 @@ export default function Profile() {
 
 
                         </div>
-                    </>
+                    </div>
                 ))}
             </TabPanel>
-            <TabPanel value={value} index={2}>
-                Item Three
-            </TabPanel>
+
         </div>
     )
 

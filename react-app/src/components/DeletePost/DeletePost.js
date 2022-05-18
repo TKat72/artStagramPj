@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { deletePost } from "../../store/posts"
-
+import "./DeletePost.css"
 
 export default function DeletePost({ id, setShowModal }) {
     const dispatch = useDispatch()
@@ -22,11 +22,13 @@ export default function DeletePost({ id, setShowModal }) {
     }
 
     return (
-        <>
+        <div className="delete-post" >
             <h2>Are you sure you want to Delete this Post </h2>
-            <button onClick={onSubmit}>Yes</button>
-            <button onClick={() => setShowModal(false)}>No</button>
-        </>
+            <div className="btn-div">
+                <button className="rnb" onClick={onSubmit}>Yes</button>
+                <button className="rnb" onClick={() => setShowModal(false)}>No</button>
+            </div>
+        </div >
     )
 
 }

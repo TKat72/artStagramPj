@@ -8,7 +8,7 @@ import AddNewPostModel from "./addNewPost"
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
   return (
-    <nav >
+    <nav  className="nav-bar">
       <div className="navbar" id="navBar">
         <div>
           <NavLink id="navForHome" to='/' exact={true} activeClassName='active'>
@@ -31,7 +31,7 @@ const NavBar = () => {
             <>
               <div className='loginUserNav' >
                 <div className='haverOver'>
-                  <NavLink to='/profile' >Profile</NavLink>
+                  <NavLink to='/profile' ><i style={{ fontSize: "23px", marginRight: "20px", color: "purple" }} className="fa-solid fa-user"></i></NavLink>
 
                 </div>
                 <div className='haverOver'>

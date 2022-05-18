@@ -11,6 +11,7 @@ export default function AddNewPost({ setShowModal }) {
     const [photo_url2, setPhotoUrl2] = useState(null)
     const [photo_url3, setPhotoUrl3] = useState(null)
     const [errors, setErrors] = useState([])
+    const [imageLoading, setImageLoading] = useState(false);
     const user_id = useSelector(state => state.session?.user?.id)
 
 
@@ -23,15 +24,18 @@ export default function AddNewPost({ setShowModal }) {
             photo_url2,
             photo_url3
         }
-
+        setImageLoading(true)
         dispatch(addPost(post))
             .then((res) => {
                 if (!res?.ok) {
                     console.log(res?.errors)
+                    setImageLoading(false)
                     setErrors(res?.errors)
                 } else {
                     setErrors([])
+                    setImageLoading(false)
                     setShowModal(false)
+
                 }
             })
 
@@ -56,7 +60,8 @@ export default function AddNewPost({ setShowModal }) {
                 {errors?.length > 0 && errors?.map((error, ind) => (
                     <div className="errors" key={ind}>{error}</div>
                 ))}
-                <input type="file" onChange={updateImage} ></input>
+
+                <input className="inputForAddPost" type="file" onChange={updateImage} ></input>
 
 
                 <input className="inputForAddPost" type="file" onChange={updateImage2} ></input>
@@ -64,7 +69,8 @@ export default function AddNewPost({ setShowModal }) {
                 <input className="inputForAddPost" type="file" placeholder="Photo 3" onChange={updateImage3}  ></input>
 
                 <input className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
-                <button id='add-post-btn' >Submit</button>
+                {imageLoading && (<p>Loading... please wait...</p>)}
+                <button className="rnb" id='add-post-btn' >Submit</button>
             </form>
         </div>
     )

@@ -1,8 +1,12 @@
-/* TODO Add site wide styles */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
+ 
+
+
+
+
 
 }
 
@@ -15,7 +19,7 @@ body {
 
 #navForHome {
     text-decoration: none;
-    color: black;
+    color: rgb(190, 86, 86);
     font-family: cursive;
     font-size: 20px;
     font-weight: bold;
@@ -42,7 +46,8 @@ a {
 }
 
 #navBar {
-    width: 900px;
+    width: 80vw;
+    padding: 15px;
     border: 1px solid #efefef;
 }
 
@@ -53,7 +58,7 @@ a {
 
 .hiden {
     display: none;
-    margin-left: -10px;
+    margin-left: -5px;
     font-size: 1em;
 }
 
@@ -67,4 +72,8 @@ a {
 
 .haverOver {
     width: 50px;
+}
+
+.nav-bar {
+    padding: 10px;
 }

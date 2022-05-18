@@ -1,9 +1,9 @@
 .post-div {
     width: 670px;
-    height: 980px;
+    height: 960px;
     margin: 10px;
     position: relative;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(124, 68, 220, 0.733) 0px 5px 15px;
     /* margin: 0px 500px 0px 600px; */
 
 }
@@ -65,8 +65,45 @@
 
 .AllPosts {
     margin-top: 40px;
+    /* margin-left: 15vw; */
     display: flex;
     flex-direction: column;
     align-items: center;
 
+}
+
+.rnb {
+
+    background-image: linear-gradient(90deg, #9123b9 0%, #99899f 0%, #ac6fc8 49%, #631b96 80%, #00C0FF 100%);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.rnb:after {
+    content: attr(alt);
+    background-color: #191919;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rnb:hover {
+    box-shadow: rgb(142, 197, 228) 0px 5px 15px;
+    animation: slidebg 4s linear infinite;
+
+}
+
+@keyframes slidebg {
+    to {
+        background-position: 20vw;
+    }
+}
+
+.description {
+    padding: 20px;
+    box-shadow: rgb(142, 197, 228) 0px 5px 15px;
 }

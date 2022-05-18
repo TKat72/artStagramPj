@@ -9,12 +9,46 @@ import EditPostModal from "../EditPost"
 import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
 import DeletePostModal from "../DeletePost"
-import { Pagination, Navigation } from 'swiper'
-
-import 'swiper/swiper.min.css'
-import 'swiper/modules/pagination/pagination.min.css'
-import 'swiper/modules/navigation/navigation.min.css'
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
 import "./PostInfo.css"
+
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`simple-tabpanel-${index}`}
+            aria-labelledby={`simple-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
+function a11yProps(index) {
+    return {
+        id: `simple-tab-${index}`,
+        'aria-controls': `simple-tabpanel-${index}`,
+    };
+}
 
 
 export default function PostInformation({ id }) {
@@ -32,8 +66,11 @@ export default function PostInformation({ id }) {
     const history = useHistory()
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false);
+    const [value, setValue] = React.useState(0);
 
-
+    const handleChange1 = (event, newValue) => {
+        setValue(newValue);
+    }
 
     useEffect(() => {
         dispatch(getOnePost(id))
@@ -48,6 +85,7 @@ export default function PostInformation({ id }) {
             .then((res) => {
                 if (!res?.ok) {
                     console.log("somthing wen wron")
+
 
                 } else {
                     setImageLoading(false)
@@ -87,32 +125,36 @@ export default function PostInformation({ id }) {
                     </div >
                 )}
                 <div >
-                    <form onSubmit={onSubmit}>
-                        <input type="file" onChange={updateImage} ></input>
-                        <button type="submit">Add</button>
-                        {imageLoading && (<p>Loading... please wait...</p>)}
-                    </form>
+
 
 
                     <div>
                         <>
-                            {post?.photos?.map(photo => (
+                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                <Tabs value={value} onChange={handleChange1} aria-label="basic tabs example">
+                                    {post.photos.map((photo, idx) => (
+                                        <Tab label={idx + 1} {...a11yProps(idx)} />
+                                    ))}
+
+                                </Tabs>
+                            </Box>
+                            {post?.photos?.map((photo, index) => (
                                 <>
 
                                     <div className="each-slide" key={photo.id}>
-                                        <div className="image-container">
-                                            {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
-                                                <>
-                                                    <embed src={photo.photo_url} allowfullscreen="true" width="400" height="700"></embed>
-                                                </>
-                                            )
-                                                :
-                                                <>
-                                                    <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} />
-                                                </>
-                                            }
 
-                                        </div>
+                                        {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
+                                            <>
+                                                <TabPanel value={value} index={index}>  <embed src={photo.photo_url} allowfullscreen="true" width="400" height="700"></embed> </TabPanel>
+                                            </>
+                                        )
+                                            :
+                                            <>
+                                                <TabPanel value={value} index={index}>  <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} /> </TabPanel>
+                                            </>
+                                        }
+
+
                                     </div>
                                 </>
                             ))}
@@ -123,6 +165,14 @@ export default function PostInformation({ id }) {
 
             </div>
             <div>
+                <form className="form-add-photo" onSubmit={onSubmit}>
+                    <label> Add Photo  </label>
+                    <input type="file" onChange={updateImage} ></input>
+                    <button className="rnb" type="submit">Add</button>
+                    {imageLoading && (<p>Loading... please wait...</p>)}
+                </form>
+            </div>
+            <div>
                 <p>{post?.username}</p>
                 <p className="div-for-desscription">{post?.description} </p >
                 <div>
@@ -130,13 +180,13 @@ export default function PostInformation({ id }) {
                 </div>
                 <div>
                     {postComments.map(comment => (
-                        <div key={comment.id}>
+                        <div className="comment-div" key={comment.id}>
                             <p><span className='username'>{comment.username} </span>{comment.comment} </p>
                             {comment?.user_id === user_id && (
-                                <>
-                                    <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal>
-                                    <DeleteCommentModal id={comment.id}></DeleteCommentModal>
-                                </>
+                                <div className='btn-div2'>
+                                    <div> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>
+                                    <div><DeleteCommentModal id={comment.id}></DeleteCommentModal></div>
+                                </div>
                             )}
                         </div>
                     ))}

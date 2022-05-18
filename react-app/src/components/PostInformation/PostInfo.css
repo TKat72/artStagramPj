@@ -1,15 +1,12 @@
 .postInfo {
 
 
-    display: flex;
-    width: 800px;
-    height: 740px;
+
+    width: 70vw;
+    height: 45vw;
     border: 1px solid #efefef;
-    border-radius: 10px;
-
-
-
-
+    justify-content: center;
+    overflow-y: scroll;
 }
 
 .topPostBar {
@@ -31,4 +28,25 @@
 
 .username {
     font-weight: bold;
+}
+
+.btn-div2 {
+    display: flex;
+    flex-direction: row;
+    margin-left: 15px;
+}
+
+.comment-div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.each-slide {
+    display: flex;
+    justify-content: center;
+}
+
+.form-add-photo {
+    display: flex;
 }
