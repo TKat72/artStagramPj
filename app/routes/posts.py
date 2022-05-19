@@ -29,13 +29,13 @@ def create_post():
     if form.validate_on_submit():
 
         if "image" not in request.files:
-            return {"errors": "image required"}, 400
+            return {"errors": ["image required"]}, 400
 
         image = request.files["image"]
 
         if not allowed_file(image.filename):
             print('not allowed')
-            return {"errors": "file type not permitted"}, 400
+            return  {"errors": ["file must be one of falowing types pdf, png, jpg, jpeg, gif, mp4, 3gp, mov, m4a, m4v "]}, 400
 
         image.filename = get_unique_filename(image.filename)
 
@@ -70,13 +70,13 @@ def create_post():
 
         if form.data['photo_url2'] and form.data['photo_url2'] != "null":
             if "photo_url2" not in request.files:
-                return {"errors": "image2 required"}, 400
+                return {"errors": ["image2 required"]}, 400
 
             image = request.files["photo_url2"]
 
             if not allowed_file(image.filename):
                 print('not allowed')
-                return {"errors": "file type not permitted"}, 400
+                return  {"errors": ["file must be one of falowing types pdf, png, jpg, jpeg, gif, mp4, 3gp, mov, m4a, m4v "]}, 400
 
             image.filename = get_unique_filename(image.filename)
 
@@ -101,13 +101,13 @@ def create_post():
                 db.session.add(new_photo2)
         if form.data['photo_url3'] and form.data['photo_url3'] != 'null':
             if "photo_url3" not in request.files:
-                return {"errors": "image3 required"}, 400
+                return {"errors": ["image3 required"]}, 400
 
             image = request.files["photo_url3"]
 
             if not allowed_file(image.filename):
                 print('not allowed')
-                return {"errors": "file type not permitted"}, 400
+                return {"errors": ["file must be one of falowing types pdf, png, jpg, jpeg, gif, mp4, 3gp, mov, m4a, m4v "]}, 400
 
             image.filename = get_unique_filename(image.filename)
 
@@ -192,12 +192,12 @@ def add_photo(id):
     print("F-----------", request.files['image'])
     if not  request.files['image']:
         print("in firts if ")
-        return {"errors": "image required"},400
+        return {"errors": ["image required"]},400
     image = request.files["image"]
 
     if not allowed_file(image.filename):
         print("in second  if ")
-        return {"errors": "file type not permitted"}, 400
+        return  {"errors": ["file must be  one of falowing types  pdf, png, jpg, jpeg, gif, mp4, 3gp, mov, m4a, m4v "]}, 400
 
     image.filename = get_unique_filename(image.filename)
 

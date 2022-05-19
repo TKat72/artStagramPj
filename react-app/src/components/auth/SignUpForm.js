@@ -8,23 +8,20 @@ const SignUpForm = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [repeatPassword, setRepeatPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
   const user = useSelector(state => state.session.user);
   const dispatch = useDispatch();
 
   const onSignUp = async (e) => {
     e.preventDefault();
 
-    if (password === repeatPassword) {
-      const data = await dispatch(signUp(username, email, password));
-      if (data) {
 
-        setErrors(data)
-      }
-    } else {
-      let error = ['passwords dont mutch ']
-      setErrors(error)
+    const data = await dispatch(signUp(username, email, password, passwordRepeat));
+    if (data) {
+
+      setErrors(data)
     }
+
   };
 
   const updateUsername = (e) => {
@@ -40,7 +37,7 @@ const SignUpForm = () => {
   };
 
   const updateRepeatPassword = (e) => {
-    setRepeatPassword(e.target.value);
+    setPasswordRepeat(e.target.value);
   };
 
   if (user) {
@@ -91,7 +88,7 @@ const SignUpForm = () => {
           name='repeat_password'
           placeholder="Repeat Password"
           onChange={updateRepeatPassword}
-          value={repeatPassword}
+          value={passwordRepeat}
 
         ></input>
       </div>
