@@ -1,4 +1,4 @@
-# Welcome to Artinstagram
+# Welcome to Artstagram
 
 This is a clone  of instagram , with little twist insted on postion usles post of nothing, you can share your favorite art work  or you own creations.
 
@@ -94,6 +94,7 @@ This is the starter for the Flask React project.
 ***
 
 ### Dev Containers (OPTIONAL for M1 Users)
+
 The following instructions detail an *optional* development setup for M1 Mac users having issues with the `psycopg` package.
 
 1. Make sure you have the [Microsoft Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) extension installed.
