@@ -30,7 +30,9 @@ export default function AddNewPost({ setShowModal }) {
                 if (!res?.ok) {
                     console.log(res?.errors)
                     setImageLoading(false)
+
                     setErrors(res?.errors)
+                    console.log("Im here", errors)
                 } else {
                     setErrors([])
                     setImageLoading(false)

@@ -28,14 +28,15 @@ export default function AddNewComment({ post_id, setShowModal }) {
 
     return (
         <>
-            <form onSubmit={onSubmit}>
+            <form className="edit-form" onSubmit={onSubmit}>
                 {errors?.length > 0 && errors?.map((error, ind) => (
                     <div className="errors" key={ind}>{error}</div>
                 ))}
                 <label>Your comment </label>
-                <input onChange={(e) => setComment(e.target.value)} value={comment}></input>
+                <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} onChange={(e) => setComment(e.target.value)} value={comment}></input>
                 <button className="rnb">Submit</button>
-            </form>
+                <button className="rnb" onClick={(e) => setShowModal(false)}> Cencel</button>
+        </form>
         </>
     )
 
