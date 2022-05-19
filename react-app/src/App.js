@@ -18,7 +18,7 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session?.user)
-  console.log(" im in app", currentUser)
+  
 
   useEffect(() => {
     (async () => {
