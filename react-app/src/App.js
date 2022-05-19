@@ -15,6 +15,7 @@ import SplashPage from './components/auth/SplashPageModel/LoginSplash';
 import Profile from './components/Profile/Profile'
 import PageNorFound from "./components/NotFound/NotFound"
 import PostForFeed from "./components/postForFeed/PostForFeed"
+import Footer from "./components/Footer/Footer"
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
@@ -71,6 +72,7 @@ function App() {
           <PageNorFound></PageNorFound>
         </Route>
       </Switch>
+      <Footer />
     </BrowserRouter>
   );
 }
