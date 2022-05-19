@@ -50,3 +50,22 @@
 .form-add-photo {
     display: flex;
 }
+
+.form-add-photo {
+    display: flex;
+    flex-direction: column;
+}
+
+.div-for-iput-add-photo {
+    display: flex;
+}
+
+.add-photo {
+    margin: -60px;
+}
+
+.div-add-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

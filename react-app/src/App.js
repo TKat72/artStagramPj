@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './components/auth/LoginForm';
 import SignUpForm from './components/auth/SignUpForm';
 import NavBar from './components/NavBar';
@@ -17,6 +17,8 @@ import PostForFeed from "./components/postForFeed/PostForFeed"
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const currentUser = useSelector(state => state.session?.user)
+  
 
   useEffect(() => {
     (async () => {
@@ -45,9 +47,15 @@ function App() {
         <ProtectedRoute path='/comment' exact={true} >
           <AddNewComment></AddNewComment>
         </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <DisplayPosts />
-        </ProtectedRoute>
+        {currentUser ? (
+          <ProtectedRoute path='/' exact={true} >
+            <DisplayPosts />
+          </ProtectedRoute>
+        ) :
+          <Route path='/'>
+            <SplashPage></SplashPage>
+          </Route>}
+
         <ProtectedRoute path='/posts/:post_id' exact={true} >
           <PostInformation></PostInformation>
         </ProtectedRoute>

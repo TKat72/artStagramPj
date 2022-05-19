@@ -57,3 +57,14 @@
 .sign-up {
     margin-bottom: 5px;
 }
+
+.photo-splash {
+    background: url('https://artstargarm2-backet.s3.amazonaws.com/modern-artists-who-are-going-to-become-very-famous-for-their-works-15.jpeg');
+    width: 250px;
+    height: 342px;
+    background-size: 250px 342px;
+
+}
+.leftSide{
+    margin-top:  30px;
+}

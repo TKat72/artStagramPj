@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import LoginForm from "../LoginForm"
 import SignUpForm from "../SignUpForm"
+
 import "./SplashPage.css"
 
 
@@ -9,8 +10,9 @@ export default function SplashPage() {
 
     return (
         <div className="splashPage">
-
-
+            <div className="leftSide">
+                <div className="photo-splash" ></div>
+            </div>
 
             <div className="rightSide">
                 {showModal ? (

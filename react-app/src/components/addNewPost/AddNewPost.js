@@ -28,11 +28,11 @@ export default function AddNewPost({ setShowModal }) {
         dispatch(addPost(post))
             .then((res) => {
                 if (!res?.ok) {
-                    console.log(res?.errors)
+
                     setImageLoading(false)
 
                     setErrors(res?.errors)
-                    console.log("Im here", errors)
+                   
                 } else {
                     setErrors([])
                     setImageLoading(false)

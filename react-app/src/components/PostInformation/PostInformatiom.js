@@ -55,6 +55,7 @@ export default function PostInformation({ id }) {
 
     const { post_id } = useParams()
     const dispatch = useDispatch()
+    const [errors, setErrors] = useState([])
     const [showForm, setShowForm] = useState(false)
     const [showForm2, setShowForm2] = useState(false)
     const post = useSelector(state => state?.posts[id])
@@ -87,9 +88,12 @@ export default function PostInformation({ id }) {
                     console.log("somthing wen wron")
 
 
+                    setErrors(res?.errors)
+
                 } else {
+                    setErrors([])
                     setImageLoading(false)
-                    setImage(null)
+
 
                 }
             })
@@ -167,9 +171,14 @@ export default function PostInformation({ id }) {
             <div>
                 <form className="form-add-photo" onSubmit={onSubmit}>
                     <label> Add Photo  </label>
-                    <input type="file" onChange={updateImage} ></input>
-                    <button className="rnb" type="submit">Add</button>
-                    {imageLoading && (<p>Loading... please wait...</p>)}
+                    {errors?.length > 0 && errors?.map((error, ind) => (
+                        <div className="errors" key={ind}>{error}</div>
+                    ))}
+                    <div className="div-for-iput-add-photo">
+                        <input type="file" onChange={updateImage} ></input>
+                        <div className='div-add-photo'><button className="rnb add-photo" type="submit">Add</button></div>
+                        {imageLoading && (<p>Loading... please wait...</p>)}
+                    </div>
                 </form>
             </div>
             <div>
