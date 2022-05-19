@@ -13,12 +13,13 @@ import PostInformation from './components/PostInformation/PostInformatiom'
 import AddNewComment from './components/AddNewComment/AddNewComment';
 import SplashPage from './components/auth/SplashPageModel/LoginSplash';
 import Profile from './components/Profile/Profile'
+import PageNorFound from "./components/NotFound/NotFound"
 import PostForFeed from "./components/postForFeed/PostForFeed"
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
   const currentUser = useSelector(state => state.session?.user)
-  
+
 
   useEffect(() => {
     (async () => {
@@ -65,6 +66,9 @@ function App() {
 
         <Route path='/login'>
           <SplashPage></SplashPage>
+        </Route>
+        <Route>
+          <PageNorFound></PageNorFound>
         </Route>
       </Switch>
     </BrowserRouter>
