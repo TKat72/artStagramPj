@@ -1,12 +1,48 @@
-#Welcome to Artinstagram
+# Welcome to Artinstagram
 
-live site https://artstagram7.herokuapp.com/
+This is a clone  of instagram , with little twist insted on postion usles post of nothing, you can share your favorite art work  or you own creations.
 
-This is may  clone on instagram
 
-heroku run -a HEROKU_APP_NAME flask seed all
 
-heroku run -a artstagram7 flask seed all
+
+## live site
+https://artstagram7.herokuapp.com/
+
+## Created with
+
+<img src="https://user-images.githubusercontent.com/95830774/169189338-a0af2011-bc27-4d87-bcb0-11cd268b7d8e.svg" width="48">
+<img src="https://camo.githubusercontent.com/442c452cb73752bb1914ce03fce2017056d651a2099696b8594ddf5ccc74825e/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f6a6176617363726970742f6a6176617363726970742d6f726967696e616c2e737667" width="48">
+<img src="https://camo.githubusercontent.com/7894f44095e8df88e2c12b0f2c91441ca66d029cf10ae3c068362bb9e68d3df9/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f637373332f637373332d6f726967696e616c2d776f72646d61726b2e737667" width="48">
+<img src="https://camo.githubusercontent.com/e84431cfbd9f7c44b1c20da1dde8ad407cbc31174844a428074d1e3b43faab8b/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f72656163742f72656163742d6f726967696e616c2d776f72646d61726b2e737667" width="48">
+<img src="https://camo.githubusercontent.com/bfde91f425cddc4b06f6a15c2ae50d90a64008c3b05f9733123127e039ffcdf6/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f706f737467726573716c2f706f737467726573716c2d6f726967696e616c2d776f72646d61726b2e737667" width="48">
+<img src="https://camo.githubusercontent.com/2b6b50702c658cdfcf440cef1eb88c7e0e5a16ce0eb6ab8bc933da7697c12213/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f72656475782f72656475782d6f726967696e616c2e737667" width="48">
+<img src="https://camo.githubusercontent.com/b4844c26bdb8e3fd41767ce4dad8ac85a90dab860c85d7daf36beb58deb38ee7/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f73716c616c6368656d792f73716c616c6368656d792d6f726967696e616c2d776f72646d61726b2e737667" width="48">
+
+<img src="https://camo.githubusercontent.com/e283cab049c866f174e0892a3a622fea361338a0e898dcb1d5bd366c61ff80b8/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f6865726f6b752f6865726f6b752d706c61696e2d776f72646d61726b2e737667" width="48">
+<img src="https://camo.githubusercontent.com/fc836983ed18b80caef906c8f1593bcfd4f5c8c587f51a911b1cb4d657a9588b/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f64657669636f6e732f64657669636f6e2f69636f6e732f646f636b65722f646f636b65722d6f726967696e616c2d776f72646d61726b2e737667" width="48">
+
+## Futures
+
+Users
+* C: As a new user, I'd like to be able to sign up for an account so i can post my arts work for everyone to see
+* R: As a current user, i want to be able to see feed page with all postings add comments to posts and go to my profile page
+
+Posts
+* C: I want to be able to create o new art post
+* R: I want to able to see others postings and my postings
+* U: I want to be able to update my posts
+* D: I want to be able to remove my posts from feed
+
+Comments
+* C: I want to be able to live a comment on other people postings and my own
+* R: I want to able to see others people comments on my posts and other people posts
+* U: I want to be able to update my comments
+* D: I want to be able to remove my comments
+
+## WIKI links
+* [User Stories](https://github.com/TKat72/artStagramPj/wiki/User-Stories)
+* [API routes](https://github.com/TKat72/artStagramPj/wiki/Api--Routes)
+* [DB Schema](https://github.com/TKat72/artStagramPj/wiki/DB-Schema)
 
 # Flask React Project
 
