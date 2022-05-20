@@ -2,6 +2,12 @@
 
 This is a clone  of instagram , with little twist insted on postion usles post of nothing, you can share your favorite art work  or you own creations.
 
+1. The 'Getting Started' section of the readme needs to be changed. At the time of grading, it was the same one that came with the project starter.  3. Please add padding to elements. 4. Please change the cursor when hovering over clickable elements. This can be read as not being intuitive. 5. The nav bar expends when hovering over 'New Post and 'Log Out'. This can read as buggy styling.
+
+   1. Logging out should redirect to the Landing page. 2. Clicking on Login/Sign up in the nav bar does not do anything. This is considered a dead link.
+
+
+1. Newly added Posts should appear at the top. 2. After deleting a Post, a blanc page gets rendered.  
 
 
 

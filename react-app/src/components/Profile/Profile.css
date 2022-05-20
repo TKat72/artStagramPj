@@ -10,6 +10,16 @@
 }
 
 .post-box {
+    padding: 10px;
 
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.profile {
+    padding: 10px;
+}
+
+.profile-information {
+    border: 1px solid #efefef;
+    padding: 10px
 }
