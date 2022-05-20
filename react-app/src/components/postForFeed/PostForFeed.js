@@ -79,7 +79,7 @@ export default function PostForFeed({ id }) {
 
 
                                     <TabPanel value={value} index={idx}>
-                                        <div className="img-podt-dspl" >
+                                        <div className="img-podt-dspl " >
                                             <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800"></embed>
                                         </div>
                                     </TabPanel>
@@ -108,12 +108,12 @@ export default function PostForFeed({ id }) {
                         <>
                             <div key={photo.id}  >
                                 {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
-                                    <div className="img-podt-dspl">
+                                    <div className="img-podt-dspl singele-photo">
                                         <embed src={photo.photo_url} allowfullscreen="true" width="600" height="800" style={{ marginTop: "10px" }} ></embed>
 
                                     </div >
                                 ) :
-                                    <div className="img-podt-dspl">
+                                    <div className="img-podt-dspl singele-photo">
                                         <img style={{ height: "600px", maxWidth: "540px" }} src={photo?.photo_url} />
                                     </div>
                                 }
