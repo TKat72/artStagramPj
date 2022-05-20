@@ -70,7 +70,7 @@ def create_post():
             photo_url = url,
         )
 
-        if form.data['photo_url2'] and form.data['photo_url2'] != "null":
+        if form.data['photo_url2'] and form.data['photo_url2'] != "null" and form.data['photo_url2'] !="undefined":
             if "photo_url2" not in request.files:
                 return {"errors": ["image2 required"]}, 400
 
@@ -101,7 +101,7 @@ def create_post():
                 photo_url = url2
                 )
                 db.session.add(new_photo2)
-        if form.data['photo_url3'] and form.data['photo_url3'] != 'null':
+        if form.data['photo_url3'] and form.data['photo_url3'] != 'null' and form.data['photo_url2'] !='undefined':
             if "photo_url3" not in request.files:
                 return {"errors": ["image3 required"]}, 400
 

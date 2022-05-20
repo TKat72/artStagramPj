@@ -24,11 +24,13 @@ export default function AddNewPost({ setShowModal }) {
             photo_url2,
             photo_url3
         }
+       
         setImageLoading(true)
         dispatch(addPost(post))
             .then((res) => {
-                if (!res?.ok) {
 
+                if (!res?.ok) {
+                    console.log("photo_usr2", photo_url2)
                     setImageLoading(false)
 
                     setErrors(res?.errors)
@@ -37,6 +39,7 @@ export default function AddNewPost({ setShowModal }) {
                     setErrors([])
                     setImageLoading(false)
                     setShowModal(false)
+                    console.log(photo_url2)
 
                 }
             })
@@ -71,7 +74,7 @@ export default function AddNewPost({ setShowModal }) {
                 <input className="inputForAddPost" type="file" placeholder="Photo 3" onChange={updateImage3}  ></input>
 
                 <input className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
-                {imageLoading && (<p style={{paddingLeft:"5vw"}}>Loading... please wait...</p>)}
+                {imageLoading && (<p style={{ paddingLeft: "5vw" }}>Loading... please wait...</p>)}
                 <button className="rnb" id='add-post-btn' >Submit</button>
             </form>
         </div>

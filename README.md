@@ -2,11 +2,6 @@
 
 This is a clone  of instagram , with little twist insted on postion usles post of nothing, you can share your favorite art work  or you own creations.
 
-1. The 'Getting Started' section of the readme needs to be changed. At the time of grading, it was the same one that came with the project starter.   
-
-
-
- 2. After deleting a Post, a blanc page gets rendered.?
 
 
 
@@ -49,7 +44,7 @@ Comments
 * [API routes](https://github.com/TKat72/artStagramPj/wiki/Api--Routes)
 * [DB Schema](https://github.com/TKat72/artStagramPj/wiki/DB-Schema)
 
-# Flask React Project
+<!-- # Flask React Project
 
 This is the starter for the Flask React project.
 
@@ -178,4 +173,4 @@ each of the following variables:
 | `flask seed all`      | Just a helpful syntax to run queries against the db to seed data. See the **app/seeds** folder for reference and more details |
 | `heroku login -i`      | Authenticate your heroku-cli using the command line. Drop the -i to authenticate via the browser |
 | `heroku authorizations:create` | Once authenticated, use this to generate an Oauth token |
-| `heroku run -a <app name>` | Run a command from within the deployed container on Heroku |
+| `heroku run -a <app name>` | Run a command from within the deployed container on Heroku | -->
