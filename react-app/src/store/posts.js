@@ -34,7 +34,7 @@ export const getAllPosts = () => async (dispatch) => {
     const res = await fetch("/api/posts/all")
     if (res.ok) {
         const data = await res.json()
-        console.log(" all posts ", data)
+        
         dispatch(getAll(data.posts))
     }
 
