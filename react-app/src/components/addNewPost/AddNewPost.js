@@ -33,7 +33,7 @@ export default function AddNewPost({ setShowModal }) {
             .then((res) => {
 
                 if (!res?.ok) {
-                    console.log("photo_usr2", photo_url2)
+
                     setImageLoading(false)
 
                     setErrors(res?.errors)
@@ -42,7 +42,7 @@ export default function AddNewPost({ setShowModal }) {
                     setErrors([])
                     setImageLoading(false)
                     setShowModal(false)
-                    console.log(photo_url2)
+                  
 
                 }
             })

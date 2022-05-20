@@ -115,7 +115,7 @@ export default function PostInformation({ id }) {
         //     setImageLoading(false)
         // } else {
         //     setImageLoading(false)
-        //     console.log("somthing went wron ")
+        //
         // }
 
     }
