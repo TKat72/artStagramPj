@@ -61,20 +61,32 @@ a {
     display: none;
     margin-left: -5px;
     font-size: 1em;
+    background: rgba(133, 82, 130, 0.5);
+}
+
+.haverOver {
+    cursor: pointer;
 }
 
 .haverOver:hover+.hiden {
     display: block;
-    text-align: right;
+    position: fixed;
+    top: 50px;
+    padding: 5px;
+    border-radius: 5px;
+
 
 }
 
 
 
-.haverOver {
-    width: 50px;
-}
+
 
 .nav-bar {
     padding: 10px;
+}
+
+.hiden {
+    position: fixed;
+
 }

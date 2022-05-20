@@ -34,7 +34,7 @@ export const getAllPosts = () => async (dispatch) => {
     const res = await fetch("/api/posts/all")
     if (res.ok) {
         const data = await res.json()
-        console.log(data)
+        console.log(" all posts ", data)
         dispatch(getAll(data.posts))
     }
 
@@ -141,7 +141,7 @@ export default function postReducer(state = {}, action) {
             return newState
         case ADD_PHOTO_TO_POST:
             newState = { ...state }
-            newState[action.payload.id]= action.payload
+            newState[action.payload.id] = action.payload
             return newState
 
         case DELETE_POST:

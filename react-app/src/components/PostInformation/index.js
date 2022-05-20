@@ -10,7 +10,7 @@ export default function PostInformationModal({ username, description, id }) {
 
     return (
         <>
-            <p onClick={() => setShowModal(true)}>@<span style={{ fontWeight: "bold" }}>{username} </span>  see more...</p>
+            <p onClick={() => setShowModal(true)}>@<span style={{ fontWeight: "bold" }}>{username} </span>  <span style={{ cursor: 'pointer' }}>  see more... </span></p>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <PostInformation id={id} ></PostInformation>
