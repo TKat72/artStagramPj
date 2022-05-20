@@ -32,7 +32,7 @@ export default function AddNewPost({ setShowModal }) {
                     setImageLoading(false)
 
                     setErrors(res?.errors)
-                   
+
                 } else {
                     setErrors([])
                     setImageLoading(false)
@@ -71,7 +71,7 @@ export default function AddNewPost({ setShowModal }) {
                 <input className="inputForAddPost" type="file" placeholder="Photo 3" onChange={updateImage3}  ></input>
 
                 <input className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
-                {imageLoading && (<p>Loading... please wait...</p>)}
+                {imageLoading && (<p style={{paddingLeft:"5vw"}}>Loading... please wait...</p>)}
                 <button className="rnb" id='add-post-btn' >Submit</button>
             </form>
         </div>
