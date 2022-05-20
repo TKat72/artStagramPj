@@ -39,6 +39,10 @@ Comments
 * U: I want to be able to update my comments
 * D: I want to be able to remove my comments
 
+Profile
+* R: I want to able  wisit my profile page and see all my coments and all my posts 
+
+
 ## WIKI links
 * [User Stories](https://github.com/TKat72/artStagramPj/wiki/User-Stories)
 * [API routes](https://github.com/TKat72/artStagramPj/wiki/Api--Routes)
