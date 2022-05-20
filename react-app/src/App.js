@@ -35,7 +35,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <NavBar />
+      {currentUser && (
+        <NavBar />
+      )}
+
       <Switch>
         <Route path='/sign-up' exact={true}>
           <SignUpForm />

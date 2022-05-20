@@ -16,29 +16,22 @@ const NavBar = () => {
           </NavLink>
         </div>
         <div >
-          {!sessionUser &&
-            <div className="rightNav">
-              <NavLink to='/login' exact={true} activeClassName='active'>
-                Login/Sign up
-              </NavLink>
 
 
-            </div>
-          }
           {sessionUser &&
             <>
               <div className='loginUserNav' >
                 <div className='haverOver'>
-                  <NavLink to='/profile' ><i style={{ fontSize: "23px", marginRight: "20px", color: "purple" }} className="fa-solid fa-user"></i></NavLink>
-
+                  <NavLink className='haverOver' to='/profile' ><i style={{ fontSize: "23px", marginRight: "20px", color: "purple" }} className="fa-solid fa-user haverOver"></i></NavLink>
+                  <p className='hiden' >Profile</p>
                 </div>
                 <div className='haverOver'>
                   <AddNewPostModel></AddNewPostModel>
-                  <p className='hiden' style={{ width: '70px', marginTop: "-5px" }}>new post</p>
+                  <p className='hiden' >new post</p>
                 </div>
                 <div className='haverOver'>
                   <LogoutButton />
-                  <p className='hiden' style={{ width: '50px', marginTop: "-5px" }}>log out</p>
+                  <p className='hiden' >log out</p>
                 </div>
               </div>
             </>

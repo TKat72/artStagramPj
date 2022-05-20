@@ -69,7 +69,7 @@
     margin-top: 40px;
     /* margin-left: 15vw; */
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
 
 }

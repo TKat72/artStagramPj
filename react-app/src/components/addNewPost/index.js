@@ -10,7 +10,7 @@ export default function AddNewPostModel() {
 
     return (
         <>
-            <i className="fa-regular fa-square-plus  haverOver" style={{ fontSize: "25px" }} onClick={() => setShowModal(true)}></i>
+            <i className="fa-regular fa-square-plus  haverOver new-post" style={{ fontSize: "25px" }} onClick={() => setShowModal(true)}></i>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <AddNewPost setShowModal={setShowModal} ></AddNewPost>

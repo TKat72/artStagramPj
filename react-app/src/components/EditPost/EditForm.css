@@ -7,10 +7,12 @@
 
 }
 
+
 .submit {
     margin-bottom: 5px;
 }
 
 .edit-post-lable {
     margin-right: 10px;
+    cursor: pointer;
 }
