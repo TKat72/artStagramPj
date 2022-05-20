@@ -6,6 +6,7 @@ from app.forms.create_post_form import PostForm
 from app.forms.update_post_form import UpdatePostForm
 from app.forms.remove_pt_form import RemovePhotoForm
 from app.forms.add_photo_form import AddPhotoForm
+from sqlalchemy import desc, asc
 from app.awsfunc import (upload_file_to_s3, allowed_file, get_unique_filename)
 
 posts_router = Blueprint("posts", __name__)
@@ -13,10 +14,11 @@ posts_router = Blueprint("posts", __name__)
 
 @posts_router.route("/all")
 def post_all():
-    posts = Post.query.all()
-    # print({"posts": [ podt.to_dict() for podt in posts]})
+    posts = Post.query.order_by(desc(Post.id))
 
-    return {"posts": [ post.to_dict() for post in posts]}
+    print("==============>>>>>>>>>>>>>>>>>", posts)
+    # print("---------------------->>>>>>>>>>>>>>>>>", posts2)
+    return {"posts": [ post.to_dict() for post in posts ]}
 
 @posts_router.route("/create-post", methods=["GET","POST"])
 def create_post():

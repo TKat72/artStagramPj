@@ -32,7 +32,7 @@ export default function EditComment({ id, commentVal, setShowModal }) {
             ))}
             <label>Your comment </label>
             <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} type="text" onChange={(e) => setComment(e.target.value)} value={comment} ></input>
-            <button className="rnb">Submit</button>
+            <button className="rnb submit">Submit</button>
             <button className="rnb" onClick={() => setShowModal(false)}>Cencel</button>
         </form>
     )

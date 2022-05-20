@@ -52,7 +52,7 @@ function a11yProps(index) {
 
 
 export default function PostInformation({ id }) {
-
+    const ref = React.useRef();
     const { post_id } = useParams()
     const dispatch = useDispatch()
     const [errors, setErrors] = useState([])
@@ -85,18 +85,24 @@ export default function PostInformation({ id }) {
         dispatch(addOnePhotoToPost(id, formData))
             .then((res) => {
                 if (!res?.ok) {
-                    console.log("somthing wen wron")
 
 
+                    setImageLoading(false)
                     setErrors(res?.errors)
 
-                } else {
+                } else if (res?.ok) {
+                    ref.current.value = ""
+                    setImageLoading(false)
+
+                }
+                else {
                     setErrors([])
                     setImageLoading(false)
 
 
                 }
             })
+
         setImage(null)
 
         // const res = await fetch(`/api/posts/${post_id}/add-photo`, {
@@ -169,20 +175,24 @@ export default function PostInformation({ id }) {
 
             </div>
             <div>
-                <form className="form-add-photo" onSubmit={onSubmit}>
-                    <label> Add Photo  </label>
-                    {errors?.length > 0 && errors?.map((error, ind) => (
-                        <div className="errors" key={ind}>{error}</div>
-                    ))}
-                    <div className="div-for-iput-add-photo">
-                        <input type="file" onChange={updateImage} ></input>
-                        <div className='div-add-photo'><button className="rnb add-photo" type="submit">Add</button></div>
-                        {imageLoading && (<p>Loading... please wait...</p>)}
-                    </div>
-                </form>
+                {post?.user_id === user_id && (
+                    <form className="form-add-photo" onSubmit={onSubmit}>
+                        <label className="lableAdd"> Add Photo  </label>
+                        {errors?.length > 0 && errors?.map((error, ind) => (
+                            <div className="errors" key={ind}>{error}</div>
+                        ))}
+                        <div className="div-for-iput-add-photo">
+                            <input type="file" onChange={updateImage} ref={ref} ></input>
+
+                            <div className='div-add-photo'><button className="rnb add-photo" type="submit">Add</button></div>
+
+                        </div>
+                        <div> {imageLoading && (<p>Loading... please wait...</p>)} </div>
+                    </form>
+                )}
             </div>
             <div>
-                <p>{post?.username}</p>
+                <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
                 <p className="div-for-desscription">{post?.description} </p >
                 <div>
                     <AddCommentModal post_id={post?.id}></AddCommentModal>
@@ -190,10 +200,10 @@ export default function PostInformation({ id }) {
                 <div>
                     {postComments.map(comment => (
                         <div className="comment-div" key={comment.id}>
-                            <p><span className='username'>{comment.username} </span>{comment.comment} </p>
+                            <p><span className='username'>@{comment.username} </span>{comment.comment} </p>
                             {comment?.user_id === user_id && (
                                 <div className='btn-div2'>
-                                    <div> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>
+                                    <div className='btn-post-info'> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>
                                     <div><DeleteCommentModal id={comment.id}></DeleteCommentModal></div>
                                 </div>
                             )}

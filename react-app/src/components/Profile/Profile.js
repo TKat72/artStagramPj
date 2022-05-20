@@ -62,15 +62,17 @@ export default function Profile() {
         setValue(newValue);
     }
     return (
-        <div>
-            <div>Profile</div>
-            <p> {user.username}</p>
-            <p> Join on {month}/{day}/{year} </p>
+        <div className="profile">
+            <div className="profile-information">
+                <div>Profile</div>
+                <p> {user.username}</p>
+                <p> Join on {month}/{day}/{year} </p>
+            </div>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label={`${user.comments.length} comments`} {...a11yProps(0)} />
                     <Tab label={`${user.posts.length} posts`} {...a11yProps(1)} />
-                    
+
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>

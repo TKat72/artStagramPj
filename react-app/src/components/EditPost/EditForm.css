@@ -1,7 +1,16 @@
 .edit-form {
-    height: 10vw;
+    height: 14vw;
     width: 20vw;
+    padding: 10px;
     display: flex;
     flex-direction: column;
 
+}
+
+.submit {
+    margin-bottom: 5px;
+}
+
+.edit-post-lable {
+    margin-right: 10px;
 }

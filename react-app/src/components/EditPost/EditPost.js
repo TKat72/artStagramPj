@@ -29,7 +29,7 @@ export default function EditPost({ id, descriptionVal, setShowModal }) {
             ))}
             <label>Your Description </label>
             <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} type="text" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
-            <button className="rnb">Submit</button>
+            <button className="rnb submit">Submit</button>
             <button className="rnb" onClick={() => setShowModal(false)}>Cencel</button>
         </form>
     )

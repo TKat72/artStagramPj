@@ -16,8 +16,8 @@ export default function DeletePost({ id, setShowModal }) {
         e.preventDefault()
 
         dispatch(deletePost(id))
-        history.push("/")
         setShowModal(false)
+
 
     }
 
