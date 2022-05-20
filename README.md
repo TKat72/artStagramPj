@@ -1,6 +1,6 @@
 # Welcome to Artstagram
 
-This is a clone  of instagram , with little twist insted on postion usles post of nothing, you can share your favorite art work  or you own creations.
+This is a clone  of instagram , with little twist ,  this site just foe shering  your favorite art work  or you own creations.
 
 <img width="814" alt="Screen Shot 2022-05-20 at 3 53 35 PM" src="https://user-images.githubusercontent.com/95830774/169609150-8151cb10-c755-4629-b654-a694f81626f8.png">
 
