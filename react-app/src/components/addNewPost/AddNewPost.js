@@ -10,6 +10,9 @@ export default function AddNewPost({ setShowModal }) {
     const [description, setDescription] = useState("")
     const [photo_url2, setPhotoUrl2] = useState(null)
     const [photo_url3, setPhotoUrl3] = useState(null)
+    const [photo_name, setPhotoName] = useState("")
+    const [photo_name2, setPhotoName2] = useState("")
+    const [photo_name3, setPhotoName3] = useState("")
     const [errors, setErrors] = useState([])
     const [imageLoading, setImageLoading] = useState(false);
     const user_id = useSelector(state => state.session?.user?.id)
@@ -24,7 +27,7 @@ export default function AddNewPost({ setShowModal }) {
             photo_url2,
             photo_url3
         }
-       
+
         setImageLoading(true)
         dispatch(addPost(post))
             .then((res) => {
@@ -47,14 +50,24 @@ export default function AddNewPost({ setShowModal }) {
     }
     const updateImage = (e) => {
         const file = e.target.files[0];
+        const name = e.target.files[0]?.name
+        setPhotoName(name)
+
         setImage(file);
     }
     const updateImage2 = (e) => {
         const file = e.target.files[0];
+
+        const name = e.target.files[0]?.name
+        setPhotoName2(name)
+
         setPhotoUrl2(file);
+
     }
     const updateImage3 = (e) => {
         const file = e.target.files[0];
+        const name = e.target.files[0]?.name
+        setPhotoName3(name)
         setPhotoUrl3(file);
     }
 
@@ -65,16 +78,29 @@ export default function AddNewPost({ setShowModal }) {
                 {errors?.length > 0 && errors?.map((error, ind) => (
                     <div className="errors" key={ind}>{error}</div>
                 ))}
+                <label class="label">
+                    <input type="file" onChange={updateImage} style={{ display: 'none' }} />
+                    <span>{!photo_name ? (<>Select a file</>) : <>Choosen File: {photo_name} </>}</span>
+                </label>
+                <label class="label">
+                    <input type="file" onChange={updateImage2} style={{ display: 'none' }}  ></input>
+                    {/* <span>Select a file {photo_name && (<> {photo_name}</> )}</span> */}
+                    <span>{!photo_name2 ? (<>Select a file</>) : <>Choosen File: {photo_name2} </>}</span>
+                </label>
+                <label class="label">
+                    <input type="file" onChange={updateImage3} style={{ display: 'none' }} />
+                    <span>{!photo_name3 ? (<>Select a file</>) : <>Choosen File: {photo_name3} </>}</span>
+                </label>
 
-                <input className="inputForAddPost" type="file" onChange={updateImage} ></input>
+                {/* <input className="inputForAddPost fileInput" type="file" onChange={updateImage} ></input>
 
 
-                <input className="inputForAddPost" type="file" onChange={updateImage2} ></input>
+                <input className="inputForAddPost fileInput" type="file" onChange={updateImage2} ></input>
 
-                <input className="inputForAddPost" type="file" placeholder="Photo 3" onChange={updateImage3}  ></input>
+                <input className="inputForAddPost fileInput" type="file" onChange={updateImage3}  ></input> */}
 
                 <input className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
-                {imageLoading && (<p style={{ paddingLeft: "5vw" }}>Loading... please wait...</p>)}
+                {imageLoading && (<p style={{ display: 'flex', justifyContent: 'center' }}>Loading... please wait...</p>)}
                 <button className="rnb" id='add-post-btn' >Submit</button>
             </form>
         </div>

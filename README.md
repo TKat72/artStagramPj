@@ -32,7 +32,9 @@ Comments
 * D: I want to be able to remove my comments
 
 Profile
+
 * R: I want to able to sww my profile page and see all my coments and posts 
+
 
 ## WIKI links
 * [User Stories](https://github.com/TKat72/artStagramPj/wiki/User-Stories)

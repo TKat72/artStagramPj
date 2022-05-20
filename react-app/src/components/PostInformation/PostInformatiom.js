@@ -68,6 +68,7 @@ export default function PostInformation({ id }) {
     const [image, setImage] = useState(null)
     const [imageLoading, setImageLoading] = useState(false);
     const [value, setValue] = React.useState(0);
+    const [photo_name, setPhotoName] = useState("")
 
     const handleChange1 = (event, newValue) => {
         setValue(newValue);
@@ -120,6 +121,8 @@ export default function PostInformation({ id }) {
     }
     const updateImage = (e) => {
         const file = e.target.files[0];
+        const name = e.target.files[0]?.name
+        setPhotoName(name)
         setImage(file);
     }
 
@@ -182,7 +185,10 @@ export default function PostInformation({ id }) {
                             <div className="errors" key={ind}>{error}</div>
                         ))}
                         <div className="div-for-iput-add-photo">
-                            <input type="file" onChange={updateImage} ref={ref} ></input>
+                            <label class="label">
+                                <input type="file" onChange={updateImage} ref={ref} style={{ display: 'none' }} />
+                                <span>{!photo_name ? (<>Select a file</>) : <>Choosen File: {photo_name} </>}</span>
+                            </label>
 
                             <div className='div-add-photo'><button className="rnb add-photo" type="submit">Add</button></div>
 
