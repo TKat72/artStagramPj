@@ -33,7 +33,7 @@ Comments
 
 Profile
 
-* R: I want to able to sww my profile page and see all my coments and posts 
+* R: I want to able to visit  my profile page and see all my coments and posts 
 
 
 ## WIKI links
