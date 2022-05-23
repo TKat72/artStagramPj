@@ -91,6 +91,7 @@ export default function PostInformation({ id }) {
 
                     setImageLoading(false)
                     setSuccess("")
+                    setImageLoading(false)
                     setErrors(res?.errors)
 
                 } else if (res?.ok) {
