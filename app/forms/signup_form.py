@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateTimeField
-from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
+from wtforms.validators import DataRequired, Email, ValidationError, EqualTo, Length
 import datetime
 from app.models import User
 
@@ -25,7 +25,7 @@ class SignUpForm(FlaskForm):
     username = StringField(
         'username', validators=[DataRequired(), username_exists])
     email = StringField('email', validators=[DataRequired(),Email(), user_exists])
-    password = StringField('password', validators=[DataRequired(), EqualTo("passwordRepeat", message="passwords mast match")])
+    password = StringField('password', validators=[DataRequired(), EqualTo("passwordRepeat", message="passwords mast match"), Length(min=5, message=" must be at least 5 characters")])
     passwordRepeat = StringField('passwordRepeat', validators=[DataRequired()])
     created_at = DateTimeField('created_at', validators=[DataRequired()], default=datetime.datetime.now)
     updated_at = DateTimeField('updated_at', validators=[DataRequired()], default=datetime.datetime.now)
