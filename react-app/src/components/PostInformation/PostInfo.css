@@ -18,10 +18,21 @@
 }
 
 .div-for-desscription {
+    word-wrap: break-word;
+    border: 1px solid #efefef;
+    padding: 20px;
+    word-break: break-word;
+    min-height: 50px;
+
+}
+
+/* .div-for-desscription {
+    word-wrap: break-word;
     border: 1px solid #efefef;
     min-height: 50px;
     padding: 10px;
-}
+
+} */
 
 .topPostBar {
 
@@ -45,6 +56,7 @@
     border: 1px solid #743a71;
     margin: 10px;
     padding: 10px;
+    word-wrap: break-word;
 }
 
 .each-slide {
@@ -84,4 +96,10 @@
 
 .success-msg {
     color: green;
+}
+
+.comment-box {
+    word-wrap: break-word;
+    word-break: break-word;
+    padding: 10px;
 }

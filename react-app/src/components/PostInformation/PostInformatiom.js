@@ -228,7 +228,7 @@ export default function PostInformation({ id }) {
                 <div>
                     {postComments.map(comment => (
                         <div className="comment-div" key={comment.id}>
-                            <p><span className='username'>@{comment.username} </span>{comment.comment} </p>
+                            <p className="comment-box"><span className='username'>@{comment.username} </span>{comment.comment} </p>
                             {comment?.user_id === user_id && (
                                 <div className='btn-div2'>
                                     <div className='btn-post-info'> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>

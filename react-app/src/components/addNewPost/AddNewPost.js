@@ -42,7 +42,7 @@ export default function AddNewPost({ setShowModal }) {
                     setErrors([])
                     setImageLoading(false)
                     setShowModal(false)
-                  
+
 
                 }
             })
@@ -99,7 +99,8 @@ export default function AddNewPost({ setShowModal }) {
 
                 <input className="inputForAddPost fileInput" type="file" onChange={updateImage3}  ></input> */}
 
-                <input className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
+                {/* <input type="text" className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description} ></input> */}
+                <textarea className="inputForAddPost" placeholder="Description" onChange={(e) => setDescription(e.target.value)} value={description}></textarea>
                 {imageLoading && (<p style={{ display: 'flex', justifyContent: 'center' }}>Loading... please wait...</p>)}
                 <button className="rnb" id='add-post-btn' >Submit</button>
             </form>

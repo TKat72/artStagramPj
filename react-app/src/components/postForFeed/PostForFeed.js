@@ -96,7 +96,7 @@ export default function PostForFeed({ id }) {
 
                             </>
                         ))}
-                        <div className="description"> <p > {post.description}</p> </div>
+                        <div className="description div-for-desscription"> <p > {post.description}</p> </div>
                     </div>
 
 
@@ -120,10 +120,10 @@ export default function PostForFeed({ id }) {
                             </div>
                         </>
                     ))}
-                    <div className="description"> <p > {post.description}</p> </div>
+                    <div className="description div-for-desscription"> <p > {post.description}</p> </div>
                 </div>}
                 <div>
-                    <p><span id="usernameComment">{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
+                    <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
 
                 </div>
                 {/* <div id="commentBox">

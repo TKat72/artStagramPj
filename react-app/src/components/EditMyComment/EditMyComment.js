@@ -31,7 +31,7 @@ export default function EditComment({ id, commentVal, setShowModal }) {
                 <div className="errors" key={indx}>{error}</div>
             ))}
             <label>Your comment </label>
-            <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} type="text" onChange={(e) => setComment(e.target.value)} value={comment} ></input>
+            <textarea className="inputForAddPost" style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} type="text" onChange={(e) => setComment(e.target.value)} value={comment} ></textarea>
             <button className="rnb submit">Submit</button>
             <button className="rnb" onClick={() => setShowModal(false)}>Cencel</button>
         </form>
