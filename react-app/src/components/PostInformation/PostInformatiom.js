@@ -70,7 +70,7 @@ export default function PostInformation({ id }) {
     const [value, setValue] = React.useState(0);
     const [photo_name, setPhotoName] = useState("")
     const [success, setSuccess] = useState("")
-
+    const [lodingMsg, setLodingMsg] = useState("")
     const handleChange1 = (event, newValue) => {
         setValue(newValue);
     }
@@ -79,11 +79,13 @@ export default function PostInformation({ id }) {
         dispatch(getOnePost(id))
         dispatch(getAllComments(id))
     }, [dispatch])
+
     const onSubmit = async (e) => {
         e.preventDefault()
         const formData = new FormData()
         formData.append('image', image)
-        setImageLoading(true)
+        if (photo_name.length > 0) setImageLoading(true)
+
         dispatch(addOnePhotoToPost(id, formData))
             .then((res) => {
                 if (!res?.ok) {
@@ -139,7 +141,7 @@ export default function PostInformation({ id }) {
     const onClick = () => {
 
         if (photo_name.length < 1) {
-           
+
             setImageLoading(false)
         }
 
