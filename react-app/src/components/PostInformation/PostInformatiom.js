@@ -110,6 +110,9 @@ export default function PostInformation({ id }) {
                 if (res.status < 500) {
                     setImageLoading(false)
                 }
+                if (res.status === 500) {
+                    setImageLoading(false)
+                }
             })
         setPhotoName("")
         setImage(null)
@@ -132,6 +135,14 @@ export default function PostInformation({ id }) {
         const name = e.target.files[0]?.name
         setPhotoName(name)
         setImage(file);
+    }
+    const onClick = () => {
+
+        if (photo_name.length < 1) {
+           
+            setImageLoading(false)
+        }
+
     }
 
     return (
@@ -198,7 +209,7 @@ export default function PostInformation({ id }) {
                                 <span>{!photo_name ? (<>Select a file</>) : <>Choosen File: {photo_name} </>}</span>
                             </label>
 
-                            <div className='div-add-photo'><button className="rnb add-photo" type="submit">Add</button></div>
+                            <div className='div-add-photo'><button className="rnb add-photo" type="submit" onClick={onClick}>Add</button></div>
 
                         </div>
                         <div> {imageLoading && (<p>Loading... please wait...</p>)} </div>
