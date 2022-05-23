@@ -16,3 +16,7 @@
     margin-right: 10px;
     cursor: pointer;
 }
+.input-text{
+    text-overflow: scroll;
+    word-wrap: normal;
+}

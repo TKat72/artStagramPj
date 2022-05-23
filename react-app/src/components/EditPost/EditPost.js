@@ -28,7 +28,7 @@ export default function EditPost({ id, descriptionVal, setShowModal }) {
                 <div className="errors" key={ind}>{error}</div>
             ))}
             <label>Your Description </label>
-            <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} type="text" onChange={(e) => setDescription(e.target.value)} value={description} ></input>
+            <textarea className="input-text" style={{ height: "4vw", padding: "10px", margin: "5px", marginBottom: "40px", borderRadius: "10px" }} type="text" onChange={(e) => setDescription(e.target.value)} value={description} ></textarea>
             <button className="rnb submit">Submit</button>
             <button className="rnb" onClick={() => setShowModal(false)}>Cencel</button>
         </form>

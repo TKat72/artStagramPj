@@ -12,6 +12,9 @@
 
 .inputForAddPost {
     padding: 10px;
+    height: 70px;
+    word-wrap: break-word;
+    border-radius: 10px;
 }
 
 #add-post-btn {

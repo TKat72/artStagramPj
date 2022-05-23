@@ -33,9 +33,9 @@ export default function AddNewComment({ post_id, setShowModal }) {
                     <div className="errors" key={ind}>{error}</div>
                 ))}
                 <label>Your comment </label>
-                <input style={{ height: "4vw", margin: "5px", marginBottom: "40px" }} onChange={(e) => setComment(e.target.value)} value={comment}></input>
+                <textarea className="inputForAddPost" style={{ height: "4vw", padding: "10px", margin: "5px", marginBottom: "40px" }} onChange={(e) => setComment(e.target.value)} value={comment}></textarea>
                 <button className="rnb submit">Submit</button>
-                
+
                 <button className="rnb" onClick={(e) => setShowModal(false)}> Cencel</button>
             </form>
         </>
