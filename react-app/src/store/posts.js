@@ -4,6 +4,9 @@ const POST_POST = "posts/POST_POST"
 const UPDATE_POST = "posts/UPDATE_POST"
 const DELETE_POST = "posts/DELE"
 const ADD_PHOTO_TO_POST = "posts/ADD_PHOTO_TO_POST"
+const GET_MY_POSTS = "posts/GET_MY_POSTS"
+
+
 const getAll = posts => ({
     type: GET_ALL_POSTS,
     payload: posts
@@ -29,13 +32,26 @@ const addPhoto = (post) => ({
     type: ADD_PHOTO_TO_POST,
     payload: post
 })
+const getPostsMy = (posts) => ({
+    type: GET_MY_POSTS,
+    payload: posts
+})
 
 export const getAllPosts = () => async (dispatch) => {
     const res = await fetch("/api/posts/all")
     if (res.ok) {
         const data = await res.json()
-        
+
         dispatch(getAll(data.posts))
+    }
+
+}
+export const getMyPosts = () => async (dispatch) => {
+    const res = await fetch("/api/posts/myposts")
+    if (res.ok) {
+        const data = await res.json()
+
+        dispatch(getPostsMy(data.posts))
     }
 
 }
@@ -124,6 +140,10 @@ export default function postReducer(state = {}, action) {
 
     switch (action.type) {
         case GET_ALL_POSTS:
+            newState = { ...state }
+            action.payload.map(post => newState[post.id] = post)
+            return newState
+        case GET_MY_POSTS:
             newState = { ...state }
             action.payload.map(post => newState[post.id] = post)
             return newState

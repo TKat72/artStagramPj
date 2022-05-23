@@ -69,6 +69,7 @@ export default function PostInformation({ id }) {
     const [imageLoading, setImageLoading] = useState(false);
     const [value, setValue] = React.useState(0);
     const [photo_name, setPhotoName] = useState("")
+    const [success, setSuccess] = useState("")
 
     const handleChange1 = (event, newValue) => {
         setValue(newValue);
@@ -89,21 +90,25 @@ export default function PostInformation({ id }) {
 
 
                     setImageLoading(false)
+                    setSuccess("")
                     setErrors(res?.errors)
 
                 } else if (res?.ok) {
                     ref.current.value = ""
+                    setPhotoName("")
+                    setSuccess(" Uploded ")
                     setImageLoading(false)
 
                 }
                 else {
                     setErrors([])
+                    setPhotoName("")
                     setImageLoading(false)
 
 
                 }
             })
-
+        setPhotoName("")
         setImage(null)
 
         // const res = await fetch(`/api/posts/${post_id}/add-photo`, {
@@ -146,7 +151,7 @@ export default function PostInformation({ id }) {
                             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                 <Tabs value={value} onChange={handleChange1} aria-label="basic tabs example">
                                     {post.photos.map((photo, idx) => (
-                                        <Tab label={idx + 1} {...a11yProps(idx)} />
+                                        <Tab key={idx} label={idx + 1} {...a11yProps(idx)} />
                                     ))}
 
                                 </Tabs>
@@ -194,6 +199,7 @@ export default function PostInformation({ id }) {
 
                         </div>
                         <div> {imageLoading && (<p>Loading... please wait...</p>)} </div>
+                        <div className="success-msg">{success && (<p className="success-msg">Success!</p>)}</div>
                     </form>
                 )}
             </div>

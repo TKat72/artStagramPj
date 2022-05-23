@@ -20,6 +20,16 @@ def post_all():
     # print("---------------------->>>>>>>>>>>>>>>>>", posts2)
     return {"posts": [ post.to_dict() for post in posts ]}
 
+
+@posts_router.route("/myposts")
+def post_my():
+    user_id = current_user.id
+    posts = Post.query.filter(Post.user_id == user_id).all()
+
+    print("==============>>>>>>>>>>>>>>>>>", posts)
+    # print("---------------------->>>>>>>>>>>>>>>>>", posts2)
+    return {"posts": [ post.to_dict() for post in posts ]}
+
 @posts_router.route("/create-post", methods=["GET","POST"])
 def create_post():
 
