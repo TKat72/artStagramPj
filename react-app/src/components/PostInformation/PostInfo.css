@@ -77,6 +77,11 @@
 .btn-post-info {
     margin-right: 10px;
 }
-.add-photo{
+
+.add-photo {
     padding: 5px 15px;
+}
+
+.success-msg {
+    color: green;
 }

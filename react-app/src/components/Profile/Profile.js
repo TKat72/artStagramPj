@@ -1,5 +1,7 @@
-import React from 'react';
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { getMYComments } from "../../store/comments"
+import { getMyPosts } from "../../store/posts"
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -14,6 +16,7 @@ import './Profile.css';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
+
 
     return (
         <div
@@ -46,8 +49,10 @@ function a11yProps(index) {
 }
 
 export default function Profile() {
-
+    const dispatch = useDispatch()
     const user = useSelector(state => state.session?.user)
+    const comments = useSelector(state => Object.values(state?.comment).filter(post => post.user_id === user.id))
+    const posts = useSelector(state => Object.values(state?.posts).filter(post => post.user_id === user.id))
     const date = user.created_at.split(" ", 1)
 
     const year = date[0].split("-", 1)
@@ -55,8 +60,14 @@ export default function Profile() {
     const month = date[0].split("-")[1]
 
     const day = date[0].split("-")[2]
+   
     const [value, setValue] = React.useState(0);
     let index = 1;
+    useEffect(() => {
+        dispatch(getMYComments());
+        dispatch(getMyPosts())
+
+    }, [dispatch])
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -70,23 +81,23 @@ export default function Profile() {
             </div>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-                    <Tab label={`${user.comments.length} comments`} {...a11yProps(0)} />
-                    <Tab label={`${user.posts.length} posts`} {...a11yProps(1)} />
+                    <Tab label={`${comments?.length} comments`} {...a11yProps(0)} />
+                    <Tab label={`${posts?.length} posts`} {...a11yProps(1)} />
 
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                {user?.comments?.map(comment => (
+                {comments?.map(comment => (
                     <>
-                        <div>
+                        <div key={comment.id}>
                             <p className="my-comments"> {comment.comment} </p>
                         </div>
                     </>
                 ))}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                {user?.posts?.map(post => (
-                    <div className="post-box">
+                {posts?.map(post => (
+                    <div className="post-box" key={post.id}>
                         <p>{post.description}</p>
                         <div className="profile-photo-div">
 
@@ -99,7 +110,7 @@ export default function Profile() {
                                                 <embed src={photo.photo_url} allowfullscreen="true" width="400" height="700"></embed>
                                             </>
                                         ) :
-                                            <div className="img-podt-dspl">
+                                            <div className="img-podt-dspl " key={photo.id}>
                                                 <img style={{ height: "600px", maxWidth: "auto" }} src={photo?.photo_url} />
                                             </div>
                                         }

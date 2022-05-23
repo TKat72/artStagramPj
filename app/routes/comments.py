@@ -15,7 +15,13 @@ def getAllcoments(id):
     print(test)
     return {"comments": [ comment.to_dict() for comment in comments]}
 
-
+@comments_routes.route("/mycoments")
+def getAllUsercoments():
+    user_id = current_user.id
+    comments = Comment.query.filter(Comment.user_id == user_id).all()
+    test = [comment.to_dict() for comment in comments]
+    print(test)
+    return {"comments": [ comment.to_dict() for comment in comments]}
 
 @comments_routes.route("/create-comment", methods=['POST'])
 def create_comment():
