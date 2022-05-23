@@ -122,10 +122,10 @@ export default function PostForFeed({ id }) {
                     ))}
                     <div className="description div-for-desscription"> <p > {post.description}</p> </div>
                 </div>}
-                <div>
+                {/* <div>
                     <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
 
-                </div>
+                </div> */}
                 {/* <div id="commentBox">
 
                         <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." onChange={(e) => setComment(e.target.value)} value={comment}></input>
