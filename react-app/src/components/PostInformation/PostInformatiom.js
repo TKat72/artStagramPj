@@ -91,7 +91,6 @@ export default function PostInformation({ id }) {
 
                     setImageLoading(false)
                     setSuccess("")
-                    setImageLoading(false)
                     setErrors(res?.errors)
 
                 } else if (res?.ok) {
@@ -107,6 +106,9 @@ export default function PostInformation({ id }) {
                     setImageLoading(false)
 
 
+                }
+                if (res.status < 500) {
+                    setImageLoading(false)
                 }
             })
         setPhotoName("")
