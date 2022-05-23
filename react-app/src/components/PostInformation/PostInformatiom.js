@@ -137,7 +137,9 @@ export default function PostInformation({ id }) {
         setImage(file);
     }
     const onClick = () => {
-        if (!setPhotoName) {
+
+        if (photo_name.length < 1) {
+           
             setImageLoading(false)
         }
 
