@@ -2,12 +2,14 @@
 
 
 
-    width: 70vw;
-    height: 45vw;
+    /* width: 70vw;
+    height: 45vw; */
     border: 1px solid #efefef;
-    justify-content: center;
-    overflow-y: scroll;
-    padding: 20px;
+    /* overflow-y: scroll; */
+    padding: 2vw;
+    display: flex;
+    background-color: #efefef;
+
 
 }
 
@@ -18,13 +20,26 @@
 }
 
 .div-for-desscription {
+    overflow-y: scroll;
+    margin-top: 40px;
+    border-top: 2px solid black;
     word-wrap: break-word;
     border: 1px solid #efefef;
+    /* padding: 20px; */
     padding: 20px;
     word-break: break-word;
     min-height: 50px;
+    max-width: 30vw;
+    border-top: 1px solid #ADB7E6;
+    border-bottom: 1px solid #ADB7E6;
+
+
+    /* border: 1px solid black; */
+
 
 }
+
+
 
 /* .div-for-desscription {
     word-wrap: break-word;
@@ -41,6 +56,7 @@
 
 .username {
     font-weight: bold;
+    color: gray;
 }
 
 .btn-div2 {
@@ -51,9 +67,12 @@
 
 .comment-div {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    border: 1px solid #743a71;
+    /* border: 1px solid #743a71; */
+
+    border: 1px solid #cdcaca;
+    padding: 10px;
     margin: 10px;
     padding: 10px;
     word-wrap: break-word;
@@ -64,13 +83,18 @@
     justify-content: center;
 }
 
-.form-add-photo {
+
+
+.slect-coment {
     display: flex;
+    justify-content: flex-end;
+    background-color: #743a71;
 }
 
 .form-add-photo {
     display: flex;
     flex-direction: column;
+    margin-bottom: -20px;
 }
 
 .div-for-iput-add-photo {
@@ -101,5 +125,72 @@
 .comment-box {
     word-wrap: break-word;
     word-break: break-word;
+    align-items: left;
+    justify-content: start;
+    border: 1px solid rgba(133, 82, 130, 0.3);
+    width: 400px;
+    padding: 10px;
+}
+
+
+
+.comments-box {
+    -ms-overflow-style: none;
+}
+
+.right-column {
+    margin-top: 60px;
+    max-height: 800px;
+    overflow-y: scroll;
+    margin-left: 35px;
+
+}
+
+.photo-box {
+    max-width: 40vw;
+    max-height: 25vw;
+
+}
+
+.top-bar-right {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.comment-top-info {
+    width: 25vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.coment-edit-delete {
+
+    display: flex;
+    flex-direction: row;
+    margin-right: 5px;
+}
+
+.video-box {
+    height: 600px;
+    width: 500px;
+}
+
+.comment-div {
+
+    align-items: flex-start;
+}
+
+.top-comments {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 25vw;
+}
+.lableAdd{
     padding: 10px;
 }

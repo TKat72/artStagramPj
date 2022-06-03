@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { getOnePost, updatePost, deletePost, addOnePhotoToPost } from "../../store/posts"
 import { getAllComments } from "../../store/comments"
 import AddCommentModal from "../AddNewComment"
+import Select from "../SelectModel"
 import EditPostModal from "../EditPost"
 import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
@@ -71,6 +72,7 @@ export default function PostInformation({ id }) {
     const [photo_name, setPhotoName] = useState("")
     const [success, setSuccess] = useState("")
     const [lodingMsg, setLodingMsg] = useState("")
+    const [popModel, setPopModel] = useState(false)
     const handleChange1 = (event, newValue) => {
         setValue(newValue);
     }
@@ -151,97 +153,149 @@ export default function PostInformation({ id }) {
 
 
         <div className="postInfo" >
-            <div className="topPostBar">
-                {post?.user_id === user_id && (
-                    < div className="edit-delte">
-                        <EditPostModal id={post?.id} descriptionVal={post.description} />
-                        <DeletePostModal id={post?.id}></DeletePostModal>
-                    </div >
-                )}
-                <div >
-
-
-
-                    <div>
-                        <>
-                            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                                <Tabs value={value} onChange={handleChange1} aria-label="basic tabs example">
-                                    {post.photos.map((photo, idx) => (
-                                        <Tab key={idx} label={idx + 1} {...a11yProps(idx)} />
-                                    ))}
-
-                                </Tabs>
-                            </Box>
-                            {post?.photos?.map((photo, index) => (
-                                <>
-
-                                    <div className="each-slide" key={photo.id}>
-
-                                        {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
-                                            <>
-                                                <TabPanel value={value} index={index}>  <embed src={photo.photo_url} allowfullscreen="true" width="400" height="700"></embed> </TabPanel>
-                                            </>
-                                        )
-                                            :
-                                            <>
-                                                <TabPanel value={value} index={index}>  <img key={photo.id} src={photo.photo_url} style={{ height: "300px", width: "auto" }} /> </TabPanel>
-                                            </>
-                                        }
-
-
-                                    </div>
-                                </>
-                            ))}
-                        </>
-                    </div>
-                </div>
-
-
-            </div>
             <div>
-                {post?.user_id === user_id && (
-                    <form className="form-add-photo" onSubmit={onSubmit}>
-                        <label className="lableAdd"> Add Photo  </label>
-                        {errors?.length > 0 && errors?.map((error, ind) => (
-                            <div className="errors" key={ind}>{error}</div>
-                        ))}
-                        <div className="div-for-iput-add-photo">
-                            <label class="label">
-                                <input type="file" onChange={updateImage} ref={ref} style={{ display: 'none' }} />
-                                <span>{!photo_name ? (<>Select a file</>) : <>Choosen File: {photo_name} </>}</span>
-                            </label>
-
-                            <div className='div-add-photo'><button className="rnb add-photo" type="submit" onClick={onClick}>Add</button></div>
-
-                        </div>
-                        <div> {imageLoading && (<p>Loading... please wait...</p>)} </div>
-                        <div className="success-msg">{success && (<p className="success-msg">Success!</p>)}</div>
-                    </form>
-                )}
-            </div>
-            <div>
-                <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
-                <p className="div-for-desscription">{post?.description} </p >
-                <div>
-                    <AddCommentModal post_id={post?.id}></AddCommentModal>
-                </div>
-                <div>
-                    {postComments.map(comment => (
-                        <div className="comment-div" key={comment.id}>
-                            <p className="comment-box"><span className='username'>@{comment.username} </span>{comment.comment} </p>
-                            {comment?.user_id === user_id && (
-                                <div className='btn-div2'>
-                                    <div className='btn-post-info'> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>
-                                    <div><DeleteCommentModal id={comment.id}></DeleteCommentModal></div>
-                                </div>
+                <div className="topPostBar">
+                    <div className="top-bar-right">
+                        <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
+                        <div >
+                            {post?.user_id === user_id && (<>
+                                <EditPostModal id={post?.id} descriptionVal={post.description} />
+                                <DeletePostModal id={post?.id}></DeletePostModal>
+                            </>
                             )}
                         </div>
-                    ))}
+                    </div>
+                    {/* {post?.user_id === user_id && (
+                        < div className="edit-delte">
+                            <EditPostModal id={post?.id} descriptionVal={post.description} />
+                            <DeletePostModal id={post?.id}></DeletePostModal>
+                        </div >
+                    )} */}
+                    <div >
+
+
+
+                        <div>
+                            < div>
+                                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                                    <Tabs value={value} onChange={handleChange1} aria-label="basic tabs example">
+                                        {post.photos.map((photo, idx) => (
+                                            <Tab key={idx} label={idx + 1} {...a11yProps(idx)} />
+                                        ))}
+
+                                    </Tabs>
+                                </Box>
+                                {post?.photos?.map((photo, index) => (
+                                    <>
+
+                                        <div className="each-slide" key={photo.id}>
+
+                                            {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
+                                                <>
+                                                    <TabPanel value={value} index={index}>  <embed src={photo.photo_url} allowfullscreen="true" className="video-box"></embed> </TabPanel>
+                                                </>
+                                            )
+                                                :
+                                                <>
+                                                    <TabPanel value={value} index={index}>  <img key={photo.id} src={photo.photo_url} className="photo-box" /> </TabPanel>
+                                                </>
+                                            }
+
+
+                                        </div>
+                                    </>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div>
+                    {post?.user_id === user_id && (
+                        <div className="user-update-post">
+                        <form className="form-add-photo" onSubmit={onSubmit}>
+                            <label className="lableAdd"> Add Photo  </label>
+                            {errors?.length > 0 && errors?.map((error, ind) => (
+                                <div className="errors" key={ind}>{error}</div>
+                            ))}
+                            <div className="div-for-iput-add-photo">
+                                <label class="label">
+                                    <input type="file" onChange={updateImage} ref={ref} style={{ display: 'none' }} />
+                                    <span>{!photo_name ? (<>Select a file</>) : <>Choosen File: {photo_name} </>}</span>
+                                </label>
+
+                                <div className='div-add-photo'><button className="rnb add-photo" type="submit" onClick={onClick}>Add</button></div>
+
+                            </div>
+                            <div> {imageLoading && (<p>Loading... please wait...</p>)} </div>
+                            <div className="success-msg">{success && (<p className="success-msg">Success!</p>)}</div>
+                        </form>
+
+                        </div>
+                    )}
+                    {/* <div className="top-bar-right">
+                    <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
+                    <div>
+                        {post?.user_id === user_id && (<>
+                            <EditPostModal id={post?.id} descriptionVal={post.description} />
+                            <DeletePostModal id={post?.id}></DeletePostModal>
+                        </>
+                        )}
+                    </div>
+                </div> */}
+                    <p className="div-for-desscription">{post?.description} </p >
+                    <div className="div-buttom"> </div>
                 </div>
             </div>
-        </div>
+            <div className="right-column">
+                {/* <div className="top-bar-right">
+                    <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
+                    <div>
+                        {post?.user_id === user_id && (<>
+                            <EditPostModal id={post?.id} descriptionVal={post.description} />
+                            <DeletePostModal id={post?.id}></DeletePostModal>
+                        </>
+                        )}
+                    </div>
+                </div>
+                <p className="div-for-desscription">{post?.description} </p >
+                <div className="div-buttom"> </div> */}
+
+                <div className="comments-box">
+                    <div className="top-comments"> <h3>Comments</h3>
+                        <div>
+
+                            <AddCommentModal post_id={post?.id}></AddCommentModal>
+                        </div>
+                    </div>
+                    {postComments.map(comment => (
+                        <div>
+                            {comment?.user_id === user_id && (
+                                <div className='btn-div2'>
+
+                                </div>
+                            )}
+                            <div className="comment-div" key={comment.id}>
+
+                                <div className="comment-top-info"> <p><span className='username'>@{comment.username} </span></p>
+                                    {comment?.user_id === user_id && (<div className="coment-edit-delete"> <div className='btn-post-info'> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>
+                                        <div><DeleteCommentModal id={comment.id}></DeleteCommentModal></div> </div>
+                                    )}
+
+                                </div>
+
+                                <p className="comment-box ">{comment.comment} </p>
+
+                            </div>
+                        </div>
+                    ))}
+
+                </div>
+            </div>
+        </div >
 
 
 
-    )
+                )
 }

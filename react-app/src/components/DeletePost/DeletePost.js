@@ -23,7 +23,7 @@ export default function DeletePost({ id, setShowModal }) {
 
     return (
         <div className="delete-post" >
-            <h2>Are you sure you want to Delete this Post </h2>
+            <p className="delete-post-h2">Are you sure you want to <span className="delete-span">Delete</span> this Post </p>
             <div className="btn-div">
                 <button className="rnb" onClick={onSubmit}>Yes</button>
                 <button className="rnb" onClick={() => setShowModal(false)}>No</button>

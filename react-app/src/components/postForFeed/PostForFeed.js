@@ -120,7 +120,7 @@ export default function PostForFeed({ id }) {
                             </div>
                         </>
                     ))}
-                    <div className="description div-for-desscription"> <p > {post.description}</p> </div>
+                    <div className="description div-for-desscription"> <p  style={{ wordWrap: "break-word"}}> {post.description}</p> </div>
                 </div>}
                 {/* <div>
                     <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>

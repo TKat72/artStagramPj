@@ -8,7 +8,7 @@ export default function EditPostModal({ id, descriptionVal }) {
 
     return (
         <>
-          <i style ={{fontSize: "25px"}} className="fa-solid fa-pen-to-square edit-post-lable"onClick={() => setShowModal(true)}></i>
+          <i style ={{fontSize: "20px", color: "rgb(134, 172, 192)"}} className="fa-solid fa-pen-to-square edit-post-lable"onClick={() => setShowModal(true)}></i>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <EditPost descriptionVal={descriptionVal} id={id} setShowModal={setShowModal} ></EditPost>
