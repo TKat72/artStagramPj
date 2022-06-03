@@ -5,9 +5,7 @@
     /* width: 70vw;
     height: 45vw; */
     border: 1px solid #efefef;
-
-    height: 48vw;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     padding: 2vw;
     display: flex;
     background-color: #efefef;
@@ -22,35 +20,26 @@
 }
 
 .div-for-desscription {
+    overflow-y: scroll;
     margin-top: 40px;
     border-top: 2px solid black;
     word-wrap: break-word;
     border: 1px solid #efefef;
     /* padding: 20px; */
-    padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 20px;
     word-break: break-word;
     min-height: 50px;
-    max-width: 40vw;
+    max-width: 30vw;
     border-top: 1px solid #ADB7E6;
-    ;
+    border-bottom: 1px solid #ADB7E6;
+
 
     /* border: 1px solid black; */
 
 
 }
 
-.div-buttom {
 
-    border-bottom: 1px solid #ADB7E6;
-
-
-    /* margin-left: 0px;
-    margin-right: 0px;
-    margin-top: -20px;
-    margin-bottom: 20px; */
-}
 
 /* .div-for-desscription {
     word-wrap: break-word;
@@ -81,7 +70,9 @@
     flex-direction: column;
     align-items: center;
     /* border: 1px solid #743a71; */
-    border-bottom: 1px solid rgb(204, 170, 209);
+
+    border: 1px solid #cdcaca;
+    padding: 10px;
     margin: 10px;
     padding: 10px;
     word-wrap: break-word;
@@ -136,7 +127,8 @@
     word-break: break-word;
     align-items: left;
     justify-content: start;
-
+    border: 1px solid rgba(133, 82, 130, 0.3);
+    width: 400px;
     padding: 10px;
 }
 

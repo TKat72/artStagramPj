@@ -22,7 +22,7 @@ export default function DeleteComment({ id, setShowModal }) {
 
     return (
         <div className="delete-post">
-            <h2>Are you sure you want to Delete this comment </h2>
+             <p className="delete-post-h2">Are you sure you want to <span className="delete-span">Delete</span> this comment </p>
             <div className="btn-div">
                 <button className="rnb" onClick={onSubmit}>Yes</button>
                 <button className="rnb" onClick={() => setShowModal(false)}>No</button>

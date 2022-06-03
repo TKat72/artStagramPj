@@ -1,18 +1,22 @@
 .my-comments {
-    border: 1px solid #efefef;
+    border: 1px solid #d4d1d1;
     padding: 10px;
+    width:600px;
+    margin-bottom:10px;
+
 }
 
 .profile-photo-div {
     display: flex;
-    width: 80vw;
+    width: 77vw;
     overflow-x: scroll;
 }
 
 .post-box {
     padding: 10px;
-
+    width: 77vw;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    margin-bottom: 20px;
 }
 
 .profile {
@@ -20,6 +24,33 @@
 }
 
 .profile-information {
+    border: 1px solid #ccc9c9;
+    padding: 10px;
+    width: 80.5vw;
+}
+
+.post-description {
+    padding: 20px;
+    border-bottom: 1px solid #ADB7E6;
+
+}
+
+.edit-delete-box-profile {
+
+    display: flex;
+    justify-content: flex-end;
+
+}
+
+.profile-edit-delete {
+
+    display: flex;
+    justify-content: flex-end;
+
+
+}
+.my-comments1{
     border: 1px solid #efefef;
-    padding: 10px
+    padding: 10px;
+
 }

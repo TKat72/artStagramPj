@@ -157,7 +157,7 @@ export default function PostInformation({ id }) {
                 <div className="topPostBar">
                     <div className="top-bar-right">
                         <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
-                        <div>
+                        <div >
                             {post?.user_id === user_id && (<>
                                 <EditPostModal id={post?.id} descriptionVal={post.description} />
                                 <DeletePostModal id={post?.id}></DeletePostModal>
@@ -213,6 +213,7 @@ export default function PostInformation({ id }) {
                 </div>
                 <div>
                     {post?.user_id === user_id && (
+                        <div className="user-update-post">
                         <form className="form-add-photo" onSubmit={onSubmit}>
                             <label className="lableAdd"> Add Photo  </label>
                             {errors?.length > 0 && errors?.map((error, ind) => (
@@ -230,6 +231,8 @@ export default function PostInformation({ id }) {
                             <div> {imageLoading && (<p>Loading... please wait...</p>)} </div>
                             <div className="success-msg">{success && (<p className="success-msg">Success!</p>)}</div>
                         </form>
+
+                        </div>
                     )}
                     {/* <div className="top-bar-right">
                     <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
@@ -282,7 +285,7 @@ export default function PostInformation({ id }) {
 
                                 </div>
 
-                                <p className="comment-box">{comment.comment} </p>
+                                <p className="comment-box ">{comment.comment} </p>
 
                             </div>
                         </div>
@@ -294,5 +297,5 @@ export default function PostInformation({ id }) {
 
 
 
-    )
+                )
 }

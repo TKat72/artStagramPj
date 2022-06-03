@@ -7,7 +7,11 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-
+import EditPostModal from "../EditPost"
+import DeletePostModal from "../DeletePost"
+import PostInformationModal from "../PostInformation"
+import EditMyCommentModal from "../EditMyComment"
+import DeleteCommentModal from "../DeleteComment"
 import 'react-slideshow-image/dist/styles.css'
 import './Profile.css';
 
@@ -60,7 +64,7 @@ export default function Profile() {
     const month = date[0].split("-")[1]
 
     const day = date[0].split("-")[2]
-   
+
     const [value, setValue] = React.useState(0);
     let index = 1;
     useEffect(() => {
@@ -89,8 +93,17 @@ export default function Profile() {
             <TabPanel value={value} index={0}>
                 {comments?.map(comment => (
                     <>
-                        <div key={comment.id}>
-                            <p className="my-comments"> {comment.comment} </p>
+                        <div className="my-comments" key={comment.id}  >
+                            <div className="coment-edit-delete profile-edit-delete">
+                                <div className='btn-post-info'>
+                                    <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal>
+                                </div>
+                                <div>
+                                    <DeleteCommentModal id={comment.id}></DeleteCommentModal>
+                                </div>
+                            </div>
+                            <p className="my-comments1"> {comment.comment} </p>
+
                         </div>
                     </>
                 ))}
@@ -98,7 +111,13 @@ export default function Profile() {
             <TabPanel value={value} index={1}>
                 {posts?.map(post => (
                     <div className="post-box" key={post.id}>
-                        <p>{post.description}</p>
+                        <PostInformationModal username={post.username} description={post.description} id={post.id}> </PostInformationModal>
+                        <div className="edit-delete-box-profile" key={post.id}>
+                            <EditPostModal id={post?.id} descriptionVal={post.description} />
+                            <DeletePostModal id={post?.id}></DeletePostModal>
+
+                        </div>
+                        <p className="post-description">{post.description}</p>
                         <div className="profile-photo-div">
 
 
