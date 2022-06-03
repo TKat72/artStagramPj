@@ -7,7 +7,7 @@ export default function EditMyCommentModal({ comment_id, commentVal }) {
 
     return (
         <>
-            <button className="rnb" onClick={() => setShowModal(true)}>Edit </button>
+            <i style ={{fontSize: "20px", color: "rgb(134, 172, 192)"}} className="fa-solid fa-pen-to-square edit-post-lable"onClick={() => setShowModal(true)}></i>
             {showModal && (
                 <Modal onClose={() => setShowModal(false)} >
                     <EditComment commentVal={commentVal} id={comment_id} setShowModal={setShowModal} ></EditComment>

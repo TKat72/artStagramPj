@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom';
 import { getOnePost, updatePost, deletePost, addOnePhotoToPost } from "../../store/posts"
 import { getAllComments } from "../../store/comments"
 import AddCommentModal from "../AddNewComment"
+import Select from "../SelectModel"
 import EditPostModal from "../EditPost"
 import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
@@ -154,18 +155,28 @@ export default function PostInformation({ id }) {
         <div className="postInfo" >
             <div>
                 <div className="topPostBar">
-                    {post?.user_id === user_id && (
+                    <div className="top-bar-right">
+                        <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
+                        <div>
+                            {post?.user_id === user_id && (<>
+                                <EditPostModal id={post?.id} descriptionVal={post.description} />
+                                <DeletePostModal id={post?.id}></DeletePostModal>
+                            </>
+                            )}
+                        </div>
+                    </div>
+                    {/* {post?.user_id === user_id && (
                         < div className="edit-delte">
                             <EditPostModal id={post?.id} descriptionVal={post.description} />
                             <DeletePostModal id={post?.id}></DeletePostModal>
                         </div >
-                    )}
+                    )} */}
                     <div >
 
 
 
                         <div>
-                            <>
+                            < div>
                                 <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                                     <Tabs value={value} onChange={handleChange1} aria-label="basic tabs example">
                                         {post.photos.map((photo, idx) => (
@@ -194,7 +205,7 @@ export default function PostInformation({ id }) {
                                         </div>
                                     </>
                                 ))}
-                            </>
+                            </div>
                         </div>
                     </div>
 
@@ -220,40 +231,63 @@ export default function PostInformation({ id }) {
                             <div className="success-msg">{success && (<p className="success-msg">Success!</p>)}</div>
                         </form>
                     )}
+                    {/* <div className="top-bar-right">
+                    <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
+                    <div>
+                        {post?.user_id === user_id && (<>
+                            <EditPostModal id={post?.id} descriptionVal={post.description} />
+                            <DeletePostModal id={post?.id}></DeletePostModal>
+                        </>
+                        )}
+                    </div>
+                </div> */}
+                    <p className="div-for-desscription">{post?.description} </p >
+                    <div className="div-buttom"> </div>
                 </div>
             </div>
             <div className="right-column">
-                <div className="top-bar-right">
+                {/* <div className="top-bar-right">
                     <p style={{ fontWeight: 'bold' }}>@{post?.username}</p>
-                    <i className="fa-solid fa-ellipsis"></i>
+                    <div>
+                        {post?.user_id === user_id && (<>
+                            <EditPostModal id={post?.id} descriptionVal={post.description} />
+                            <DeletePostModal id={post?.id}></DeletePostModal>
+                        </>
+                        )}
+                    </div>
                 </div>
                 <p className="div-for-desscription">{post?.description} </p >
-                <div className="div-buttom"></div>
+                <div className="div-buttom"> </div> */}
                 <div>
                     <AddCommentModal post_id={post?.id}></AddCommentModal>
                 </div>
                 <div className="comments-box">
+                    <h4>Comments</h4>
                     {postComments.map(comment => (
                         <div>
                             {comment?.user_id === user_id && (
                                 <div className='btn-div2'>
-                                    <div className='btn-post-info'> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>
-                                    <div><DeleteCommentModal id={comment.id}></DeleteCommentModal></div>
+
                                 </div>
                             )}
                             <div className="comment-div" key={comment.id}>
 
                                 <div className="comment-top-info"> <p><span className='username'>@{comment.username} </span></p>
-                                <div >  <i className="fa-solid fa-ellipsis"></i></div></div>
+                                    {comment?.user_id === user_id && (<div className="coment-edit-delete"> <div className='btn-post-info'> <EditMyCommentModal comment_id={comment.id} commentVal={comment.comment}></EditMyCommentModal> </div>
+                                        <div><DeleteCommentModal id={comment.id}></DeleteCommentModal></div> </div>
+                                    )}
+
+                                </div>
 
                                 <p className="comment-box">{comment.comment} </p>
 
                             </div>
                         </div>
                     ))}
+
                 </div>
             </div>
-        </div>
+        </div >
 
 
 

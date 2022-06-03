@@ -2,14 +2,15 @@
 
 
 
-    width: 70vw;
-    height: 45vw;
+    /* width: 70vw;
+    height: 45vw; */
     border: 1px solid #efefef;
 
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
     padding: 20px;
     display: flex;
     background-color: #efefef;
+
 
 }
 
@@ -20,21 +21,29 @@
 }
 
 .div-for-desscription {
+    border-top: 2px solid black;
     word-wrap: break-word;
     border: 1px solid #efefef;
     padding: 20px;
     word-break: break-word;
     min-height: 50px;
+    max-width: 40vw;
+    border-top: 1px solid rgb(155, 168, 175);
+
+    /* border: 1px solid black; */
 
 
 }
 
 .div-buttom {
-    border-bottom: 1px solid black;
-    margin-left: 0px;
+
+    border-bottom: 1px solid rgb(155, 168, 175);
+
+
+    /* margin-left: 0px;
     margin-right: 0px;
     margin-top: -20px;
-    margin-bottom: 20px;
+    margin-bottom: 20px; */
 }
 
 /* .div-for-desscription {
@@ -52,6 +61,7 @@
 
 .username {
     font-weight: bold;
+    background-color: rgb(134, 172, 192);
 }
 
 .btn-div2 {
@@ -64,7 +74,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid #743a71;
+    /* border: 1px solid #743a71; */
+    border-bottom: 1px solid rgb(204, 170, 209);
     margin: 10px;
     padding: 10px;
     word-wrap: break-word;
@@ -75,9 +86,7 @@
     justify-content: center;
 }
 
-.form-add-photo {
-    display: flex;
-}
+
 
 .slect-coment {
     display: flex;
@@ -88,6 +97,7 @@
 .form-add-photo {
     display: flex;
     flex-direction: column;
+    margin-bottom: -20px;
 }
 
 .div-for-iput-add-photo {
@@ -118,8 +128,11 @@
 .comment-box {
     word-wrap: break-word;
     word-break: break-word;
+
     padding: 10px;
 }
+
+
 
 .comments-box {
     -ms-overflow-style: none;
@@ -127,22 +140,34 @@
 
 .right-column {
     margin-top: 60px;
+    max-height: 800px;
+    overflow-y: scroll;
+
 }
 
 .photo-box {
     max-width: 40vw;
     max-height: 40vw;
-    margin-left: -2.5vw;
+
 }
 
 .top-bar-right {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
 .comment-top-info {
+    width: 25vw;
     display: flex;
-    background-color: black;
+    align-items: center;
     justify-content: space-between;
 
+}
+
+.coment-edit-delete {
+
+    display: flex;
+    flex-direction: row;
+    margin-right: 5px;
 }
