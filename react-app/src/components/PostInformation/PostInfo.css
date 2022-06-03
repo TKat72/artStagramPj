@@ -6,8 +6,9 @@
     height: 45vw; */
     border: 1px solid #efefef;
 
-    /* overflow-y: scroll; */
-    padding: 20px;
+    height: 48vw;
+    overflow-y: scroll;
+    padding: 2vw;
     display: flex;
     background-color: #efefef;
 
@@ -21,14 +22,19 @@
 }
 
 .div-for-desscription {
+    margin-top: 40px;
     border-top: 2px solid black;
     word-wrap: break-word;
     border: 1px solid #efefef;
-    padding: 20px;
+    /* padding: 20px; */
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     word-break: break-word;
     min-height: 50px;
     max-width: 40vw;
-    border-top: 1px solid rgb(155, 168, 175);
+    border-top: 1px solid #ADB7E6;
+    ;
 
     /* border: 1px solid black; */
 
@@ -37,7 +43,7 @@
 
 .div-buttom {
 
-    border-bottom: 1px solid rgb(155, 168, 175);
+    border-bottom: 1px solid #ADB7E6;
 
 
     /* margin-left: 0px;
@@ -61,7 +67,7 @@
 
 .username {
     font-weight: bold;
-    background-color: rgb(134, 172, 192);
+    color: gray;
 }
 
 .btn-div2 {
@@ -128,6 +134,8 @@
 .comment-box {
     word-wrap: break-word;
     word-break: break-word;
+    align-items: left;
+    justify-content: start;
 
     padding: 10px;
 }
@@ -142,12 +150,13 @@
     margin-top: 60px;
     max-height: 800px;
     overflow-y: scroll;
+    margin-left: 35px;
 
 }
 
 .photo-box {
     max-width: 40vw;
-    max-height: 40vw;
+    max-height: 25vw;
 
 }
 
@@ -170,4 +179,23 @@
     display: flex;
     flex-direction: row;
     margin-right: 5px;
+}
+
+.video-box {
+    height: 600px;
+    width: 500px;
+}
+
+.comment-div {
+
+    align-items: flex-start;
+}
+
+.top-comments {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    width: 25vw;
 }

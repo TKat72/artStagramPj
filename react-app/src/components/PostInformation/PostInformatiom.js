@@ -192,7 +192,7 @@ export default function PostInformation({ id }) {
 
                                             {photo.photo_url.includes("mp4") || photo.photo_url.includes("gif") || photo.photo_url.includes("3gp") || photo.photo_url.includes("mov") || photo.photo_url.includes("m4a") || photo.photo_url.includes("m4a") ? (
                                                 <>
-                                                    <TabPanel value={value} index={index}>  <embed src={photo.photo_url} allowfullscreen="true" className="photo-box"></embed> </TabPanel>
+                                                    <TabPanel value={value} index={index}>  <embed src={photo.photo_url} allowfullscreen="true" className="video-box"></embed> </TabPanel>
                                                 </>
                                             )
                                                 :
@@ -258,11 +258,14 @@ export default function PostInformation({ id }) {
                 </div>
                 <p className="div-for-desscription">{post?.description} </p >
                 <div className="div-buttom"> </div> */}
-                <div>
-                    <AddCommentModal post_id={post?.id}></AddCommentModal>
-                </div>
+
                 <div className="comments-box">
-                    <h4>Comments</h4>
+                    <div className="top-comments"> <h3>Comments</h3>
+                        <div>
+
+                            <AddCommentModal post_id={post?.id}></AddCommentModal>
+                        </div>
+                    </div>
                     {postComments.map(comment => (
                         <div>
                             {comment?.user_id === user_id && (

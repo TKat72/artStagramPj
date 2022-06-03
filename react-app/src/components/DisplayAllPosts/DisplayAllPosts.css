@@ -76,8 +76,9 @@
 
 .rnb {
 
-    background-image: linear-gradient(90deg, #9123b9 0%, #99899f 0%, #ac6fc8 49%, #631b96 80%, #00C0FF 100%);
+    background-image: linear-gradient(90deg, #9f7aac 0%, #99899f 0%, #ba97cb 49%, #669fa9 80%, #00C0FF 100%);
     border-radius: 5px;
+    border: 1px solid rgb(133, 164, 195);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,7 +96,7 @@
 
 .rnb:hover {
     box-shadow: rgb(142, 197, 228) 0px 5px 15px;
-    animation: slidebg 4s linear infinite;
+    animation: slidebg 9s linear infinite;
 
 }
 
@@ -112,4 +113,3 @@
 .singele-photo{
     margin-bottom: 50px;
 }
-
