@@ -5,6 +5,7 @@ import { getMyPosts } from "../../store/posts"
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import user from "./user.jpeg"
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import EditPostModal from "../EditPost"
@@ -80,7 +81,10 @@ export default function Profile() {
         <div className="profile">
             <div className="profile-information">
                 <div>Profile</div>
-                <p> {user.username}</p>
+                <div className="profile-pic-name">
+                    <img className="profile-photo" src="https://artstargarm2-backet.s3.amazonaws.com/user.jpeg"></img>  <p> {user.username}</p>
+
+                </div>
                 <p> Join on {month}/{day}/{year} </p>
             </div>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
