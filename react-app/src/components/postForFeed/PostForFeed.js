@@ -9,6 +9,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import PostInformationModal from "../PostInformation"
+import "./PostForFeed.css"
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -122,15 +123,15 @@ export default function PostForFeed({ id }) {
                     ))}
                     <div className="description div-for-desscription"> <p  style={{ wordWrap: "break-word"}}> {post.description}</p> </div>
                 </div>}
-                {/* <div>
+                <div>
                     <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
 
-                </div> */}
-                {/* <div id="commentBox">
+                </div>
+                 <div id="commentBox">
 
-                        <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." onChange={(e) => setComment(e.target.value)} value={comment}></input>
-                        <span id="PostComent" onClick={(e) => dispatch(createNewComment(comment, post.id))}>Post </span>
-                    </div> */}
+                        <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." ></input>
+                        <span id="PostComent" >Post </span>
+                    </div>
 
             </div>
 

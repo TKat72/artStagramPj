@@ -82,7 +82,7 @@ export default function Profile() {
             <div className="profile-information">
                 <div>Profile</div>
                 <div className="profile-pic-name">
-                    <img className="profile-photo" src="https://artstargarm2-backet.s3.amazonaws.com/user.jpeg"></img>  <p> {user.username}</p>
+                    <img className="profile-photo" src="https://artstargarm2-backet.s3.amazonaws.com/02eddb3ff9fd44719cc15bc999582f08.jpeg"></img>  <p> {user.username}</p>
 
                 </div>
                 <p> Join on {month}/{day}/{year} </p>

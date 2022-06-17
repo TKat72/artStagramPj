@@ -1,0 +1,8 @@
+.div-for-desscription{
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.commentBox{
+    position: absolute;
+    margin: 0;
+}
