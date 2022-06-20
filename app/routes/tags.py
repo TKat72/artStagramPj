@@ -18,6 +18,11 @@ def get_tags():
 def create_tag():
     form = CreateTagForm()
     test = form.data['tag_name']
+    all_tags = Tag.query.all()
+    tag = {'tag_id': [tag.id for tag in all_tags if tag.tag_name == test]}
+    print("+++++++test for tag --------------- ", len(tag))
+    if len(tag['tag_id']) > 0:
+        return tag
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         new_tag = Tag(
@@ -29,4 +34,7 @@ def create_tag():
 
     return render_template("new_tag.html", form=form)
 
-
+@tags_routes.route('/<int:id>')
+def get_tag(id):
+    tag = Tag.query.get(id)
+    return tag.to_dict()

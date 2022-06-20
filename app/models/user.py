@@ -40,11 +40,17 @@ class User(db.Model, UserMixin):
         return [comment.to_dict() for comment in self.comments]
     def post_to_dict(self):
         return [post.to_dict() for post in self.posts]
+    def follows_to_dict(self):
+        return {
+            id: self.follows[0].id
+        }
     def to_dict(self):
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
+            # 'followers': self.followers,
+            # 'follows': self.following,
             'created_at': str(self.created_at),
             'updated_at': str(self.updated_at),
             'comments': self.comments_to_dict(),

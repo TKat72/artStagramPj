@@ -33,6 +33,7 @@ class Post(db.Model):
             "username": self.user.username,
             'photos': [photo.to_dict() for photo in self.photos],
             'comments': [comment.to_dict() for comment in self.comments],
+            'tags': [tag.to_dict() for tag in self.tags],
             'created_at': str(self.created_at),
             'updated_at': str(self.updated_at),
 
