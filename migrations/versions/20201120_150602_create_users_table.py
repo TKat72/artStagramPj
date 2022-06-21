@@ -70,11 +70,17 @@ def upgrade():
     sa.ForeignKeyConstraint(['tag_id'], ['tags.id']),
     sa.ForeignKeyConstraint(['post_id'], ['posts.id']),
     )
-    op.create_table('follows',
-    sa.Column('followed_id', sa.Integer(), nullable=False),
+    # op.create_table('follows',
+    # sa.Column('followed_id', sa.Integer(), nullable=False),
+    # sa.Column('follower_id', sa.Integer(), nullable=False),
+    # sa.ForeignKeyConstraint(['followed_id'], ['users.id']),
+    # sa.ForeignKeyConstraint(['follower_id'], ['users.id']),
+    # )
+    op.create_table('followers',
     sa.Column('follower_id', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['followed_id'], ['users.id']),
+    sa.Column('followed_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['follower_id'], ['users.id']),
+    sa.ForeignKeyConstraint(['followed_id'], ['users.id']),
     )
 
 

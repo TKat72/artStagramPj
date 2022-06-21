@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, db
+
 # from app.forms import UpdateUserForm
 user_routes = Blueprint('users', __name__)
 
@@ -11,6 +12,31 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+@user_routes.route('/follow/<int:id>')
+# @login_required
+def add_follow(id):
+    user_to_follow = User.query.get(id)
+    if user_to_follow:
+        current_user.follow(user_to_follow)
+    else:
+        return {"error": " user do not exists"}
+    return {"msg": "success"}
+
+
+
+
+@user_routes.route('/get_follows')
+def get_follows():
+    return current_user.followed_users()
+
+@user_routes.route('/follow/<int:id>', methods=['DELETE'])
+def unfollow(id):
+    user = User.query.get(id)
+    if user:
+        current_user.unfollow(user)
+    else:
+        return {"error": " user do not exists"}
+    return {"msg": "success"}
 
 @user_routes.route('/<int:id>')
 @login_required
