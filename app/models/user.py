@@ -50,6 +50,16 @@ class User(db.Model, UserMixin):
     def password(self, password):
         self.hashed_password = generate_password_hash(password)
 
+    def like(self, post):
+        self.liked_post.append(post)
+        db.session.add(self)
+        db.session.commit()
+
+    def unlike(self, post):
+        self.liked_post.remove(post)
+        db.session.add(self)
+        db.session.commit()
+
     def check_password(self, password):
         return check_password_hash(self.password, password)
     def comments_to_dict(self):
