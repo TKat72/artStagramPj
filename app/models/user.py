@@ -56,13 +56,14 @@ class User(db.Model, UserMixin):
         db.session.commit()
 
     def unlike(self, post):
+        print(" ++++++++ in unlike ", post)
         self.liked_post.remove(post)
         db.session.add(self)
         db.session.commit()
 
     def liked_post_to_dict(self):
         liked_posts ={}
-        return {"liked_posts": [post.to_dict() for post in self.liked_posts]}
+        return {"liked_posts": [post.to_dict() for post in self.liked_post]}
 
     def check_password(self, password):
         return check_password_hash(self.password, password)

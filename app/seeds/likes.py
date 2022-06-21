@@ -7,10 +7,10 @@ def seed_likes():
     post2 = Post.query.get(2)
     post4Kat = Post.query.get(4)
     post3 = Post.query.get(3)
-    post4Kat = Post.query.get(5)
+    post5Kat = Post.query.get(5)
 
     demo.like(post4Kat)
-    demo.like(post3Kat)
+    demo.like(post5Kat)
 
     kat.like(post1)
     kat.like(post2)

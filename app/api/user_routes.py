@@ -12,6 +12,7 @@ def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+# follow
 @user_routes.route('/follow/<int:id>')
 # @login_required
 def add_follow(id):
@@ -24,11 +25,11 @@ def add_follow(id):
 
 
 
-
+# get all falowing
 @user_routes.route('/get_follows')
 def get_follows():
     return current_user.followed_users()
-
+#unfollow
 @user_routes.route('/follow/<int:id>', methods=['DELETE'])
 def unfollow(id):
     user = User.query.get(id)
@@ -43,6 +44,10 @@ def unfollow(id):
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/liked_post')
+def liked_post():
+    return current_user.liked_post_to_dict()
 # @user_routes.route('/<int:id>', methods=['PATCH'])
 # @login_required
 # def update_user(id):

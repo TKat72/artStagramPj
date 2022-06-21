@@ -259,7 +259,7 @@ def add_tag(id):
         return post.to_dict()
     return render_template("add_tag_post.html", form = form)
 
-@posts_router.route("/<int:id>/remove", methods =["POST", "GET"])
+@posts_router.route("/<int:id>/remove_tag", methods =["POST", "GET"])
 def remove_tag(id):
     post = Post.query.get(id)
     form = AddTagPostForm()
@@ -271,3 +271,19 @@ def remove_tag(id):
         db.session.commit()
         return post.to_dict()
     return render_template("add_tag_post.html", form=form)
+
+
+
+@posts_router.route("/<int:id>/likes", methods=["POST"])
+def add_like(id):
+    post = Post.query.get(id)
+    current_user.like(post)
+    return current_user.liked_post_to_dict()
+
+@posts_router.route("/<int:id>/likes", methods=["DELETE"])
+def remove_like(id):
+    post = Post.query.get(id)
+    print("------------ api routs delete post", post)
+    current_user.unlike(post)
+    print("******************************afterr unblike")
+    return current_user.liked_post_to_dict()

@@ -32,6 +32,8 @@ def seed_posts():
     db.session.add(p1)
     db.session.add(p2)
     db.session.add(p3)
+    db.session.add(p4)
+    db.session.add(p5)
     db.session.commit()
 
 def undo_posts():
