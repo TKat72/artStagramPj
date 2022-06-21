@@ -1,5 +1,6 @@
 const GET_ALL_FOLLOWS = 'session/GET_ALL_FOLLOWS'
 const UNFOLLW = 'session/UNFOLLW'
+const FOLLOW = 'session/FOLLOW'
 
 const getFallows = (fallows) => ({
     type: GET_ALL_FOLLOWS,
@@ -8,6 +9,11 @@ const getFallows = (fallows) => ({
 const unfollw = (id) => ({
     type: UNFOLLW,
     payload: id
+})
+
+const follow = (fallow) => ({
+    type: FOLLOW,
+    payload: fallow
 })
 
 
@@ -35,6 +41,18 @@ export const unfollwUser = (id) => async (dispatch) => {
         dispatch(unfollw(id))
     }
 }
+export const followUser = (id) => async (dispatch) => {
+
+    const res = await fetch(`/api/users/follow/${id}`)
+    if (res.ok) {
+        const user = await res.json()
+        if (user.errors) {
+            return;
+        }
+        console.log("^^^^^^^^^^^^user to add", user)
+        dispatch(follow(user.user))
+    }
+}
 export default function followsReducer(state = {}, action) {
     let newState;
     console.log("'''''''''''im here")
@@ -47,6 +65,10 @@ export default function followsReducer(state = {}, action) {
         case UNFOLLW:
             newState = { ...state }
             delete newState[action.payload]
+            return newState
+        case FOLLOW:
+            newState = { ...state }
+            newState[action.payload.id] = action.payload
             return newState
         default:
             return state

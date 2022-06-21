@@ -21,7 +21,7 @@ def add_follow(id):
         current_user.follow(user_to_follow)
     else:
         return {"error": " user do not exists"}
-    return {"msg": "success"}
+    return {"user": user_to_follow.to_dict()}
 
 
 
