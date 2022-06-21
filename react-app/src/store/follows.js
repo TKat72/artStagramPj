@@ -1,8 +1,13 @@
 const GET_ALL_FOLLOWS = 'session/GET_ALL_FOLLOWS'
+const UNFOLLW = 'session/UNFOLLW'
 
 const getFallows = (fallows) => ({
     type: GET_ALL_FOLLOWS,
     payload: fallows
+})
+const unfollw = (id) => ({
+    type: UNFOLLW,
+    payload: id
 })
 
 
@@ -19,6 +24,17 @@ export const getAllFollows = () => async (dispatch) => {
         dispatch(getFallows(Object.values(data)))
     }
 }
+
+export const unfollwUser = (id) => async (dispatch) => {
+    const res = await fetch(`/api/users/follow/${id}`, { method: 'DELETE' })
+    if (res.ok) {
+        const unfUser = await res.json()
+        if (unfUser.errors) {
+            return;
+        }
+        dispatch(unfollw(id))
+    }
+}
 export default function followsReducer(state = {}, action) {
     let newState;
     console.log("'''''''''''im here")
@@ -27,6 +43,10 @@ export default function followsReducer(state = {}, action) {
             newState = { ...state }
             console.log("in get all post action", newState.payload)
             action.payload.map(follow => newState[follow.id] = follow)
+            return newState
+        case UNFOLLW:
+            newState = { ...state }
+            delete newState[action.payload]
             return newState
         default:
             return state

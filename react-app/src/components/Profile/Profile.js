@@ -13,7 +13,7 @@ import DeletePostModal from "../DeletePost"
 import PostInformationModal from "../PostInformation"
 import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
-import { getAllFollows } from "../../store/follows"
+import { getAllFollows, unfollwUser } from "../../store/follows"
 import 'react-slideshow-image/dist/styles.css'
 import './Profile.css';
 
@@ -59,7 +59,9 @@ export default function Profile() {
     const user = useSelector(state => state.session?.user)
     const comments = useSelector(state => Object.values(state?.comment).filter(post => post.user_id === user.id))
     const posts = useSelector(state => Object.values(state?.posts).filter(post => post.user_id === user.id))
+    const follows = useSelector(state => Object.values(state?.follows))
     const date = user.created_at.split(" ", 1)
+
 
     const year = date[0].split("-", 1)
 
@@ -80,6 +82,10 @@ export default function Profile() {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
+    const onClick = (id) => {
+        dispatch(unfollwUser(id))
+
+    }
     return (
         <div className="profile">
             <div className="profile-information">
@@ -94,6 +100,7 @@ export default function Profile() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label={`${comments?.length} comments`} {...a11yProps(0)} />
                     <Tab label={`${posts?.length} posts`} {...a11yProps(1)} />
+                    <Tab label={`${follows?.length} follows`} {...a11yProps(2)} />
 
                 </Tabs>
             </Box>
@@ -149,8 +156,18 @@ export default function Profile() {
                     </div>
                 ))}
             </TabPanel>
+            <TabPanel value={value} index={2}>
+                {follows?.map(follow => (
+                    <>
+                        <div className="my-comments1">
+                            <p>@{follow.username}</p>
+                            <button className="unfollw" onClick={() => dispatch(unfollwUser(follow.id))}> unfollw</button>
+                    </div>
+                    </>
+                ))}
+        </TabPanel>
 
-        </div>
+        </div >
     )
 
 
