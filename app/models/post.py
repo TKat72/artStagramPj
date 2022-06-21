@@ -1,6 +1,9 @@
 from .db import db
 from .tagged_post import tagged_posts
 
+likes = db.Table('likes',
+    db.Column('post_id', db.Integer, db.ForeignKey('posts.id', ondelete="CASCADE"), primary_key=True),
+    db.Column('user_id', db.Integer, db.ForeignKey('users.id', ondelete="CASCADE"),primary_key=True))
 
 
 class Post(db.Model):
@@ -18,6 +21,18 @@ class Post(db.Model):
     photos = db.relationship("Photo", back_populates="post", cascade="all, delete")
     comments = db.relationship("Comment", back_populates="post", cascade="all, delete")
     tags = db.relationship("Tag", back_populates="posts",secondary=tagged_posts )
+    users_likes = db.relationship("User",secondary=likes, back_populates="liked_post")
+
+    def post_likes(self):
+        users = self.users_likes
+        all_users ={}
+        for user in users:
+            all_users[user.id] = {
+                "username": user.username,
+                "id": user.id,
+                "email": user.email
+            }
+        return all_users
 
     def photos_to_dict(self):
         return {"test":[photo.to_dict() for photo in self.photos]}

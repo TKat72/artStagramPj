@@ -4,6 +4,7 @@ from .posts import seed_posts, undo_posts
 from .photos import seed_photos, undo_photos
 from .comments import seed_comments, undo_comments
 from .tags import seed_tags, undo_tags
+from .follows import seed_follows
 # Creates a seed group to hold our commands
 # So we can type `flask seed --help`
 seed_commands = AppGroup('seed')
@@ -17,6 +18,7 @@ def seed():
     seed_photos()
     seed_comments()
     seed_tags()
+    seed_follows()
     # Add other seed functions here
 
 

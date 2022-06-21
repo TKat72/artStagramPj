@@ -1,5 +1,6 @@
 from .db import db
 from .follows import follows
+from .post import likes
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 
@@ -22,6 +23,11 @@ class User(db.Model, UserMixin):
     posts = db.relationship("Post", back_populates="user", cascade="all, delete")
     comments = db.relationship("Comment", back_populates="user", cascade="all, delete")
 
+    liked_post = db.relationship(
+        "Post",
+        secondary=likes,
+        back_populates="users_likes"
+    )
     # followers = db.relationship(
     #     "User",
     #     secondary=follows,

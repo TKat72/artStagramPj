@@ -16,10 +16,16 @@ def seed_tags():
       tag_name='Strong'
     )
     t5 = Tag(
-      tag_name='Badass'
+      tag_name='Funy'
     )
     t6 = Tag(
-      tag_name='Difficult'
+      tag_name='Sad'
+    )
+    t7 = Tag(
+      tag_name='Sunset'
+    )
+    t8 = Tag(
+      tag_name='Fun'
     )
 
     db.session.add(t1)
@@ -28,6 +34,8 @@ def seed_tags():
     db.session.add(t4)
     db.session.add(t5)
     db.session.add(t6)
+    db.session.add(t7)
+    db.session.add(t8)
 
     db.session.commit()
 

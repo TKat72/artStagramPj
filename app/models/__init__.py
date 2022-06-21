@@ -1,6 +1,6 @@
 from .db import db
 from .user import User
-from .post import Post
+from .post import Post, likes
 from .photo import Photo
 from .tag import Tag
 from .comment import Comment
