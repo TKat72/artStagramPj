@@ -13,6 +13,7 @@ import DeletePostModal from "../DeletePost"
 import PostInformationModal from "../PostInformation"
 import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
+import { getAllFollows } from "../../store/follows"
 import 'react-slideshow-image/dist/styles.css'
 import './Profile.css';
 
@@ -69,8 +70,10 @@ export default function Profile() {
     const [value, setValue] = React.useState(0);
     let index = 1;
     useEffect(() => {
+        dispatch(getAllFollows())
         dispatch(getMYComments());
-        dispatch(getMyPosts())
+        dispatch(getMyPosts());
+
 
     }, [dispatch])
 
