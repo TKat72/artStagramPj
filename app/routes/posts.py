@@ -1,11 +1,12 @@
 from flask import Blueprint, jsonify, render_template, redirect, request, session
-from app.models import db, User, Photo, Post , Comment
+from app.models import db, User, Photo, Post , Comment, Tag
 from flask_login import current_user
 from app.api.auth_routes import validation_errors_to_error_messages
 from app.forms.create_post_form import PostForm
 from app.forms.update_post_form import UpdatePostForm
 from app.forms.remove_pt_form import RemovePhotoForm
 from app.forms.add_photo_form import AddPhotoForm
+from app.forms.add_tag_form import AddTagPostForm
 from sqlalchemy import desc, asc
 from app.awsfunc import (upload_file_to_s3, allowed_file, get_unique_filename)
 
@@ -243,3 +244,46 @@ def delete_post(id):
     db.session.delete(post)
     db.session.commit()
     return {"massage":"Secsees"}
+
+@posts_router.route("/<int:id>/add_tag", methods=["GET","POST"])
+def add_tag(id):
+    post = Post.query.get(id)
+    form = AddTagPostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        tag = Tag.query.get(form.data['tag_id'])
+        print(" Gett tag for post", tag.to_dict())
+        post.tags.append(tag)
+        db.session.add(post)
+        db.session.commit()
+        return post.to_dict()
+    return render_template("add_tag_post.html", form = form)
+
+@posts_router.route("/<int:id>/remove_tag", methods =["POST", "GET"])
+def remove_tag(id):
+    post = Post.query.get(id)
+    form = AddTagPostForm()
+    form['csrf_token'].data = request.cookies['csrf_token']
+    if form.validate_on_submit():
+        tag = Tag.query.get(form.data['tag_id'])
+        post.tags.remove(tag)
+        db.session.add(post)
+        db.session.commit()
+        return post.to_dict()
+    return render_template("add_tag_post.html", form=form)
+
+
+
+@posts_router.route("/<int:id>/likes", methods=["POST"])
+def add_like(id):
+    post = Post.query.get(id)
+    current_user.like(post)
+    return current_user.liked_post_to_dict()
+
+@posts_router.route("/<int:id>/likes", methods=["DELETE"])
+def remove_like(id):
+    post = Post.query.get(id)
+    print("------------ api routs delete post", post)
+    current_user.unlike(post)
+    print("******************************afterr unblike")
+    return current_user.liked_post_to_dict()

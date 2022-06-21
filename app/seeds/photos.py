@@ -7,12 +7,16 @@ def seed_photos():
     p3= Photo(photo_url="http://cdn.designbump.com/wp-content/uploads/2014/08/street-art-17.jpg", user_id=1, post_id=1)
     p4= Photo(photo_url="https://i.etsystatic.com/15747752/r/il/8e1565/2248241385/il_fullxfull.2248241385_49gw.jpg", user_id=1, post_id=2)
     p5= Photo(photo_url="https://artcollider.net/wp-content/uploads/2014/11/AC-AU003-1.jpg", user_id=2, post_id=3)
+    p6= Photo(photo_url="https://artstargarm2-backet.s3.amazonaws.com/000e25f809fb48bb8f5756d5d1f86f56.jpeg", user_id=4, post_id=4)
+    p7= Photo(photo_url="https://artstargarm2-backet.s3.amazonaws.com/0011a7fb910f4f1b923e012fb9b4e642.png", user_id=4, post_id=5)
 
     db.session.add(p1)
     db.session.add(p2)
     db.session.add(p3)
     db.session.add(p4)
     db.session.add(p5)
+    db.session.add(p6)
+    db.session.add(p7)
     db.session.commit()
 
 def undo_photos():

@@ -11,9 +11,21 @@ def seed_users():
     bobbie = User(
         username='bobbie', email='bobbie@aa.io', password='password', created_at=datetime.now(pytz.timezone('US/Central')), updated_at=datetime.now(pytz.timezone('US/Central')))
 
+    kat = User(
+        username='kat', email='kat@gaa.io', password='password', created_at=datetime.now(pytz.timezone('US/Central')), updated_at=datetime.now(pytz.timezone('US/Central')))
+
+    kat2 = User(
+        username='kat2', email='kat2@gaa.io', password='password', created_at=datetime.now(pytz.timezone('US/Central')), updated_at=datetime.now(pytz.timezone('US/Central')))
+
+    kat3 = User(
+        username='kat3', email='kat3@gaa.io', password='password', created_at=datetime.now(pytz.timezone('US/Central')), updated_at=datetime.now(pytz.timezone('US/Central')))
+
     db.session.add(demo)
     db.session.add(marnie)
     db.session.add(bobbie)
+    db.session.add(kat)
+    db.session.add(kat2)
+    db.session.add(kat3)
 
     db.session.commit()
 

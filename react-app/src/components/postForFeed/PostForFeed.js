@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { followUser, getAllFollows } from '../../store/follows'
 import { getOnePost } from "../../store/posts"
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
@@ -9,6 +9,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import PostInformationModal from "../PostInformation"
+import "./PostForFeed.css"
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -48,20 +49,28 @@ export default function PostForFeed({ id }) {
     const { post_id } = useParams()
     const dispatch = useDispatch()
     const [value, setValue] = useState(0);
+    const curent_user_id = useSelector(state => state?.session?.user?.id)
     const post = useSelector(state => state?.posts[id])
-
+    const following = useSelector(state => state?.follows)
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
+    let user_id = post?.user_id
+    let user_followed = !following[user_id]
+    console.log("curent user id ", curent_user_id)
     useEffect(() => {
-
+        dispatch(getAllFollows())
         dispatch(getOnePost(id))
+        // dispatch(getAllFollows())
 
     }, [dispatch])
     return (
         <>
             <div className="post-div" key={post.id}  >
                 <PostInformationModal username={post.username} description={post.description} id={post.id}> </PostInformationModal>
+                {user_followed & user_id !== curent_user_id ? (<>
+                    <button onClick={() => dispatch(followUser(user_id))}>fallow</button>
+                </>) : <></>}
                 {post.photos.length > 1 ? (
                     <div className="slide" >
                         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -120,17 +129,17 @@ export default function PostForFeed({ id }) {
                             </div>
                         </>
                     ))}
-                    <div className="description div-for-desscription"> <p  style={{ wordWrap: "break-word"}}> {post.description}</p> </div>
+                    <div className="description div-for-desscription"> <p style={{ wordWrap: "break-word" }}> {post.description}</p> </div>
                 </div>}
-                {/* <div>
+                <div>
                     <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
 
-                </div> */}
-                {/* <div id="commentBox">
+                </div>
+                <div id="commentBox">
 
-                        <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." onChange={(e) => setComment(e.target.value)} value={comment}></input>
-                        <span id="PostComent" onClick={(e) => dispatch(createNewComment(comment, post.id))}>Post </span>
-                    </div> */}
+                    <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." ></input>
+                    <span id="PostComent" >Post </span>
+                </div>
 
             </div>
 

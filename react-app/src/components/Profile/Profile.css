@@ -1,8 +1,8 @@
 .my-comments {
     border: 1px solid #d4d1d1;
     padding: 10px;
-    width:600px;
-    margin-bottom:10px;
+    width: 600px;
+    margin-bottom: 10px;
 
 }
 
@@ -49,8 +49,24 @@
 
 
 }
-.my-comments1{
+
+.my-comments1 {
     border: 1px solid #efefef;
     padding: 10px;
+
+}
+
+.profile-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 50px;
+    margin-right: 10px;
+}
+.profile-photo:hover {
+ box-shadow: ;
+}
+.profile-pic-name {
+    display: flex;
+    align-items: flex-end;
 
 }

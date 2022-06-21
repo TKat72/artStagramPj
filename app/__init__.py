@@ -10,6 +10,7 @@ from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
 from .routes.posts import posts_router
 from .routes.comments import comments_routes
+from .routes.tags import tags_routes
 from .awsfunc import (upload_file_to_s3, allowed_file, get_unique_filename)
 from .seeds import seed_commands
 
@@ -35,6 +36,7 @@ app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
 app.register_blueprint(posts_router, url_prefix='/api/posts')
 app.register_blueprint(comments_routes, url_prefix='/api/comments')
+app.register_blueprint(tags_routes, url_prefix='/api/tags')
 db.init_app(app)
 Migrate(app, db)
 

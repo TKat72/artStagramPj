@@ -1,22 +1,53 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import login_required, current_user
+from app.models import User, db
+
 # from app.forms import UpdateUserForm
 user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('/')
-@login_required
+# @login_required
 def users():
     users = User.query.all()
     return {'users': [user.to_dict() for user in users]}
 
+# follow
+@user_routes.route('/follow/<int:id>')
+# @login_required
+def add_follow(id):
+    user_to_follow = User.query.get(id)
+    if user_to_follow:
+        current_user.follow(user_to_follow)
+    else:
+        return {"error": " user do not exists"}
+    return {"user": user_to_follow.to_dict()}
+
+
+
+# get all falowing
+@user_routes.route('/get_follows')
+def get_follows():
+    return current_user.followed_users()
+#unfollow
+@user_routes.route('/follow/<int:id>', methods=['DELETE'])
+def unfollow(id):
+    user = User.query.get(id)
+    if user:
+        current_user.unfollow(user)
+    else:
+        return {"error": " user do not exists"}
+    return {"msg": "success"}
 
 @user_routes.route('/<int:id>')
 @login_required
 def user(id):
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/liked_post')
+def liked_post():
+    return current_user.liked_post_to_dict()
 # @user_routes.route('/<int:id>', methods=['PATCH'])
 # @login_required
 # def update_user(id):
