@@ -18,3 +18,7 @@ def seed_follows():
     db.session.add(demo)
     db.session.add(kat)
     db.session.commit()
+
+def undo_follows():
+    db.session.execute('TRUNCATE followers RESTART IDENTITY CASCADE;')
+    db.session.commit()

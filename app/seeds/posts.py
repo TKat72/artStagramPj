@@ -18,6 +18,16 @@ def seed_posts():
         description=" This therd seed for post ",
         created_at=datetime.now(), updated_at=datetime.now()
     )
+    p4 = Post(
+        user_id=4,
+        description=" somthing somthing somthing",
+        created_at=datetime.now(), updated_at=datetime.now()
+    )
+    p5 = Post(
+        user_id=4,
+        description=" somthing2 somthing2 somthing2",
+        created_at=datetime.now(), updated_at=datetime.now()
+    )
 
     db.session.add(p1)
     db.session.add(p2)
