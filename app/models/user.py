@@ -102,12 +102,23 @@ class User(db.Model, UserMixin):
             }
         return followed_ids
 
+    def followes_user(self):
+        users = self.followers.all()
+        followers ={}
+        for user in users:
+            followers[user.id] = {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+            }
+        return followers
+
     def to_dict(self):
         return {
             'id': self.id,
             'username': self.username,
             'email': self.email,
-            # 'followers': self.followers,
+            'followers': self.followes_user(),
             # 'follows': self.following,
             'created_at': str(self.created_at),
             'updated_at': str(self.updated_at),

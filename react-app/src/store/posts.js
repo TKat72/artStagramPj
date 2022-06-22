@@ -5,7 +5,8 @@ const UPDATE_POST = "posts/UPDATE_POST"
 const DELETE_POST = "posts/DELE"
 const ADD_PHOTO_TO_POST = "posts/ADD_PHOTO_TO_POST"
 const GET_MY_POSTS = "posts/GET_MY_POSTS"
-
+const ADD_LIKE = "posts/ADD_LIKE"
+const REMOVE_LIKE = "posts/REMOVE_LIKE"
 
 const getAll = posts => ({
     type: GET_ALL_POSTS,
@@ -36,6 +37,15 @@ const getPostsMy = (posts) => ({
     type: GET_MY_POSTS,
     payload: posts
 })
+const addLike = (user) => ({
+    type: ADD_LIKE,
+    payload: user
+})
+const removeLike = (id) => ({
+    type: REMOVE_LIKE,
+    payload: id
+})
+
 
 export const getAllPosts = () => async (dispatch) => {
     const res = await fetch("/api/posts/all")

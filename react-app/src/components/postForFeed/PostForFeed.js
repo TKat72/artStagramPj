@@ -129,6 +129,7 @@ export default function PostForFeed({ id }) {
                             </div>
                         </>
                     ))}
+                    <i className="fa-solid fa-heart" ></i>
                     <div className="description div-for-desscription"> <p style={{ wordWrap: "break-word" }}> {post.description}</p> </div>
                 </div>}
                 <div>

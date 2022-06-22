@@ -47,6 +47,7 @@ class Post(db.Model):
             'user_id': self.user_id,
             "username": self.user.username,
             'photos': [photo.to_dict() for photo in self.photos],
+            'likes': self.post_likes(),
             'comments': [comment.to_dict() for comment in self.comments],
             'tags': [tag.to_dict() for tag in self.tags],
             'created_at': str(self.created_at),
