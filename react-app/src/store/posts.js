@@ -41,9 +41,9 @@ const addLike = (user) => ({
     type: ADD_LIKE,
     payload: user
 })
-const removeLike = (id) => ({
+const removeLike = (info) => ({
     type: REMOVE_LIKE,
-    payload: id
+    payload: info
 })
 
 
@@ -178,7 +178,18 @@ export default function postReducer(state = {}, action) {
             newState = { ...state }
             delete newState[action.payload]
             return newState
-
+            case ADD_LIKE:
+                const { post_id, id, email,  username } = action.payload
+                const likedUser = {
+                    email, username, id,
+                }
+                newState[post_id].likes[id] = likedUser
+                return newState
+            case REMOVE_LIKE:
+                const {removePostId, removeUserId} = action.payload
+                const postLikes = newState[removePostId].likes
+                delete postLikes[removeUserId]
+                return newState
         default:
             return state
 

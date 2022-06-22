@@ -60,6 +60,8 @@ export default function Profile() {
     const comments = useSelector(state => Object.values(state?.comment).filter(post => post.user_id === user.id))
     const posts = useSelector(state => Object.values(state?.posts).filter(post => post.user_id === user.id))
     const follows = useSelector(state => Object.values(state?.follows))
+    console.log("followinf", user.followers
+    )
     const date = user.created_at.split(" ", 1)
 
 
@@ -100,7 +102,8 @@ export default function Profile() {
                 <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
                     <Tab label={`${comments?.length} comments`} {...a11yProps(0)} />
                     <Tab label={`${posts?.length} posts`} {...a11yProps(1)} />
-                    <Tab label={`${follows?.length} follows`} {...a11yProps(2)} />
+                    <Tab label={`${follows?.length} followed`} {...a11yProps(2)} />
+                    <Tab label={`${Object.values(user?.followers).length} followers`} {...a11yProps(3)} />
 
                 </Tabs>
             </Box>
@@ -158,6 +161,16 @@ export default function Profile() {
             </TabPanel>
             <TabPanel value={value} index={2}>
                 {follows?.map(follow => (
+                    <>
+                        <div className="my-comments1">
+                            <p>@{follow.username}</p>
+                            <button className="unfollw" onClick={() => dispatch(unfollwUser(follow.id))}> unfollw</button>
+                    </div>
+                    </>
+                ))}
+        </TabPanel>
+        <TabPanel value={value} index={3}>
+                {Object.values(user?.followers).map(follow => (
                     <>
                         <div className="my-comments1">
                             <p>@{follow.username}</p>
