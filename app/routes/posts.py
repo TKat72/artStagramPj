@@ -278,7 +278,7 @@ def remove_tag(id):
 def add_like(id):
     post = Post.query.get(id)
     current_user.like(post)
-    return current_user.liked_post_to_dict()
+    return post.to_dict()
 
 @posts_router.route("/<int:id>/likes", methods=["DELETE"])
 def remove_like(id):
@@ -286,4 +286,4 @@ def remove_like(id):
     print("------------ api routs delete post", post)
     current_user.unlike(post)
     print("******************************afterr unblike")
-    return current_user.liked_post_to_dict()
+    return post.to_dict()

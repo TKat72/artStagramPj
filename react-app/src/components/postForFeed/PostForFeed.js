@@ -129,6 +129,8 @@ export default function PostForFeed({ id }) {
                             </div>
                         </>
                     ))}
+                    {post.likes[curent_user_id]?(<><i className="fa-solid fa-heart"  style={{ color: "red"}}> {Object.values(post.likes).length}</i></>):<><i className="fa-solid fa-heart" > {Object.values(post.likes).length}</i></>}
+
                     <div className="description div-for-desscription"> <p style={{ wordWrap: "break-word" }}> {post.description}</p> </div>
                 </div>}
                 <div>

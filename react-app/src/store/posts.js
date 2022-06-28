@@ -5,7 +5,8 @@ const UPDATE_POST = "posts/UPDATE_POST"
 const DELETE_POST = "posts/DELE"
 const ADD_PHOTO_TO_POST = "posts/ADD_PHOTO_TO_POST"
 const GET_MY_POSTS = "posts/GET_MY_POSTS"
-
+const ADD_LIKE = "posts/ADD_LIKE"
+const REMOVE_LIKE = "posts/REMOVE_LIKE"
 
 const getAll = posts => ({
     type: GET_ALL_POSTS,
@@ -36,6 +37,15 @@ const getPostsMy = (posts) => ({
     type: GET_MY_POSTS,
     payload: posts
 })
+const addLike = (user) => ({
+    type: ADD_LIKE,
+    payload: user
+})
+const removeLike = (info) => ({
+    type: REMOVE_LIKE,
+    payload: info
+})
+
 
 export const getAllPosts = () => async (dispatch) => {
     const res = await fetch("/api/posts/all")
@@ -134,6 +144,14 @@ export const addOnePhotoToPost = (id, formData) => async (dispatch) => {
     return res
 
 }
+export const addLiketoPost = (id) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${id}/likes`, { method: "POST" })
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(addLike(data))
+    }
+}
 
 export default function postReducer(state = {}, action) {
     let newState
@@ -168,6 +186,12 @@ export default function postReducer(state = {}, action) {
             newState = { ...state }
             delete newState[action.payload]
             return newState
+        case ADD_LIKE:
+            newState = { ...state }
+            newState[action.payload.id] = action.payload
+            return newState
+
+        case REMOVE_LIKE:
 
         default:
             return state
