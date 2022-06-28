@@ -144,6 +144,14 @@ export const addOnePhotoToPost = (id, formData) => async (dispatch) => {
     return res
 
 }
+export const addLiketoPost = (id) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${id}/likes`, { method: "POST" })
+
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(addLike(data))
+    }
+}
 
 export default function postReducer(state = {}, action) {
     let newState
@@ -178,18 +186,13 @@ export default function postReducer(state = {}, action) {
             newState = { ...state }
             delete newState[action.payload]
             return newState
-            case ADD_LIKE:
-                const { post_id, id, email,  username } = action.payload
-                const likedUser = {
-                    email, username, id,
-                }
-                newState[post_id].likes[id] = likedUser
-                return newState
-            case REMOVE_LIKE:
-                const {removePostId, removeUserId} = action.payload
-                const postLikes = newState[removePostId].likes
-                delete postLikes[removeUserId]
-                return newState
+        case ADD_LIKE:
+            newState = { ...state }
+            newState[action.payload.id] = action.payload
+            return newState
+
+        case REMOVE_LIKE:
+
         default:
             return state
 
