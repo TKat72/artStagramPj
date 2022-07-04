@@ -6,3 +6,8 @@
     position: absolute;
     margin: 0;
 }
+.likeNum{
+    color: black;
+    font-size: 10px;
+    padding: 5px;
+}
