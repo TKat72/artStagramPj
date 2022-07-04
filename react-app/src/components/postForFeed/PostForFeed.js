@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { followUser, getAllFollows } from '../../store/follows'
-import { getOnePost } from "../../store/posts"
+import { getOnePost, addLiketoPost, removeLikesFromPost } from "../../store/posts"
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -64,6 +64,13 @@ export default function PostForFeed({ id }) {
         // dispatch(getAllFollows())
 
     }, [dispatch])
+
+    const addLike = async () => {
+        dispatch(addLiketoPost(post?.id))
+    }
+    const removeLike = async () => {
+        dispatch(removeLikesFromPost(post?.id))
+    }
     return (
         <>
             <div className="post-div" key={post.id}  >
@@ -105,6 +112,7 @@ export default function PostForFeed({ id }) {
 
                             </>
                         ))}
+                        {post.likes[curent_user_id] ? (<><i className="fa-solid fa-heart" style={{ color: "red" }} onClick={removeLike}> <span className="likeNum">{Object.values(post.likes).length} </span></i></>) : <><i className="fa-solid fa-heart" onClick={addLike}>  <span className="likeNum">{Object.values(post.likes).length} </span></i></>}
                         <div className="description div-for-desscription"> <p > {post.description}</p> </div>
                     </div>
 
@@ -129,7 +137,7 @@ export default function PostForFeed({ id }) {
                             </div>
                         </>
                     ))}
-                    {post.likes[curent_user_id]?(<><i className="fa-solid fa-heart"  style={{ color: "red"}}> {Object.values(post.likes).length}</i></>):<><i className="fa-solid fa-heart" > {Object.values(post.likes).length}</i></>}
+                    {post.likes[curent_user_id] ? (<><i className="fa-solid fa-heart" style={{ color: "red" }} onClick={removeLike}>  <span className="likeNum"> {Object.values(post.likes).length} </span></i></>) : <><i className="fa-solid fa-heart" onClick={addLike}>  <span className="likeNum"> {Object.values(post.likes).length} </span></i></>}
 
                     <div className="description div-for-desscription"> <p style={{ wordWrap: "break-word" }}> {post.description}</p> </div>
                 </div>}

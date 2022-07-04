@@ -127,6 +127,7 @@ export const deletePost = (id) => async (dispatch) => {
         dispatch(removePost(id))
     }
 }
+
 export const addOnePhotoToPost = (id, formData) => async (dispatch) => {
     const res = await fetch(`/api/posts/${id}/add-photo`, {
         method: 'POST',
@@ -151,6 +152,14 @@ export const addLiketoPost = (id) => async (dispatch) => {
         const data = await res.json()
         dispatch(addLike(data))
     }
+}
+export const removeLikesFromPost = (id) => async (dispatch) => {
+    const res = await fetch(`/api/posts/${id}/likes`, { method: "DELETE" })
+    if (res.ok) {
+        const data = await res.json()
+        dispatch(removeLike(data))
+    }
+
 }
 
 export default function postReducer(state = {}, action) {
@@ -192,6 +201,9 @@ export default function postReducer(state = {}, action) {
             return newState
 
         case REMOVE_LIKE:
+            newState = { ...state }
+            newState[action.payload.id] = action.payload
+            return newState
 
         default:
             return state
