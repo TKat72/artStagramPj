@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { followUser, getAllFollows } from '../../store/follows'
 import { getOnePost, addLiketoPost, removeLikesFromPost } from "../../store/posts"
+import { createNewComment } from '../../store/comments'
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
@@ -52,6 +53,8 @@ export default function PostForFeed({ id }) {
     const curent_user_id = useSelector(state => state?.session?.user?.id)
     const post = useSelector(state => state?.posts[id])
     const following = useSelector(state => state?.follows)
+    const [comment, setComment] = useState('')
+
     const handleChange = (event, newValue) => {
         setValue(newValue);
     }
@@ -70,6 +73,11 @@ export default function PostForFeed({ id }) {
     }
     const removeLike = async () => {
         dispatch(removeLikesFromPost(post?.id))
+    }
+    const addComment = async () => {
+        console.log("post id", post?.id)
+        dispatch(createNewComment(comment, post?.id))
+        setComment('')
     }
     return (
         <>
@@ -141,14 +149,14 @@ export default function PostForFeed({ id }) {
 
                     <div className="description div-for-desscription"> <p style={{ wordWrap: "break-word" }}> {post.description}</p> </div>
                 </div>}
-                <div>
+                {/* <div>
                     <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
 
-                </div>
+                </div> */}
                 <div id="commentBox">
 
-                    <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." ></input>
-                    <span id="PostComent" >Post </span>
+                    <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." onChange={(e) => setComment(e.target.value)} value={comment}></input>
+                    <span id="PostComent" onClick={addComment} >Post </span>
                 </div>
 
             </div>
