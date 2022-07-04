@@ -81,7 +81,7 @@ export default function PostForFeed({ id }) {
     }
     return (
         <>
-            <div className="post-div" key={post.id}  >
+            <div className={`${post.photos.length > 1?"more-then-one": "post-div" }`} key={post.id}   >
                 <PostInformationModal username={post.username} description={post.description} id={post.id}> </PostInformationModal>
                 {user_followed & user_id !== curent_user_id ? (<>
                     <button onClick={() => dispatch(followUser(user_id))}>fallow</button>
@@ -149,10 +149,10 @@ export default function PostForFeed({ id }) {
 
                     <div className="description div-for-desscription"> <p style={{ wordWrap: "break-word" }}> {post.description}</p> </div>
                 </div>}
-                {/* <div>
+                <div>
                     <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
 
-                </div> */}
+                </div>
                 <div id="commentBox">
 
                     <i class="fa-regular fa-face-smile" style={{ fontSize: "25px" }}></i><input type="text" id="commentInput" style={{ width: "460px", height: "25px" }} placeholder="Add a comment..." onChange={(e) => setComment(e.target.value)} value={comment}></input>

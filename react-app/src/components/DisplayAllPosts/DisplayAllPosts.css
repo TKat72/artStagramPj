@@ -9,7 +9,16 @@
     /* margin: 0px 500px 0px 600px; */
 
 }
+.more-then-one{
 
+    width: 670px;
+    height: 1060px;
+    margin: 10px;
+    padding: 10px;
+    position: relative;
+    overflow-y: scroll;
+    box-shadow: rgba(124, 68, 220, 0.733) 0px 5px 15px;
+}
 .img-podt-dspl {
 
     display: flex;
@@ -43,7 +52,7 @@
 #commentBox {
     display: flex;
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     width: 528px;
     padding: 10px;
     border: 1px solid #efefef;
