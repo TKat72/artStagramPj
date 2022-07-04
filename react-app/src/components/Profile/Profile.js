@@ -13,7 +13,7 @@ import DeletePostModal from "../DeletePost"
 import PostInformationModal from "../PostInformation"
 import EditMyCommentModal from "../EditMyComment"
 import DeleteCommentModal from "../DeleteComment"
-import { getAllFollows, unfollwUser } from "../../store/follows"
+import { getAllFollows, unfollwUser, followUser } from "../../store/follows"
 import 'react-slideshow-image/dist/styles.css'
 import './Profile.css';
 
@@ -60,8 +60,7 @@ export default function Profile() {
     const comments = useSelector(state => Object.values(state?.comment).filter(post => post.user_id === user.id))
     const posts = useSelector(state => Object.values(state?.posts).filter(post => post.user_id === user.id))
     const follows = useSelector(state => Object.values(state?.follows))
-    console.log("followinf", user.followers
-    )
+    const followed = useSelector(state =>  state?.follows)
     const date = user.created_at.split(" ", 1)
 
 
@@ -88,6 +87,7 @@ export default function Profile() {
         dispatch(unfollwUser(id))
 
     }
+    console.log(" follow test", follows[4])
     return (
         <div className="profile">
             <div className="profile-information">
@@ -173,8 +173,16 @@ export default function Profile() {
                 {Object.values(user?.followers).map(follow => (
                     <>
                         <div className="my-comments1">
-                            <p>@{follow.username}</p>
+                            <p>@{follow?.username}</p>
+                           {followed[follow.id] ?(
+                           <>
                             <button className="unfollw" onClick={() => dispatch(unfollwUser(follow.id))}> unfollw</button>
+                            </>
+                           ) :
+                           <div>
+                               <button onClick={() => dispatch(followUser(follow.id))}>fallow</button>
+                           </div>
+                           }
                     </div>
                     </>
                 ))}
