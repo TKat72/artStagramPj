@@ -4,7 +4,7 @@ import { updatePost } from "../../store/posts"
 import "./EditForm.css"
 export default function EditPost({ id, descriptionVal, setShowModal }) {
     const dispatch = useDispatch()
-    console.log(descriptionVal)
+ 
     const [errors, setErrors] = useState([])
     const [description, setDescription] = useState(descriptionVal)
 

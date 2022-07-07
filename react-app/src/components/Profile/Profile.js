@@ -87,7 +87,7 @@ export default function Profile() {
         dispatch(unfollwUser(id))
 
     }
-    console.log(" follow test", follows[4])
+  
     return (
         <div className="profile">
             <div className="profile-information">
