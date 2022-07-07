@@ -60,7 +60,7 @@ export default function PostForFeed({ id }) {
     }
     let user_id = post?.user_id
     let user_followed = !following[user_id]
-    console.log("curent user id ", curent_user_id)
+
     useEffect(() => {
         dispatch(getAllFollows())
         dispatch(getOnePost(id))
@@ -75,7 +75,7 @@ export default function PostForFeed({ id }) {
         dispatch(removeLikesFromPost(post?.id))
     }
     const addComment = async () => {
-        console.log("post id", post?.id)
+        
         dispatch(createNewComment(comment, post?.id))
         setComment('')
     }
@@ -150,7 +150,7 @@ export default function PostForFeed({ id }) {
                     <div className="description div-for-desscription"> <p style={{ wordWrap: "break-word" }}> {post.description}</p> </div>
                 </div>}
                 <div>
-                    <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[0]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[0]?.comment}</p>
+                    <p className="comment-box"><span id="usernameComment" >{post?.comments.length > 0 && (<> @ </>)}{post?.comments[post.comments.length - 1]?.username} {post?.comments.length > 0 && (<> : </>)} </span>  {post?.comments[post.comments.length - 1]?.comment}</p>
 
                 </div>
                 <div id="commentBox">
