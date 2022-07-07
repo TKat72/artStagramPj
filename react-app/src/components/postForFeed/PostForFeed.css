@@ -4,7 +4,8 @@
 }
 .commentBox{
     position: absolute;
-    margin: 0;
+    margin: 5px;
+    background-color: aqua;
 }
 .likeNum{
     color: black;
