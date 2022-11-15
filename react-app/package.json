@@ -28,10 +28,13 @@
     "swiper": "^6.8.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "render-postbuild": "npm run build",
+    "sequelize": "sequelize",
+    "sequelize-cli": "sequelize-cli",
+    "start": "per-env",
+    "start:development": "nodemon -r dotenv/config ./bin/www",
+    "start:production": "node ./bin/www",
+    "build": "echo 'Building....'"
   },
   "eslintConfig": {
     "extends": "react-app"

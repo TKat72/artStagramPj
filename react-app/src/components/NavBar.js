@@ -5,6 +5,7 @@ import LogoutButton from './auth/LogoutButton';
 import { useSelector } from "react-redux"
 import AddNewPostModel from "./addNewPost"
 
+
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
   return (
